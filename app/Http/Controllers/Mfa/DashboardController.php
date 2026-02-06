@@ -1,0 +1,21 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Http\Controllers\Mfa;
+
+use App\Services\Mfa\DashboardService;
+
+class DashboardController
+{
+    public function __construct(protected DashboardService $dashboardService) {}
+
+    public function index()
+    {
+        $modules = $this->dashboardService->getActiveModulesForUser();
+
+        return view('dashboard', [
+            'modules' => $modules,
+        ]);
+    }
+}

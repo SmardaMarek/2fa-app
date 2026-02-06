@@ -1,0 +1,5 @@
+Formátování	- sail bin pint
+Funkční testy - sail test
+Frontend/Tailwind watch - sail npm run dev
+Frontend/Tailwind build - sail npm run build
+PhpStan - sail bin phpstan analyse app
