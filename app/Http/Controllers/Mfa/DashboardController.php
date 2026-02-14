@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Mfa;
 
+use App\Enums\ModulSlug;
 use App\Services\Mfa\DashboardService;
 
 class DashboardController
@@ -13,9 +14,11 @@ class DashboardController
     public function index()
     {
         $modules = $this->dashboardService->getActiveModulesForUser();
+        $progress = $this->dashboardService->getProgressForUser();
 
         return view('dashboard', [
             'modules' => $modules,
+            'progress' => $progress
         ]);
     }
 }

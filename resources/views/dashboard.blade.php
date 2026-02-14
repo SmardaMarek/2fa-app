@@ -12,8 +12,11 @@
 
                 @foreach ($modules as $module)
                     @php
-                        $userProgress = $module->progress->first();
-                        $isCompleted = $userProgress && $userProgress->completed_at;
+                        $completedSteps = $progress[$module->slug] ?? 0;
+                        $totalSteps = 4;
+
+                        $progressPercentage = ($completedSteps / $totalSteps) * 100;
+                        $isCompleted = $completedSteps === $totalSteps;
 
                         $difficultyColor = match($module->difficulty->color()) {
                             'green' => 'bg-green-100 text-green-800',
@@ -23,7 +26,7 @@
                         };
                     @endphp
 
-                    <div class="bg-gray-100 overflow-hidden shadow-sm sm:rounded-lg border border-gray-200 hover:shadow-md transition-shadow duration-200">
+                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg border border-gray-200 hover:shadow-md transition-shadow duration-200 flex flex-col justify-between">
                         <div class="p-6">
                             <div class="flex justify-between items-start mb-4">
                                 <span class="px-2 py-1 text-xs font-semibold rounded-full {{ $difficultyColor }}">
@@ -31,8 +34,8 @@
                                 </span>
 
                                 @if($isCompleted)
-                                    <span class="text-green-600 font-bold flex items-center">
-                                        <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <span class="bg-green-100 text-green-800 text-xs font-bold px-2.5 py-1 rounded flex items-center">
+                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                                         Hotovo
                                     </span>
                                 @endif
@@ -41,14 +44,25 @@
                             <h3 class="text-lg font-bold text-gray-900 mb-2">
                                 {{ $module->title }}
                             </h3>
-                            <p class="text-gray-600 text-sm mb-6 h-12 overflow-hidden">
+                            <p class="text-gray-600 text-sm mb-6">
                                 {{ Str::limit($module->description, 100) }}
                             </p>
+                        </div>
+
+                        <div class="px-6 pb-6 mt-auto">
+                            <div class="mb-4">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="text-xs font-medium text-gray-600">Postup modulem</span>
+                                    <span class="text-xs font-bold text-indigo-600">{{ $completedSteps }} / {{ $totalSteps }}</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-indigo-600 h-2 rounded-full transition-all duration-500 ease-in-out" style="width: {{ $progressPercentage }}%"></div>
+                                </div>
+                            </div>
 
                             <div class="flex justify-end">
-                                <a href="{{ route('module.theory', $module) }}" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
-                                    {{ $userProgress ? 'Pokračovat' : 'Zahájit lekci' }}
-                                    <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                <a href="{{ route('module.theory', $module) }}" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 w-full justify-center">
+                                    {{ $completedSteps > 0 && !$isCompleted ? 'Pokračovat v lekci' : ($isCompleted ? 'Zopakovat lekci' : 'Zahájit lekci') }}
                                 </a>
                             </div>
                         </div>
