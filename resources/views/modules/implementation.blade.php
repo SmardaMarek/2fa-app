@@ -19,9 +19,13 @@
 
                 <div class="p-6 border-b border-gray-100 bg-gray-50">
                     <h3 class="text-lg font-medium text-gray-900">Jak to funguje pod kapotou?</h3>
-                    <p class="mt-1 text-sm text-gray-600">
-                        Algoritmus TOTP (RFC 6238) je standardizovaný. Prohlédněte si, jak se implementuje validace na serveru nebo generování na klientovi v různých jazycích.
-                    </p>
+                    @if(View::exists($contentView))
+                        @include($contentView)
+                    @else
+                        <div class="p-4 bg-yellow-100 text-yellow-800 rounded-lg">
+                            ⚠️ Úvodní text pro modul zatím nebyl vytvořen.
+                        </div>
+                    @endif
                 </div>
 
                 {{-- Pokud nejsou žádné ukázky, zobrazíme info --}}

@@ -1,9 +1,38 @@
-// Příklad za použití knihovny 'otplib'
 const { totp } = require('otplib');
 
-const secret = 'K6UVX7XJ7XJ7XJ7X'; // Sdílený tajný klíč (Base32)
+// 1. SDÍLENÉ TAJEMSTVÍ (Seed)
+// Tento klíč musí znát klient i server. V praxi se předává přes QR kód.
+const secret = 'K6UVX7XJ7XJ7XJ7X';
 
-// Generování aktuálního 6místného kódu
-const token = totp.generate(secret);
+/**
+ * STRANA KLIENTA (Např. Google Authenticator)
+ * Generuje kód na základě tajného klíče a aktuálního času.
+ */
+function generateCurrentToken(userSecret) {
+    // Algoritmus TOTP = HOTP(Tajemství, Časový interval)
+    return totp.generate(userSecret);
+}
 
-console.log(`Váš aktuální kód je: ${token}`);
+const token = generateCurrentToken(secret);
+console.log(`Váš aktuální 6místný kód: ${token}`);
+
+/**
+ * STRANA SERVERU
+ * Validuje kód zaslaný uživatelem.
+ */
+function verifyUserToken(userSecret, tokenFromUser) {
+    // Server provede stejný výpočet jako klient a výsledky porovná.
+    // 'check' automaticky počítá s časovým krokem (standardně 30s).
+    const isValid = totp.check(tokenFromUser, userSecret);
+
+    if (isValid) {
+        console.log("Ověření úspěšné. Přístup povolen.");
+        return true;
+    } else {
+        console.log("Neplatný nebo vypršený kód.");
+        return false;
+    }
+}
+
+// Simulace ověření
+verifyUserToken(secret, token);

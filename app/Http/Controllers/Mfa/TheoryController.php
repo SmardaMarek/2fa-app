@@ -48,10 +48,12 @@ class TheoryController extends Controller
     public function implementation(Module $module)
     {
         $codeSamples = $this->theoryService->getCodeSamples($module);
+        $contentView = "modules.code-samples.introduction.{$module->slug}";
 
         return view('modules.implementation', [
             'module' => $module,
             'codeSamples' => $codeSamples,
+            'contentView' => $contentView,
         ]);
     }
 }

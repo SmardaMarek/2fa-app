@@ -1,8 +1,6 @@
-Změnit vizál u code samples
 Doplnit teoretické texty
 Zamyslet se jestli je TOTP simulace dostanečná
 Redirect z dashboard na to kde jsem skončil
 Opravit redirecty na jednotlivé sekce - všechno teď směruje jedním směrem
-Implementation blade udělat obecný a includovat content na základě modulu
 Přidat obrázky a odkazy v teoretické sekci
 Vytvořit testy
