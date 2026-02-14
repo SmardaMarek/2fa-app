@@ -22,4 +22,9 @@ class Module extends Model
     {
         return $this->hasMany(UserProgress::class);
     }
+
+    public function questions()
+    {
+        return $this->hasMany(Question::class);
+    }
 }

@@ -21,6 +21,7 @@ class DashboardService
             }])
             ->get();
     }
+
     public function getProgressForUser(): array
     {
         $userId = Auth::id();
@@ -34,10 +35,18 @@ class DashboardService
         foreach ($userProgressRecords as $record) {
             $completedSteps = 0;
 
-            if ($record->theory_completed) $completedSteps++;
-            if ($record->simulation_setup_completed) $completedSteps++;
-            if ($record->simulation_attack_completed) $completedSteps++;
-            if (!is_null($record->quiz_score)) $completedSteps++;
+            if ($record->theory_completed) {
+                $completedSteps++;
+            }
+            if ($record->simulation_setup_completed) {
+                $completedSteps++;
+            }
+            if ($record->simulation_attack_completed) {
+                $completedSteps++;
+            }
+            if ($record->quiz_completed) {
+                $completedSteps++;
+            }
 
             $moduleSlug = $this->mapModuleIdToSlug($record->module_id);
 
@@ -59,5 +68,4 @@ class DashboardService
             default => null,
         };
     }
-
 }

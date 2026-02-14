@@ -1,10 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Services\Mfa;
 
-use lbuchs\WebAuthn\WebAuthn;
 use Exception;
+use lbuchs\WebAuthn\WebAuthn;
 
 class WebAuthnService
 {
@@ -35,7 +36,7 @@ class WebAuthnService
                 'credentialId' => $data->credentialId,
             ];
         } catch (Exception $e) {
-            throw new Exception("Registrace klíče selhala: " . $e->getMessage());
+            throw new Exception('Registrace klíče selhala: '.$e->getMessage());
         }
     }
 

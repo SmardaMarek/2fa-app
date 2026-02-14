@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Services\Mfa;
@@ -16,7 +17,7 @@ class BiometricService
         // Biometrie funguje jako lokální "odemknutí" kryptografického klíče.
         $authenticatorData = $assertion->getAuthenticatorData();
 
-        if (!$authenticatorData->isUserVerified()) {
+        if (! $authenticatorData->isUserVerified()) {
             return false;
         }
 

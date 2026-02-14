@@ -18,4 +18,12 @@ class UserProgressManager
             [$stepName => $status]
         );
     }
+
+    public function markAsCompleted(int $moduleId, int $userId): void
+    {
+        UserProgress::updateOrCreate(
+            ['module_id' => $moduleId, 'user_id' => $userId],
+            ['completed_at' => now()]
+        );
+    }
 }

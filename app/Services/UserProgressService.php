@@ -33,4 +33,19 @@ class UserProgressService
             true
         );
     }
+
+    public function completeQuizStep(Module $module): void
+    {
+        $this->progressManager->createOrUpdate(
+            $module->id,
+            Auth::id(),
+            UserProgress::QUIZ_STEP,
+            true
+        );
+
+        $this->progressManager->markAsCompleted(
+            $module->id,
+            Auth::id()
+        );
+    }
 }

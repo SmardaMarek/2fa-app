@@ -16,7 +16,7 @@ enum ModulSlug: string
      */
     public function label(): string
     {
-        return match($this) {
+        return match ($this) {
             self::TOTP => 'TOTP',
             self::SMS => 'SMS OTP',
             self::BIOMETRY => 'Biometrie',

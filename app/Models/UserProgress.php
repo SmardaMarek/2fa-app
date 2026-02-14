@@ -13,6 +13,10 @@ class UserProgress extends Model
 
     public const SIMULATION_SETUP_STEP = 'simulation_setup_completed';
 
+    public const THEORY_STEP = 'theory_completed';
+
+    public const QUIZ_STEP = 'quiz_completed';
+
     protected $table = 'user_progress';
 
     protected $guarded = [];
@@ -21,6 +25,7 @@ class UserProgress extends Model
         'theory_completed' => 'boolean',
         'simulation_setup_completed' => 'boolean',
         'simulation_attack_completed' => 'boolean',
+        'quiz_completed' => 'boolean',
         'completed_at' => 'datetime',
     ];
 

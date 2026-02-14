@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Mfa;
 
-use App\Enums\ModulSlug;
 use App\Services\Mfa\DashboardService;
 
 class DashboardController
@@ -18,7 +17,7 @@ class DashboardController
 
         return view('dashboard', [
             'modules' => $modules,
-            'progress' => $progress
+            'progress' => $progress,
         ]);
     }
 }

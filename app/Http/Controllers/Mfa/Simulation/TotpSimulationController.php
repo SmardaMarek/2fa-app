@@ -73,8 +73,8 @@ class TotpSimulationController extends Controller
         );
 
         if ($vulnerabilityConfirmed) {
-            return redirect()->route('dashboard') // Nebo na kvíz
-                ->with('status', 'Výborně! Hypotéza potvrzena: Protokol TOTP neověřuje původ domény a kód byl přijat.');
+            return redirect()->route('module.quiz', $module)
+                ->with('status', 'Výborně! Hypotéza potvrzena. Nyní ověříme vaše znalosti v závěrečném testu.');
         }
 
         return back()->withErrors(['code' => 'Kód není platný. Pro potvrzení zranitelnosti musíte zadat platný kód z vaší aplikace.']);

@@ -1,10 +1,12 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Services\Mfa;
 
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
+
 class SmsOtpService
 {
     /**
@@ -32,6 +34,7 @@ class SmsOtpService
         // Porovnání kódů a zajištění jednorázovosti
         if ($storedCode && hash_equals($storedCode, $enteredCode)) {
             Cache::forget("sms_otp_{$phoneNumber}");
+
             return true;
         }
 

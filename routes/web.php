@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Mfa\DashboardController;
+use App\Http\Controllers\Mfa\QuizController;
 use App\Http\Controllers\Mfa\Simulation\TotpSimulationController;
 use App\Http\Controllers\Mfa\TheoryController;
 use App\Http\Controllers\ProfileController;
@@ -13,6 +14,7 @@ Route::get('/', function () {
 Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
     Route::prefix('module/{module:slug}')->name('module.')->group(function () {
         Route::get('/theory', [TheoryController::class, 'show'])
             ->name('theory');
@@ -30,6 +32,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         Route::get('/implementation', [TheoryController::class, 'implementation'])
             ->name('implementation');
+
+        // Quiz
+        Route::get('/quiz', [QuizController::class, 'show'])->name('quiz');
+        Route::post('/quiz', [QuizController::class, 'submit'])->name('quiz.submit');
 
     });
 

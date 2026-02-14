@@ -1,6 +1,4 @@
 Doplnit teoretické texty
 Zamyslet se jestli je TOTP simulace dostanečná
-Redirect z dashboard na to kde jsem skončil
-Opravit redirecty na jednotlivé sekce - všechno teď směruje jedním směrem
 Přidat obrázky a odkazy v teoretické sekci
 Vytvořit testy

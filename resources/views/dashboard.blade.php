@@ -24,6 +24,14 @@
                             'red' => 'bg-red-100 text-red-800',
                             default => 'bg-gray-100 text-gray-800'
                         };
+
+                        $nextRoute = match($completedSteps) {
+                            0 => route('module.theory', $module),
+                            1 => route('module.simulation.setup', $module),
+                            2 => route('module.simulation.attack', $module),
+                            3 => route('module.quiz', $module),
+                            default => route('module.theory', $module),
+                        };
                     @endphp
 
                     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg border border-gray-200 hover:shadow-md transition-shadow duration-200 flex flex-col justify-between">
@@ -61,7 +69,7 @@
                             </div>
 
                             <div class="flex justify-end">
-                                <a href="{{ route('module.theory', $module) }}" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 w-full justify-center">
+                                <a href="{{ $nextRoute }}" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 w-full justify-center">
                                     {{ $completedSteps > 0 && !$isCompleted ? 'Pokračovat v lekci' : ($isCompleted ? 'Zopakovat lekci' : 'Zahájit lekci') }}
                                 </a>
                             </div>

@@ -38,6 +38,10 @@
                                     <x-dropdown-link :href="route('module.simulation.setup', $module->value)">
                                         {{ __('3. Interaktivní simulace') }}
                                     </x-dropdown-link>
+
+                                    <x-dropdown-link :href="route('module.quiz', $module->value)">
+                                        {{ __('4. Quiz') }}
+                                    </x-dropdown-link>
                                 </x-slot>
                             </x-dropdown>
                         </div>

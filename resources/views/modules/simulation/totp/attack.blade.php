@@ -16,13 +16,16 @@
                         </svg>
                     </div>
                     <div class="ml-3">
-                        <h3 class="text-sm font-medium text-blue-800">Cíl experimentu</h3>
-                        <div class="mt-2 text-sm text-blue-700">
-                            <p>
-                                Ověřte, zda protokol TOTP obsahuje ochranu proti phishingu (Origin Binding).
-                                Pokuste se použít váš validní kód na <strong>simulované podvržené doméně</strong>.
-                                Pokud server kód přijme, zranitelnost je potvrzena.
-                            </p>
+                        <div class="ml-3">
+                            <h3 class="text-sm font-medium text-blue-800">Cíl experimentu: Phishing (AitM) a Replay útoky</h3>
+                            <div class="mt-2 text-sm text-blue-700 space-y-3">
+                                <p>
+                                    V tomto scénáři testujeme dvě fundamentální slabiny TOTP protokolu. Zaprvé ověříme <strong>absenci vazby na původ (Origin Binding)</strong>. Zkuste zadat validní kód na simulované podvržené doméně. Kód totiž není vázán na konkrétní web, ale pouze na časové okno.
+                                </p>
+                                <p>
+                                    Zadruhé demonstrujeme hrozbu <strong>útoku přehráním (Replay Attack)</strong>. Pokud útočník získá váš kód z podvodné stránky , pokusí se jej okamžitě použít na legitimním serveru. Vaším cílem je zjistit, zda náš systém takový útok v reálném čase propustí.
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -55,20 +58,33 @@
                     </div>
                 </div>
 
-                <div class="bg-gray-900 overflow-hidden shadow-sm sm:rounded-lg p-6 text-green-400 font-mono text-sm">
-                    <div class="mb-2 border-b border-gray-700 pb-2 font-bold text-white">
-                        > SYSTEM ANALYZER
+                <div class="bg-gray-900 overflow-hidden shadow-sm sm:rounded-lg p-6 text-green-400 font-mono text-sm h-full flex flex-col">
+                    <div class="mb-4 border-b border-gray-700 pb-2 font-bold text-white flex justify-between items-center">
+                        <span>> SYSTEM ANALYZER</span>
+                        <span class="text-red-500 text-xs animate-pulse border border-red-500 px-1 rounded">VULNERABILITY SCAN ACTIVE</span>
                     </div>
                     <p class="mb-2">> Waiting for input...</p>
-                    <p class="mb-2 opacity-50">> Monitoring traffic on port 443...</p>
-                    <br>
-                    <p class="text-white font-bold">Otázka k zamyšlení:</p>
-                    <p>
-                        Ví aplikace v mobilu, na jakou stránku se právě díváte?
-                        Zabraňuje vám vygenerovat kód, když jste na <code>g00gle.com</code> místo <code>google.com</code>?
-                    </p>
-                </div>
+                    <p class="mb-6 opacity-50">> Monitoring traffic on port 443...</p>
 
+                    <div class="space-y-6 text-gray-300 mt-auto">
+                        <div class="bg-gray-800 p-3 rounded border-l-2 border-yellow-500">
+                            <p class="text-white font-bold mb-1">[?] Zamyšlení 1: Chybějící kontext (Origin Binding)</p>
+                            <p class="text-xs leading-relaxed">
+                                Ví vaše autentizační aplikace v mobilu, na jakou webovou stránku se právě díváte?
+                                Zabrání vám opsat kód, když jste na <code class="text-red-400 bg-gray-900 px-1">g00gle.com</code> místo <code class="text-green-400 bg-gray-900 px-1">google.com</code>?
+                                Odpověď zní ne. Aplikace generuje kódy offline a nezajímá ji, kam je zadáváte.
+                            </p>
+                        </div>
+
+                        <div class="bg-gray-800 p-3 rounded border-l-2 border-red-500">
+                            <p class="text-white font-bold mb-1">[?] Zamyšlení 2: Časové okno (Replay Attack)</p>
+                            <p class="text-xs leading-relaxed">
+                                TOTP kód se standardně mění každých 30 sekund. Co se stane, když kód zadáte do podvodné stránky hned v 5. sekundě jeho platnosti?
+                                Útočníkovi zbývá celých 25 sekund na to, aby ho odeslal na legitimní server. Pokud backend <strong>neukládá již použité kódy do mezipaměti (např. Redis)</strong>, aby je do konce jejich platnosti zneplatnil, přijme ten samý kód dvakrát.
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
