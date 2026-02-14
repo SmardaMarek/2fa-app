@@ -15,6 +15,33 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+
+                    {{-- Dynamické načtení modulů z Enumu --}}
+                    @foreach(\App\Enums\ModulSlug::cases() as $module)
+                        <div class="hidden sm:flex sm:items-center">
+                            <x-dropdown align="left" width="48">
+                                <x-slot name="trigger">
+                                    <button class="inline-flex items-center px-1 pt-1 border-b-2 {{ request()->is('module/'.$module->value.'*') ? 'border-indigo-400 text-white font-bold' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300' }} text-sm font-medium leading-5 transition duration-150 ease-in-out focus:outline-none">
+                                        <div>{{ $module->label() }}</div>
+                                    </button>
+                                </x-slot>
+
+                                <x-slot name="content">
+                                    <x-dropdown-link :href="route('module.theory', $module->value)">
+                                        {{ __('1. Teorie a princip') }}
+                                    </x-dropdown-link>
+
+                                    <x-dropdown-link :href="route('module.implementation', $module->value)">
+                                        {{ __('2. Ukázky implementace') }}
+                                    </x-dropdown-link>
+
+                                    <x-dropdown-link :href="route('module.simulation.setup', $module->value)">
+                                        {{ __('3. Interaktivní simulace') }}
+                                    </x-dropdown-link>
+                                </x-slot>
+                            </x-dropdown>
+                        </div>
+                    @endforeach
                 </div>
             </div>
 
