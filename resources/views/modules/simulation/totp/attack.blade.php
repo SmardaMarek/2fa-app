@@ -4,7 +4,7 @@
             <h2 class="font-semibold text-xl text-gray-400 leading-tight">
                 {{ $module->title }} - Experiment: Origin binding/Replay attack
             </h2>
-            <div class="text-sm text-gray-400">
+            <div class="text-sm font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full">
                 Krok 3/4
             </div>
         </div>
@@ -50,7 +50,7 @@
                     <div class="p-6">
                         <h3 class="text-center text-lg font-bold text-gray-700 mb-4">Přihlášení k účtu</h3>
 
-                        <form action="{{ route('module.simulation.verify_attack', $module) }}" method="POST">
+                        <form action="{{ route('module.totp.verify_attack', ['module' => $module->slug]) }}" method="POST">
                             @csrf
                             <div class="mb-4">
                                 <label class="block text-sm font-medium text-gray-700">Váš TOTP kód</label>

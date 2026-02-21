@@ -4,7 +4,7 @@
             <h2 class="font-semibold text-xl text-gray-400 leading-tight">
                 {{ $module->title }} - Praktické nastavení
             </h2>
-            <div class="text-sm text-gray-400">
+            <div class="text-sm font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full">
                 Krok 3/4
             </div>
         </div>
@@ -29,7 +29,7 @@
                 </div>
 
                 <h3 class="text-lg font-bold mb-4">2. Ověřte nastavení</h3>
-                <form action="{{ route('module.simulation.verify_setup', $module) }}" method="POST">
+                <form action="{{ route($module->getSimulationVerifySetupRoute(), ['module' => $module->slug]) }}" method="POST">
                     @csrf
                     <div class="mb-4">
                         <input type="text" name="code" placeholder="123456" class="text-center text-2xl tracking-widest w-48 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" maxlength="6" required>

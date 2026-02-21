@@ -4,7 +4,9 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ $module->title }} - Závěrečný test
             </h2>
-            <div class="text-sm text-gray-500">Krok 4/4</div>
+            <div class="text-sm font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full">
+                Krok 4/4
+            </div>
         </div>
     </x-slot>
 

@@ -4,7 +4,7 @@
             <h2 class="font-semibold text-xl text-gray-400 leading-tight">
                 {{ $module->title }} - Implementace
             </h2>
-            <div class="text-sm text-gray-400">
+            <div class="text-sm font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full">
                 Krok 2/4
             </div>
         </div>
@@ -70,11 +70,11 @@
                 @endif
 
                 <div class="bg-gray-50 px-6 py-4 border-t border-gray-100 flex justify-between items-center">
-                    <a href="{{ route('module.theory', $module) }}" class="text-sm text-gray-600 hover:text-gray-900">
+                    <a href="{{ route('module.theory', ['module' => $module->slug]) }}" class="text-sm text-gray-600 hover:text-gray-900">
                         ← Zpět na teorii
                     </a>
 
-                    <a href="{{ route('module.simulation.setup', $module) }}" class="inline-flex items-center px-6 py-3 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-500 transition ease-in-out duration-150 shadow-md">
+                    <a href="{{ route($module->getSimulationSetupRoute(), ['module' => $module->slug]) }}" class="inline-flex items-center px-6 py-3 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-500 transition ease-in-out duration-150 shadow-md">
                         Vyzkoušet v simulátoru
                         <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>

@@ -4,3 +4,4 @@ Vytvořit testy
 Přidat ověřovací email
 Přidat kontrolu emailu, jestli je ve školní doméně
 Udělat pentetrační test
+Projet STAN level 5 výsledky a podívat se co je relevantní

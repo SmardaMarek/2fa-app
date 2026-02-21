@@ -27,19 +27,19 @@
                                 </x-slot>
 
                                 <x-slot name="content">
-                                    <x-dropdown-link :href="route('module.theory', $module->value)">
+                                    <x-dropdown-link :href="route('module.theory', ['module' => $module->value])">
                                         {{ __('1. Teorie a princip') }}
                                     </x-dropdown-link>
 
-                                    <x-dropdown-link :href="route('module.implementation', $module->value)">
+                                    <x-dropdown-link :href="route('module.implementation', ['module' => $module->value])">
                                         {{ __('2. Ukázky implementace') }}
                                     </x-dropdown-link>
 
-                                    <x-dropdown-link :href="route('module.simulation.setup', $module->value)">
+                                    <x-dropdown-link :href="route($module->getSimulationSetupRoute(), ['module' => $module->value])">
                                         {{ __('3. Interaktivní simulace') }}
                                     </x-dropdown-link>
 
-                                    <x-dropdown-link :href="route('module.quiz', $module->value)">
+                                    <x-dropdown-link :href="route('module.quiz', ['module' => $module->value])">
                                         {{ __('4. Quiz') }}
                                     </x-dropdown-link>
                                 </x-slot>

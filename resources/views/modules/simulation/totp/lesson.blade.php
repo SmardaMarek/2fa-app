@@ -4,7 +4,7 @@
             <h2 class="font-semibold text-xl text-gray-400 leading-tight">
                 {{ $module->title }} - Prevence proti útoku
             </h2>
-            <div class="text-sm text-gray-400">
+            <div class="text-sm font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full">
                 Krok 3/4
             </div>
         </div>
@@ -89,7 +89,7 @@
                 @endif
 
                 <div class="bg-gray-50 px-6 py-4 border-t border-gray-100 flex justify-end items-center">
-                    <form action="{{ route('module.simulation.complete', $module) }}" method="POST">
+                    <form action="{{ route('module.totp.complete', ['module' => $module->slug]) }}" method="POST">
                         @csrf
                         <button type="submit" class="inline-flex items-center px-6 py-3 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-500 transition ease-in-out duration-150 shadow-md">
                             Dokončit simulaci

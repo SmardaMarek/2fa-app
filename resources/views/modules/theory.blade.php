@@ -4,7 +4,7 @@
             <h2 class="font-semibold text-xl text-gray-400 leading-tight">
                 {{ $module->title }} - Teorie
             </h2>
-            <div class="text-sm text-gray-400">
+            <div class="text-sm font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full">
                 Krok 1/4
             </div>
         </div>

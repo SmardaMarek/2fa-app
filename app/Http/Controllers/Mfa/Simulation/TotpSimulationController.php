@@ -50,7 +50,7 @@ class TotpSimulationController extends Controller
         if ($valid) {
             $this->progressService->completeSimulationSetupStep($module);
 
-            return redirect()->route('module.simulation.attack', $module)
+            return redirect()->route('module.totp.attack', ['module' => $module->slug])
                 ->with('status', 'Nastavení úspěšné! Nyní se prosím znovu přihlaste pro potvrzení.');
         }
 
@@ -73,7 +73,7 @@ class TotpSimulationController extends Controller
         );
 
         if ($vulnerabilityConfirmed) {
-            return redirect()->route('module.simulation.lessons', $module)
+            return redirect()->route('module.totp.lessons', ['module' => $module->slug])
                 ->with('status', 'Výborně! Kód byl přijat. Podívejme se, proč tento útok zafungoval.');
         }
 
@@ -95,7 +95,7 @@ class TotpSimulationController extends Controller
 
         $this->simulationService->completeAttackPhase($user, $module);
 
-        return redirect()->route('module.quiz', $module)
+        return redirect()->route('module.quiz', ['module' => $module->slug])
             ->with('status', 'Skvělá práce! Nyní ověříme vaše znalosti v závěrečném testu.');
     }
 }

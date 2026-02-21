@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Mfa\DashboardController;
 use App\Http\Controllers\Mfa\QuizController;
+use App\Http\Controllers\Mfa\Simulation\SmsSimulationController;
 use App\Http\Controllers\Mfa\Simulation\TotpSimulationController;
 use App\Http\Controllers\Mfa\TheoryController;
 use App\Http\Controllers\ProfileController;
@@ -16,32 +17,40 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::prefix('module/{module:slug}')->name('module.')->group(function () {
-        Route::get('/theory', [TheoryController::class, 'show'])
-            ->name('theory');
+        // --- 1. OBECNÉ ROUTY (Sdílené) ---
+        Route::get('/theory', [TheoryController::class, 'show'])->name('theory');
+        Route::post('/theory/complete', [TheoryController::class, 'complete'])->name('theory.complete');
+        Route::get('/implementation', [TheoryController::class, 'implementation'])->name('implementation');
 
-        Route::post('/theory/complete', [TheoryController::class, 'complete'])
-            ->name('theory.complete');
-
-        // Scénář A: Setup
-        Route::get('/simulation/setup', [TotpSimulationController::class, 'setup'])->name('simulation.setup');
-        Route::post('/simulation/setup', [TotpSimulationController::class, 'verifySetup'])->name('simulation.verify_setup');
-
-        // Scénář B: Attack
-        Route::get('/simulation/attack', [TotpSimulationController::class, 'attack'])->name('simulation.attack');
-        Route::post('/simulation/attack', [TotpSimulationController::class, 'verifyAttack'])->name('simulation.verify_attack');
-
-        Route::get('/implementation', [TheoryController::class, 'implementation'])
-            ->name('implementation');
-
-        Route::get('/simulation/lessons', [TotpSimulationController::class, 'lessons'])
-            ->name('simulation.lessons');
-
-        Route::post('/simulation/complete', [TotpSimulationController::class, 'complete'])
-            ->name('simulation.complete');
-
-        // Quiz
         Route::get('/quiz', [QuizController::class, 'show'])->name('quiz');
         Route::post('/quiz', [QuizController::class, 'submit'])->name('quiz.submit');
+
+        // --- 2. SPECIFICKÉ ROUTY SIMULACÍ ---
+
+        // A) TOTP Simulace
+        Route::prefix('totp')->name('totp.')->group(function () {
+            Route::get('/setup', [TotpSimulationController::class, 'setup'])->name('setup');
+            Route::post('/setup', [TotpSimulationController::class, 'verifySetup'])->name('verify_setup');
+
+            Route::get('/attack', [TotpSimulationController::class, 'attack'])->name('attack');
+            Route::post('/attack', [TotpSimulationController::class, 'verifyAttack'])->name('verify_attack');
+
+            Route::get('/lessons', [TotpSimulationController::class, 'lessons'])->name('lessons');
+            Route::post('/complete', [TotpSimulationController::class, 'complete'])->name('complete');
+        });
+
+        // B) SMS OTP Simulace
+        Route::prefix('sms')->name('sms.')->group(function () {
+            Route::get('/setup', [SmsSimulationController::class, 'setup'])->name('setup');
+            Route::post('/send', [SmsSimulationController::class, 'send'])->name('send');
+            Route::post('/verify', [SmsSimulationController::class, 'verify'])->name('verify');
+
+            Route::get('/attack', [SmsSimulationController::class, 'attack'])->name('attack');
+            Route::post('/attack', [SmsSimulationController::class, 'verifyAttack'])->name('verify_attack');
+
+            Route::get('/lessons', [SmsSimulationController::class, 'lessons'])->name('lessons');
+            Route::post('/complete', [SmsSimulationController::class, 'complete'])->name('complete');
+        });
 
     });
 

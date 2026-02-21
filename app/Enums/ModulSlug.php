@@ -23,4 +23,41 @@ enum ModulSlug: string
             self::FIDO2 => 'Fyzický klíč',
         };
     }
+
+    /**
+     * Vrátí název routy pro Setup fázi simulace.
+     */
+    public function getSimulationSetupRoute(): string
+    {
+        return match ($this) {
+            self::TOTP => 'module.totp.setup',
+            self::SMS => 'module.sms.setup',
+            // Pro moduly, které zatím nemají simulaci, vrátíme fallback
+            default => 'dashboard',
+        };
+    }
+
+    /**
+     * Vrátí název routy pro Attack fázi simulace.
+     */
+    public function getSimulationAttackRoute(): string
+    {
+        return match ($this) {
+            self::TOTP => 'module.totp.attack',
+            self::SMS => 'module.sms.attack',
+            default => 'dashboard',
+        };
+    }
+
+    /**
+     * Vrátí název routy pro Lessons fázi simulace.
+     */
+    public function getSimulationLessonsRoute(): string
+    {
+        return match ($this) {
+            self::TOTP => 'module.totp.lessons',
+            self::SMS => 'module.sms.lessons',
+            default => 'dashboard',
+        };
+    }
 }
