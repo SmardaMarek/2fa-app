@@ -33,6 +33,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/implementation', [TheoryController::class, 'implementation'])
             ->name('implementation');
 
+        Route::get('/simulation/lessons', [TotpSimulationController::class, 'lessons'])
+            ->name('simulation.lessons');
+
+        Route::post('/simulation/complete', [TotpSimulationController::class, 'complete'])
+            ->name('simulation.complete');
+
         // Quiz
         Route::get('/quiz', [QuizController::class, 'show'])->name('quiz');
         Route::post('/quiz', [QuizController::class, 'submit'])->name('quiz.submit');

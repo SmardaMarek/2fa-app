@@ -6,24 +6,15 @@ namespace App\Http\Controllers\Mfa;
 
 use App\Http\Controllers\Controller;
 use App\Models\Module;
-use App\Models\UserProgress;
 use App\Services\Mfa\TheoryService;
-use Illuminate\Support\Facades\Auth;
+use App\Services\UserProgressService;
 
 class TheoryController extends Controller
 {
-    public function __construct(protected TheoryService $theoryService) {}
+    public function __construct(protected TheoryService $theoryService, protected UserProgressService $progressService) {}
 
     public function show(Module $module)
     {
-        // Zde zaznamenáme, že uživatel začal modul (pokud ještě nezačal)
-        UserProgress::firstOrCreate(
-            ['user_id' => Auth::id(), 'module_id' => $module->id],
-            ['theory_completed' => false]
-        );
-
-        // Dynamicky určíme, kterou šablonu obsahu načíst podle slugu
-        // např. resources/views/modules/content/sms-otp.blade.php
         $contentView = "modules.content.{$module->slug}";
 
         return view('modules.theory', [
@@ -32,16 +23,10 @@ class TheoryController extends Controller
         ]);
     }
 
-    // Metoda pro dokončení teorie a přechod na simulaci
     public function complete(Module $module)
     {
-        // Označíme teorii jako hotovou
-        UserProgress::updateOrCreate(
-            ['user_id' => Auth::id(), 'module_id' => $module->id],
-            ['theory_completed' => true]
-        );
+        $this->progressService->completeTheory($module);
 
-        // Přesměrujeme na setup simulace (zatím jen placeholder, ten uděláme příště)
         return redirect()->route('module.implementation', $module);
     }
 

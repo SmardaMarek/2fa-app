@@ -1,10 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex items-center justify-between">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            <h2 class="font-semibold text-xl text-gray-400 leading-tight">
                 {{ $module->title }} - Implementace
             </h2>
-            <div class="text-sm text-gray-500">
+            <div class="text-sm text-gray-400">
                 Krok 2/4
             </div>
         </div>

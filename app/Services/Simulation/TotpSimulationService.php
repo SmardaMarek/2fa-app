@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Services\UserProgressService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use PragmaRX\Google2FA\Exceptions\IncompatibleWithGoogleAuthenticatorException;
 use PragmaRX\Google2FA\Exceptions\InvalidCharactersException;
 use PragmaRX\Google2FA\Exceptions\SecretKeyTooShortException;
@@ -96,8 +97,6 @@ class TotpSimulationService
         );
 
         if ($isValid) {
-            $this->completeAttackPhase($user, $module);
-
             return true;
         }
 
@@ -107,7 +106,7 @@ class TotpSimulationService
     /**
      * Pomocná metoda pro zápis změn do DB
      */
-    private function completeAttackPhase(User $user, Module $module): void
+    public function completeAttackPhase(User $user, Module $module): void
     {
         $this->userProgressService->completeSimulationAttackStep($module);
 
@@ -117,5 +116,21 @@ class TotpSimulationService
             MfaSimulation::STATUS_COMPROMISED,
             MfaSimulation::SCENARIO_ATTACK
         );
+    }
+
+    public function getLessonCodeSamples(): array
+    {
+        $directoryPath = resource_path('views/modules/code-samples/totp-app-lesson');
+        $samples = [];
+
+        if (File::isDirectory($directoryPath)) {
+            $files = File::files($directoryPath);
+            foreach ($files as $file) {
+                $language = pathinfo($file->getFilename(), PATHINFO_FILENAME);
+                $samples[$language] = file_get_contents($file->getRealPath());
+            }
+        }
+
+        return $samples;
     }
 }

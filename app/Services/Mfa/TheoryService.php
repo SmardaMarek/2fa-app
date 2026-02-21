@@ -6,14 +6,12 @@ namespace App\Services\Mfa;
 
 use App\Models\Module;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Log;
 
 class TheoryService
 {
     public function getCodeSamples(Module $module): array
     {
         $directoryPath = resource_path("views/modules/code-samples/{$module->slug}");
-        Log::info($directoryPath);
         $samples = [];
 
         if (File::isDirectory($directoryPath)) {

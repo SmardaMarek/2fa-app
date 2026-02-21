@@ -48,4 +48,14 @@ class UserProgressService
             Auth::id()
         );
     }
+
+    public function completeTheory(Module $module): void
+    {
+        $this->progressManager->createOrUpdate(
+            $module->id,
+            Auth::id(),
+            UserProgress::THEORY_STEP,
+            true
+        );
+    }
 }

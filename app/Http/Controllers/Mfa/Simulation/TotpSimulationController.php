@@ -73,11 +73,29 @@ class TotpSimulationController extends Controller
         );
 
         if ($vulnerabilityConfirmed) {
-            return redirect()->route('module.quiz', $module)
-                ->with('status', 'Výborně! Hypotéza potvrzena. Nyní ověříme vaše znalosti v závěrečném testu.');
+            return redirect()->route('module.simulation.lessons', $module)
+                ->with('status', 'Výborně! Kód byl přijat. Podívejme se, proč tento útok zafungoval.');
         }
 
         return back()->withErrors(['code' => 'Kód není platný. Pro potvrzení zranitelnosti musíte zadat platný kód z vaší aplikace.']);
 
+    }
+
+    public function lessons(Module $module)
+    {
+        return view('modules.simulation.totp.lesson', [
+            'module' => $module,
+            'codeSamples' => $this->simulationService->getLessonCodeSamples(),
+        ]);
+    }
+
+    public function complete(Request $request, Module $module)
+    {
+        $user = Auth::user();
+
+        $this->simulationService->completeAttackPhase($user, $module);
+
+        return redirect()->route('module.quiz', $module)
+            ->with('status', 'Skvělá práce! Nyní ověříme vaše znalosti v závěrečném testu.');
     }
 }

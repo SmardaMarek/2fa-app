@@ -1,12 +1,12 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex items-center justify-between">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            <h2 class="font-semibold text-xl text-gray-400 leading-tight">
                 {{ $module->title }} - Teorie
             </h2>
-            <a href="{{ route('dashboard') }}" class="text-sm text-gray-500 hover:text-gray-700">
-                ← Zpět na přehled
-            </a>
+            <div class="text-sm text-gray-400">
+                Krok 1/4
+            </div>
         </div>
     </x-slot>
 
