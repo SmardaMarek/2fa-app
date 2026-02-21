@@ -4,4 +4,3 @@ Vytvořit testy
 Přidat ověřovací email
 Přidat kontrolu emailu, jestli je ve školní doméně
 Udělat pentetrační test
-Upravit index - momentálně je index na laravel page místo toho rovnou na login/dashboard
