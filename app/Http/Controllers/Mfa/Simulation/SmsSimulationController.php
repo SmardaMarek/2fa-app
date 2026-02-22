@@ -19,17 +19,11 @@ class SmsSimulationController extends Controller
         private UserProgressService $progressService
     ) {}
 
-    /**
-     * KROK 1: Zobrazení formuláře pro prvotní nastavení/vyzkoušení
-     */
     public function setup(Module $module)
     {
         return view('modules.simulation.otp.setup', compact('module'));
     }
 
-    /**
-     * KROK 1.1: Asynchronní vygenerování a odeslání SMS kódu
-     */
     public function send(Module $module): JsonResponse
     {
         // Generujeme a ukládáme hash kódu přes naši dříve vytvořenou servisu
@@ -41,9 +35,6 @@ class SmsSimulationController extends Controller
         ]);
     }
 
-    /**
-     * KROK 1.2: Ověření zadaného kódu pro úspěšný scénář
-     */
     public function verify(Request $request, Module $module)
     {
         $request->validate(['code' => 'required|digits:6']);
@@ -51,10 +42,8 @@ class SmsSimulationController extends Controller
         $isValid = $this->smsService->verify(Auth::user(), $request->input('code'));
 
         if ($isValid) {
-            // Zápis postupu studenta
             $this->progressService->completeSimulationSetupStep($module);
 
-            // Přesun na Scénář B (Útok)
             return redirect()->route('module.sms.attack', ['module' => $module->slug])
                 ->with('status', 'Ověření proběhlo úspěšně! Nyní si ukážeme, jak lze SMS metodu zneužít.');
         }
@@ -62,48 +51,34 @@ class SmsSimulationController extends Controller
         return back()->withErrors(['code' => 'Neplatný nebo expirovaný kód. Zkuste to znovu.']);
     }
 
-    /**
-     * KROK 2: Zobrazení simulace útoku (Phishing / AitM)
-     */
     public function attack(Module $module)
     {
         return view('modules.simulation.otp.attack', compact('module'));
     }
 
-    /**
-     * KROK 2.1: Ověření útoku (Student odesílá kód na "falešný" server)
-     */
     public function verifyAttack(Request $request, Module $module)
     {
         $request->validate(['code' => 'required|digits:6']);
 
-        // DIDAKTIKA: Útočník (tato metoda) přijal kód z podvodného formuláře
-        // a okamžitě ho zkouší ověřit proti legitimní službě.
-        $vulnerabilityConfirmed = $this->smsService->verify(Auth::user(), $request->input('code'));
+        $isValid = $this->smsService->verify(Auth::user(), $request->input('code'));
 
-        if ($vulnerabilityConfirmed) {
-            // Útok byl úspěšný! SMS OTP neposkytuje ochranu proti phishingu (origin binding).
+        if ($isValid) {
+            $this->progressService->completeSimulationAttackStep($module);
+
             return redirect()->route('module.sms.lessons', ['module' => $module->slug])
-                ->with('status', 'Útok byl úspěšný. Útočník zachytil váš kód a získal přístup k účtu.');
+                ->with('status', 'Útok dokončen! Číslo bylo úspěšně zneužito k ovládnutí účtu.');
         }
 
-        return back()->withErrors(['code' => 'Kód není platný. Pro potvrzení zranitelnosti zadejte platný kód, který vám přišel v SMS.']);
+        return back()->withErrors(['code' => 'Kód už vypršel. Útočník musí být rychlejší!']);
     }
 
-    /**
-     * KROK 3: Ponaučení a vysvětlení hrozeb (Lessons learned)
-     */
     public function lessons(Module $module)
     {
         return view('modules.simulation.otp.lesson', compact('module'));
     }
 
-    /**
-     * KROK 4: Dokončení simulace a přechod na kvíz
-     */
     public function complete(Request $request, Module $module)
     {
-        // Uzavření praktické části modulu
         $this->progressService->completeSimulationAttackStep($module);
 
         return redirect()->route('module.quiz', ['module' => $module->slug])

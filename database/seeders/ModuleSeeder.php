@@ -23,7 +23,7 @@ class ModuleSeeder extends Seeder
             [
                 'slug' => 'totp-app',
                 'title' => 'Autentizační aplikace (TOTP)',
-                'description' => 'Generování jednorázových kódů offline (např. Google Authenticator). [cite_start]Eliminace rizika odposlechu sítě, ale stále existuje riziko phishingu (Real-time Phishing Proxy).',
+                'description' => 'Generování jednorázových kódů offline (např. Google Authenticator). Eliminace rizika odposlechu sítě, ale stále existuje riziko phishingu (Real-time Phishing Proxy).',
                 'factor_type' => FactorType::Possession,
                 'difficulty' => ModuleDifficulty::Intermediate,
                 'is_active' => true,
@@ -31,7 +31,7 @@ class ModuleSeeder extends Seeder
             [
                 'slug' => 'fido2-key',
                 'title' => 'Fyzický bezpečnostní klíč (FIDO2)',
-                'description' => 'Zlatý standard bezpečnosti. Využití asymetrické kryptografie a hardwarového klíče (YubiKey). [cite_start]Díky vazbě na původ (Origin Binding) je tato metoda odolná vůči phishingu.',
+                'description' => 'Zlatý standard bezpečnosti. Využití asymetrické kryptografie a hardwarového klíče (YubiKey). Díky vazbě na původ (Origin Binding) je tato metoda odolná vůči phishingu.',
                 'factor_type' => FactorType::Possession,
                 'difficulty' => ModuleDifficulty::Advanced,
                 'is_active' => true,
@@ -39,7 +39,7 @@ class ModuleSeeder extends Seeder
             [
                 'slug' => 'biometrics',
                 'title' => 'Biometrická autentizace',
-                'description' => 'Ověření pomocí otisku prstu nebo skenu obličeje. [cite_start]V kontextu webu funguje jako "User Verification" pro odemknutí kryptografického klíče v zařízení.',
+                'description' => 'Ověření pomocí otisku prstu nebo skenu obličeje. V kontextu webu funguje jako "User Verification" pro odemknutí kryptografického klíče v zařízení.',
                 'factor_type' => FactorType::Inherence,
                 'difficulty' => ModuleDifficulty::Intermediate,
                 'is_active' => true,
