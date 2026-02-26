@@ -68,6 +68,8 @@ class Module extends Model
             return match ($enum) {
                 ModulSlug::TOTP => 'module.totp.lessons',
                 ModulSlug::SMS => 'module.sms.lessons',
+                ModulSlug::BIOMETRY => 'module.biometrics.lessons',
+                // ModulSlug::FIDO2 => 'module.fido2.lessons',
                 default => 'dashboard',
             };
         }

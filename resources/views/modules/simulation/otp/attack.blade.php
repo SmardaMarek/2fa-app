@@ -35,8 +35,8 @@
                     </svg>
                 </div>
                 <div class="text-gray-700 dark:text-slate-200 text-sm leading-relaxed space-y-2 font-medium">
-                    <p>SMS OTP není bezpečné ověření "něco, co vlastním". V této simulaci si vyzkoušíte <strong>SIM Swapping</strong> útok[cite: 8, 65].</p>
-                    <p><strong>Úkol:</strong> Vlevo přesvědčte operátora k swapu, uprostřed se zkuste přihlásit a vpravo sledujte "vlastní" telefon[cite: 103, 112].</p>
+                    <p>SMS OTP není bezpečné ověření "něco, co vlastním". V této simulaci si vyzkoušíte <strong>SIM Swapping</strong> útok.</p>
+                    <p><strong>Úkol:</strong> Vlevo přesvědčte operátora k swapu, uprostřed se zkuste přihlásit a vpravo sledujte "vlastní" telefon.</p>
                 </div>
             </div>
         </div>
@@ -188,7 +188,7 @@
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                 Incident report
                             </h4>
-                            <p class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed font-medium">Číslo bylo odpojeno a přesměrováno na SIM kartu útočníka. Zprávy na tento telefon nedorazí[cite: 8, 104].</p>
+                            <p class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed font-medium">Číslo bylo odpojeno a přesměrováno na SIM kartu útočníka. Zprávy na tento telefon nedorazí.</p>
                         </div>
                     </div>
                 </div>

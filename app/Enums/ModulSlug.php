@@ -32,7 +32,8 @@ enum ModulSlug: string
         return match ($this) {
             self::TOTP => 'module.totp.setup',
             self::SMS => 'module.sms.setup',
-            // Pro moduly, které zatím nemají simulaci, vrátíme fallback
+            self::BIOMETRY => 'module.biometrics.setup',
+            // self::FIDO2 => 'module.fido2.setup',
             default => 'dashboard',
         };
     }
@@ -45,6 +46,8 @@ enum ModulSlug: string
         return match ($this) {
             self::TOTP => 'module.totp.attack',
             self::SMS => 'module.sms.attack',
+            self::BIOMETRY => 'module.biometrics.attack',
+            // self::FIDO2 => 'module.fido2.attack',
             default => 'dashboard',
         };
     }
@@ -57,6 +60,8 @@ enum ModulSlug: string
         return match ($this) {
             self::TOTP => 'module.totp.lessons',
             self::SMS => 'module.sms.lessons',
+            self::BIOMETRY => 'module.biometrics.lessons',
+            // self::FIDO2 => 'module.fido2.lessons',
             default => 'dashboard',
         };
     }

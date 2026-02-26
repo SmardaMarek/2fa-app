@@ -28,7 +28,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
 
     <div class="py-12 bg-gray-50 dark:bg-slate-900 min-h-screen transition-colors duration-300">
-        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8 space-y-8">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-8">
 
             {{-- Sekce 1: Origin Binding --}}
             <div class="bg-white dark:bg-slate-800/40 dark:backdrop-blur-md overflow-hidden shadow-xl dark:shadow-2xl sm:rounded-2xl border border-gray-200 dark:border-slate-700/50 flex flex-col transition-all duration-300">
@@ -43,7 +43,7 @@
                 <div class="p-8 md:p-10">
                     <div class="prose dark:prose-invert prose-indigo max-w-none text-gray-700 dark:text-slate-200 leading-relaxed font-medium mb-8">
                         <p>
-                            Úspěch útoku <strong>Adversary-in-the-Middle (AitM)</strong>, který jste si vyzkoušeli, není chybou vaší implementace[cite: 68]. Jedná se o fundamentální vlastnost návrhu protokolu **TOTP** dle standardu **RFC 6238**[cite: 29, 30].
+                            Úspěch útoku <strong>Adversary-in-the-Middle (AitM)</strong>, který jste si vyzkoušeli, není chybou vaší implementace. Jedná se o fundamentální vlastnost návrhu protokolu **TOTP** dle standardu **RFC 6238**.
                         </p>
                     </div>
 
@@ -57,15 +57,15 @@
                                 $$TOTP = Truncate(HMAC-SHA1(K, T))$$
                             </div>
                             <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-mono text-slate-500 dark:text-slate-400 border-t border-indigo-500/10 pt-6 text-left">
-                                <div class="flex items-center gap-2"><span class="font-black text-indigo-500">K:</span> Sdílený tajný klíč (Seed) [cite: 18, 133]</div>
-                                <div class="flex items-center gap-2"><span class="font-black text-indigo-500">T:</span> Časový faktor $T = (Unixtime - T_0) / X$ [cite: 19, 134]</div>
+                                <div class="flex items-center gap-2"><span class="font-black text-indigo-500">K:</span> Sdílený tajný klíč (Seed) </div>
+                                <div class="flex items-center gap-2"><span class="font-black text-indigo-500">T:</span> Časový faktor $T = (Unixtime - T_0) / X$ </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="prose dark:prose-invert prose-indigo max-w-none text-gray-700 dark:text-slate-200 leading-relaxed font-medium">
                         <p>
-                            Jak vidíte, funkce přijímá pouze symetrický klíč a čas[cite: 133]. **Zcela chybí kryptografická vazba na doménu**[cite: 16, 30]. Kód vygenerovaný pro falešnou doménu je matematicky identický s kódem pro legitimní službu[cite: 31, 68].
+                            Jak vidíte, funkce přijímá pouze symetrický klíč a čas. **Zcela chybí kryptografická vazba na doménu**. Kód vygenerovaný pro falešnou doménu je matematicky identický s kódem pro legitimní službu.
                         </p>
                     </div>
 
@@ -77,7 +77,7 @@
                         <div>
                             <h4 class="text-rose-500 font-bold uppercase tracking-wider text-xs mb-1">Standardy a mitigace</h4>
                             <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-medium">
-                                Dokument **NIST SP 800-63B** řadí TOTP do úrovně AAL2 právě kvůli rizikům phishingu[cite: 15, 118]. Plnou ochranu poskytuje až **FIDO2 / WebAuthn**, kde podpis zahrnuje hash `rpId` (Origin Binding)[cite: 42, 49, 71].
+                                Dokument **NIST SP 800-63B** řadí TOTP do úrovně AAL2 právě kvůli rizikům phishingu. Plnou ochranu poskytuje až **FIDO2 / WebAuthn**, kde podpis zahrnuje hash `rpId` (Origin Binding).
                             </p>
                         </div>
                     </div>
@@ -96,7 +96,7 @@
                 <div class="p-8 md:p-10 border-b border-gray-100 dark:border-slate-700/50">
                     <div class="prose dark:prose-invert prose-indigo max-w-none text-gray-600 dark:text-slate-300 mb-8 leading-relaxed">
                         <p>
-                            Aby TOTP kompenzovalo síťovou latenci, RFC 6238 doporučuje validovat i přilehlé časové kroky ($T-1$ až $T+1$)[cite: 142]. Tím vzniká validní okno o délce až 90 sekund[cite: 129]. Bez stavové logiky může útočník i oběť použít **stejný kód opakovaně** (Replay Attack)[cite: 146].
+                            Aby TOTP kompenzovalo síťovou latenci, RFC 6238 doporučuje validovat i přilehlé časové kroky ($T-1$ až $T+1$). Tím vzniká validní okno o délce až 90 sekund. Bez stavové logiky může útočník i oběť použít **stejný kód opakovaně** (Replay Attack).
                         </p>
                         <p class="font-bold text-indigo-600 dark:text-indigo-400">
                             Nápravné opatření: Backend musí po úspěšném ověření hodnotu pro daný krok $T$ zneplatnit v mezipaměti (např. Redis) po celou dobu jeho platnosti.

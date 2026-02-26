@@ -13,6 +13,7 @@ class QuestionSeeder extends Seeder
     {
         $this->seedTotpQuestions();
         $this->seedSmsQuestions();
+        $this->seedBiometricsQuestions();
     }
 
     private function seedTotpQuestions(): void
@@ -208,6 +209,101 @@ class QuestionSeeder extends Seeder
         foreach ($questions as $q) {
             Question::create([
                 'module_id' => $smsModule->id,
+                'text' => $q['text'],
+                'options' => $q['options'],
+                'correct_option' => $q['correct_option'],
+            ]);
+        }
+    }
+
+    private function seedBiometricsQuestions(): void
+    {
+        $biometricsModule = Module::where('slug', ModulSlug::BIOMETRY)->first();
+
+        if (! $biometricsModule) {
+            return;
+        }
+
+        $questions = [
+            [
+                'text' => 'Jaký je fundamentální rozdíl mezi autentizací pomocí hesla (Znalost) a biometrií (Inherence)?',
+                'options' => [
+                    'a' => 'Heslo se vyhodnocuje pravděpodobnostně, zatímco biometrie vyžaduje vždy 100% shodu bitů na úrovni hardwaru.',
+                    'b' => 'Heslo je diskrétní hodnota (buď je správné, nebo chybné), zatímco biometrie je stochastický proces vyhodnocující míru podobnosti vůči šabloně.',
+                    'c' => 'Biometrie jako jediný faktor nativně poskytuje ochranu proti Man-in-the-Middle útokům pomocí Origin Bindingu.',
+                ],
+                'correct_option' => 'b',
+            ],
+            [
+                'text' => 'Co v kontextu biometrických systémů označuje metrika EER (Equal Error Rate)?',
+                'options' => [
+                    'a' => 'Práh (Threshold), při kterém systém začne automaticky blokovat účty z důvodu podezření na spoofing.',
+                    'b' => 'Rychlost, jakou dokáže Secure Enclave zpracovat biometrickou šablonu v milisekundách.',
+                    'c' => 'Bod na grafu, ve kterém se křivky FAR (False Acceptance Rate) a FRR (False Rejection Rate) protínají.',
+                ],
+                'correct_option' => 'c',
+            ],
+            [
+                'text' => 'Ukládají moderní systémy (jako Apple FaceID nebo Android BiometricPrompt) reálnou fotografii vašeho obličeje / otisk prstu?',
+                'options' => [
+                    'a' => 'Ano, ale tyto obrázky jsou zašifrovány pomocí symetrického klíče AES-256 v databázi operačního systému.',
+                    'b' => 'Ne, senzory extrahují pouze klíčové markanty, ze kterých matematicky vytvoří nevratnou biometrickou šablonu (Template).',
+                    'c' => 'Ano, obrázky se odesílají a ukládají na zabezpečených serverech výrobce hardwaru (např. Apple iCloud).',
+                ],
+                'correct_option' => 'b',
+            ],
+            [
+                'text' => 'Proč byla 2D RGB kamera v naší simulaci úspěšně oklamána ukradenou fotografií (Presentation Attack)?',
+                'options' => [
+                    'a' => 'Protože běžná optická kamera nedokáže měřit Z-osu (hloubku prostoru) a vyhodnocuje pouze dvourozměrnou shodu pixelů/rysů.',
+                    'b' => 'Protože fotografie obsahovala skrytý malware (steganografie), který provedl buffer overflow v biometrickém modulu.',
+                    'c' => 'Protože útočník snížil hodnotu FRR (False Rejection Rate) v nastavení systému oběti na minimum.',
+                ],
+                'correct_option' => 'a',
+            ],
+            [
+                'text' => 'Jakou hardwarovou technologii využívají pokročilé systémy pro aktivní detekci živosti (PAD) a obranu proti 2D spoofingu?',
+                'options' => [
+                    'a' => 'NFC (Near Field Communication) čipy pro detekci krevního oběhu.',
+                    'b' => 'Algoritmy pro sledování pohybu očí (mrkání) implementované v JavaScriptu.',
+                    'c' => 'Infračervené (IR) projektory nebo Time-of-Flight (ToF) senzory, které vytvářejí 3D topografickou mapu povrchu.',
+                ],
+                'correct_option' => 'c',
+            ],
+            [
+                'text' => 'Co v biometrii znamená pojem "neodvolatelnost" (Non-revocability) a proč představuje architektonické riziko?',
+                'options' => [
+                    'a' => 'Skutečnost, že při odcizení nebo kompromitaci biometrické šablony si uživatel nemůže "vygenerovat nový obličej" nebo "změnit otisk".',
+                    'b' => 'Znamená to, že jakmile je biometrie nastavena na úroveň AAL3, nelze ji v systému administrátorem vypnout.',
+                    'c' => 'Označuje to fakt, že moderní snímače nelze fyzicky odpojit od základní desky zařízení.',
+                ],
+                'correct_option' => 'a',
+            ],
+            [
+                'text' => 'Kde probíhá samotné kryptografické porovnání biometrického vzorku s uloženou šablonou v moderních smartphonech?',
+                'options' => [
+                    'a' => 'Přímo v jádře (kernelu) operačního systému (např. iOS / Android).',
+                    'b' => 'V hardwarově izolovaném prostředí (Trusted Execution Environment / Secure Enclave), kam nemá přístup ani samotný operační systém.',
+                    'c' => 'Na vzdálených serverech backendu (např. v bance), kam se šablona odesílá přes zabezpečené TLS spojení.',
+                ],
+                'correct_option' => 'b',
+            ],
+            [
+                'text' => 'Jakou přesně roli hraje biometrie v moderním bezheslovém standardu FIDO2 / WebAuthn?',
+                'options' => [
+                    'a' => 'Biometrie se vůbec nepoužívá, standard FIDO2 spoléhá výhradně na hardwarové USB tokeny jako je YubiKey.',
+                    'b' => 'Z prohlížeče se odesílá zašifrovaný hash obličeje přímo na server služby (Relying Party), který jej asymetricky ověří.',
+                    'c' => 'Slouží výhradně jako lokální ověření uživatele (User Verification), které v rámci Secure Enclave odemkne asymetrický privátní klíč pro podepsání výzvy (Challenge).',
+                ],
+                'correct_option' => 'c',
+            ],
+        ];
+
+        Question::where('module_id', $biometricsModule->id)->delete();
+
+        foreach ($questions as $q) {
+            Question::create([
+                'module_id' => $biometricsModule->id,
                 'text' => $q['text'],
                 'options' => $q['options'],
                 'correct_option' => $q['correct_option'],

@@ -5,4 +5,6 @@ Přidat ověřovací email
 Přidat kontrolu emailu, jestli je ve školní doméně
 Udělat pentetrační test
 Projet STAN level 5 výsledky a podívat se co je relevantní
-OTP - je simualce dostatečná? Přidat víc popisků pro uživatele
+TOTP - je simualce dostatečná? Přidat víc popisků pro uživatele
+TOTP - jaký je rozdíl mezi tím klasickým a jakým používá banka?
+Nahradit validate za DTO?

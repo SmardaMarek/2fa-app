@@ -49,7 +49,7 @@
                 <div class="p-8 md:p-10">
                     <div class="prose dark:prose-invert prose-indigo max-w-none text-gray-700 dark:text-slate-200 leading-relaxed font-medium mb-10">
                         <p>
-                            Experiment demonstroval, že SMS OTP nesplňuje definici bezpečného vlastnictví autentizátoru[cite: 3, 10]. Metoda se spoléhá na důvěryhodnost směrovací infrastruktury třetích stran, nad kterou uživatel ani služba nemají kryptografickou kontrolu[cite: 6, 14].
+                            Experiment demonstroval, že SMS OTP nesplňuje definici bezpečného vlastnictví autentizátoru. Metoda se spoléhá na důvěryhodnost směrovací infrastruktury třetích stran, nad kterou uživatel ani služba nemají kryptografickou kontrolu.
                         </p>
                     </div>
 
@@ -61,7 +61,7 @@
                             </div>
                             <h4 class="text-slate-900 dark:text-white font-bold mb-3 text-sm">Manipulace HLR a IMSI</h4>
                             <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                                Při SIM swapu útočník manipuluje záznamem v <strong>HLR (Home Location Register)</strong>[cite: 8]. Přepisuje vazbu mezi směrovacím číslem a hardwarovým identifikátorem <code>IMSI</code> nové karty[cite: 103].
+                                Při SIM swapu útočník manipuluje záznamem v <strong>HLR (Home Location Register)</strong>. Přepisuje vazbu mezi směrovacím číslem a hardwarovým identifikátorem <code>IMSI</code> nové karty.
                             </p>
                         </div>
 
@@ -72,7 +72,7 @@
                             </div>
                             <h4 class="text-slate-900 dark:text-white font-bold mb-3 text-sm">Zranitelnosti SS7</h4>
                             <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                                Globální doručování SMS závisí na protokolu <strong>SS7</strong> z 80. let[cite: 6, 106]. Ten spoléhá na implicitní důvěru a postrádá end-to-end šifrování i autentizaci zdroje[cite: 7, 13, 107].
+                                Globální doručování SMS závisí na protokolu <strong>SS7</strong> z 80. let. Ten spoléhá na implicitní důvěru a postrádá end-to-end šifrování i autentizaci zdroje.
                             </p>
                         </div>
 
@@ -83,7 +83,7 @@
                             </div>
                             <h4 class="text-slate-900 dark:text-white font-bold mb-3 text-sm">Absence Origin Binding</h4>
                             <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                                SMS kód nijak nekoreluje s TLS spojením[cite: 12]. Pokud uživatel zadá kód na phishingové stránce, útočník jej může okamžitě přeposlat legitimní službě (Replay attack)[cite: 11, 16].
+                                SMS kód nijak nekoreluje s TLS spojením. Pokud uživatel zadá kód na phishingové stránce, útočník jej může okamžitě přeposlat legitimní službě (Replay attack).
                             </p>
                         </div>
                     </div>
@@ -102,7 +102,7 @@
                 <div class="p-8 md:p-10">
                     <div class="prose dark:prose-invert prose-indigo max-w-none text-gray-700 dark:text-slate-300 leading-relaxed font-medium mb-8">
                         <p>
-                            Dokument <strong>NIST SP 800-63B</strong> klasifikuje SMS jako dostatečné maximálně pro úroveň <strong>AAL2</strong>[cite: 15, 118]. Pro zajištění odolnosti vůči phishingu (AAL3) je nutné přejít na kryptografické standardy[cite: 285].
+                            Dokument <strong>NIST SP 800-63B</strong> klasifikuje SMS jako dostatečné maximálně pro úroveň <strong>AAL2</strong>. Pro zajištění odolnosti vůči phishingu (AAL3) je nutné přejít na kryptografické standardy.
                         </p>
                     </div>
 
@@ -121,7 +121,7 @@
                             </div>
 
                             <p class="text-sm text-indigo-800 dark:text-slate-300 mb-6 leading-relaxed max-w-3xl">
-                                Architektura FIDO2 je založená na asymetrické kryptografii[cite: 33, 248]. Při registraci generuje autentizátor pár klíčů, který je <strong>kryptograficky svázán s doménou (Relying Party ID)</strong>[cite: 42, 71, 310].
+                                Architektura FIDO2 je založená na asymetrické kryptografii. Při registraci generuje autentizátor pár klíčů, který je <strong>kryptograficky svázán s doménou (Relying Party ID)</strong>.
                             </p>
 
                             {{-- IDE Snippet Style --}}
@@ -140,7 +140,7 @@
                             </div>
 
                             <p class="text-xs text-indigo-700 dark:text-indigo-400/80 italic font-medium">
-                                Útok AitM je zde matematicky nemožný – falešná doména vygeneruje odlišný hash a podpis bude okamžitě zamítnut[cite: 43, 44, 375].
+                                Útok AitM je zde matematicky nemožný – falešná doména vygeneruje odlišný hash a podpis bude okamžitě zamítnut.
                             </p>
                         </div>
                     </div>

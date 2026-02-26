@@ -44,7 +44,7 @@
 
                             <div class="prose dark:prose-invert prose-indigo max-w-none text-gray-600 dark:text-slate-300 leading-relaxed font-medium mb-8">
                                 <p>
-                                    SMS OTP nevyužívá standardní kryptografii na straně klienta[cite: 3]. Server vygeneruje náhodný kód a odešle jej přes telekomunikační síť na vaše zařízení[cite: 5, 623].
+                                    SMS OTP nevyužívá standardní kryptografii na straně klienta. Server vygeneruje náhodný kód a odešle jej přes telekomunikační síť na vaše zařízení.
                                 </p>
 
                                 {{-- Didaktická poznámka ve stylu standardu --}}
@@ -113,7 +113,7 @@
                             Technické pozadí doručení
                         </h4>
                         <p class="text-slate-300 text-xs leading-relaxed font-medium">
-                            SMS kód je doručován přes protokol **Signalling System No. 7 (SS7)**[cite: 6]. Tento protokol obsahuje fundamentální zranitelnosti umožňující odposlech či přesměrování zpráv útočníkem, jelikož SMS nejsou standardně end-to-end šifrovány[cite: 7, 13, 108].
+                            SMS kód je doručován přes protokol **Signalling System No. 7 (SS7)**. Tento protokol obsahuje fundamentální zranitelnosti umožňující odposlech či přesměrování zpráv útočníkem, jelikož SMS nejsou standardně end-to-end šifrovány.
                         </p>
                     </div>
                 </div>

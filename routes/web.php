@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Mfa\DashboardController;
 use App\Http\Controllers\Mfa\QuizController;
+use App\Http\Controllers\Mfa\Simulation\BiometricsSimulationController;
 use App\Http\Controllers\Mfa\Simulation\SmsSimulationController;
 use App\Http\Controllers\Mfa\Simulation\TotpSimulationController;
 use App\Http\Controllers\Mfa\TheoryController;
@@ -50,6 +51,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
             Route::get('/lessons', [SmsSimulationController::class, 'lessons'])->name('lessons');
             Route::post('/complete', [SmsSimulationController::class, 'complete'])->name('complete');
+        });
+
+        // C) Biometrie Simulace
+        Route::prefix('biometrics')->name('biometrics.')->group(function () {
+            Route::get('/setup', [BiometricsSimulationController::class, 'setup'])->name('setup');
+            Route::get('/attack', [BiometricsSimulationController::class, 'attack'])->name('attack');
+            Route::get('/lessons', [BiometricsSimulationController::class, 'lessons'])->name('lessons');
+            Route::post('/complete', [BiometricsSimulationController::class, 'complete'])->name('complete');
         });
 
     });
