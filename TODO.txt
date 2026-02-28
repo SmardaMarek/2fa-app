@@ -8,3 +8,7 @@ Projet STAN level 5 výsledky a podívat se co je relevantní
 TOTP - je simualce dostatečná? Přidat víc popisků pro uživatele
 TOTP - jaký je rozdíl mezi tím klasickým a jakým používá banka?
 Nahradit validate za DTO?
+Aplikace pro přihlašování by měla kombinovat nějaké MFA
+Kam spadá otevři aplikaci a zadej stejné číslo, co vidíš? Jak to využít?
+Biometrie attack prohodit barvy bloceked a success
+Přidat schémata a infogtafiku do teoretické sekce

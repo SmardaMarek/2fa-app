@@ -3,6 +3,7 @@
 use App\Http\Controllers\Mfa\DashboardController;
 use App\Http\Controllers\Mfa\QuizController;
 use App\Http\Controllers\Mfa\Simulation\BiometricsSimulationController;
+use App\Http\Controllers\Mfa\Simulation\Fido2KeySimulationController;
 use App\Http\Controllers\Mfa\Simulation\SmsSimulationController;
 use App\Http\Controllers\Mfa\Simulation\TotpSimulationController;
 use App\Http\Controllers\Mfa\TheoryController;
@@ -59,6 +60,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::get('/attack', [BiometricsSimulationController::class, 'attack'])->name('attack');
             Route::get('/lessons', [BiometricsSimulationController::class, 'lessons'])->name('lessons');
             Route::post('/complete', [BiometricsSimulationController::class, 'complete'])->name('complete');
+        });
+
+        // D) Fyzický Klíč Simulace
+        Route::prefix('fido2')->name('fido2.')->group(function () {
+            Route::get('/setup', [Fido2KeySimulationController::class, 'setup'])->name('setup');
+            Route::get('/attack', [Fido2KeySimulationController::class, 'attack'])->name('attack');
+            Route::get('/lessons', [Fido2KeySimulationController::class, 'lessons'])->name('lessons');
+            Route::post('/complete', [Fido2KeySimulationController::class, 'complete'])->name('complete');
         });
 
     });

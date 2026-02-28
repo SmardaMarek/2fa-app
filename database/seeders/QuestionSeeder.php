@@ -14,6 +14,7 @@ class QuestionSeeder extends Seeder
         $this->seedTotpQuestions();
         $this->seedSmsQuestions();
         $this->seedBiometricsQuestions();
+        $this->seedFidoQuestions();
     }
 
     private function seedTotpQuestions(): void
@@ -304,6 +305,103 @@ class QuestionSeeder extends Seeder
         foreach ($questions as $q) {
             Question::create([
                 'module_id' => $biometricsModule->id,
+                'text' => $q['text'],
+                'options' => $q['options'],
+                'correct_option' => $q['correct_option'],
+            ]);
+        }
+    }
+
+    private function seedFidoQuestions(): void
+    {
+        // Uprav si slug podle toho, jak ho máš v Enumu (např. ModulSlug::FIDO)
+        $fidoModule = Module::where('slug', ModulSlug::FIDO2)->first();
+
+        if (! $fidoModule) {
+            return;
+        }
+
+        $questions = [
+            [
+                'text' => 'Jaký je fundamentální architektonický rozdíl mezi TOTP a FIDO2 (WebAuthn)?',
+                'options' => [
+                    'a' => 'TOTP využívá asymetrickou kryptografii s veřejným klíčem, zatímco FIDO2 spoléhá na bezpečnější symetrické sdílené tajemství.',
+                    'b' => 'FIDO2 opouští koncept sdíleného tajemství (Shared Secret) a využívá asymetrickou kryptografii, kdy server drží pouze veřejný klíč.',
+                    'c' => 'Ověření u FIDO2 probíhá výhradně na serveru výrobce klíče (např. Yubico), zatímco TOTP se ověřuje přímo u poskytovatele služby.',
+                ],
+                'correct_option' => 'b',
+            ],
+            [
+                'text' => 'Co přesně znamená pojem "Origin Binding" v kontextu WebAuthn API?',
+                'options' => [
+                    'a' => 'Prohlížeč předává hardwarovému klíči informaci o aktuální doméně (Origin) a ta je následně zahrnuta do kryptografického podpisu, což znemožňuje AitM útoky.',
+                    'b' => 'Technika, kdy se hardwarový klíč fyzicky spáruje s MAC adresou počítače pomocí Bluetooth nebo USB protokolu.',
+                    'c' => 'Mechanismus, který zaručuje, že FIDO2 klíč bude fungovat pouze na území státu (dle IP adresy), kde byl původně registrován.',
+                ],
+                'correct_option' => 'a',
+            ],
+            [
+                'text' => 'Jak systém FIDO2 chrání účet uživatele v případě, že útočník kompletně zkopíruje (vykrade) databázi přihlašovacích údajů banky?',
+                'options' => [
+                    'a' => 'Útočník musí data do 30 sekund dešifrovat, jinak klíče díky algoritmu HMAC expirují.',
+                    'b' => 'Databáze banky obsahuje pouze veřejné klíče (Public Keys). Bez fyzického přístupu k hardwaru uživatele (kde je uzamčen privátní klíč) z nich nelze vygenerovat platný podpis.',
+                    'c' => 'Systém automaticky detekuje masivní stažení dat a zneplatní všechny existující klíče, takže si uživatelé musí koupit nové.',
+                ],
+                'correct_option' => 'b',
+            ],
+            [
+                'text' => 'Jakou roli hraje parametr "Challenge" (Výzva) zasílaný ze serveru při autentizaci (GetAssertion)?',
+                'options' => [
+                    'a' => 'Určuje, jaký PIN kód nebo biometrii má systém po uživateli vyžadovat.',
+                    'b' => 'Slouží jako náhodná hodnota (Nonce), která je zahrnuta do podpisu, aby se matematicky zabránilo Replay útokům (znovupoužití starého podpisu).',
+                    'c' => 'Je to zašifrovaný hash hesla uživatele, který token pouze dešifruje a pošle zpět.',
+                ],
+                'correct_option' => 'b',
+            ],
+            [
+                'text' => 'V konfiguraci WebAuthn narazíte na parametr "User Verification" (UV). Co tento pojem znamená z pohledu hardwaru?',
+                'options' => [
+                    'a' => 'Ověření, zda má uživatel administrátorská práva v operačním systému Windows/macOS.',
+                    'b' => 'Odeslání biometrického vzorku (otisku prstu) přímo na server banky k jeho validaci.',
+                    'c' => 'Lokální ověření uživatele (např. PINem nebo biometrií) přímo v Secure Enclave, které slouží jako podmínka k odemčení privátního klíče pro podepsání výzvy.',
+                ],
+                'correct_option' => 'c',
+            ],
+            [
+                'text' => 'Pokud útočník při AitM (Phishing) útoku pošle prohlížeči oběti platnou výzvu z banky, ale na podvržené doméně "fake-bank.cz", co se stane?',
+                'options' => [
+                    'a' => 'Prohlížeč vyhodí výjimku (SecurityError), protože parametr rpId (např. banka.cz) nesouhlasí s aktuální doménou (Origin). Autentizátor se vůbec neprobudí.',
+                    'b' => 'Uživatel je vyzván k dotyku klíče, klíč podepíše data, ale server banky podpis následně odmítne kvůli špatnému certifikátu.',
+                    'c' => 'Útok bude úspěšný, protože hardwarový klíč nedokáže číst text v adresním řádku prohlížeče.',
+                ],
+                'correct_option' => 'a',
+            ],
+            [
+                'text' => 'Co přesně je obsahem objektu "clientDataJSON", jehož hash se v rámci FIDO2 podepisuje privátním klíčem?',
+                'options' => [
+                    'a' => 'Verze operačního systému, typ prohlížeče a IP adresa klienta.',
+                    'b' => 'Aktuální čas (Unix Timestamp) a symetrický klíč pro šifrování relace.',
+                    'c' => 'Typ operace (webauthn.get), Challenge (výzva od serveru) a Origin (URL domény, na které se uživatel právě nachází).',
+                ],
+                'correct_option' => 'c',
+            ],
+            [
+                'text' => 'Do jaké úrovně záruky autentizátoru (AAL) dle standardu NIST SP 800-63B spadá FIDO2 / WebAuthn a proč?',
+                'options' => [
+                    'a' => 'AAL1, protože se jedná o bezheslové řešení (chybí faktor znalosti).',
+                    'b' => 'AAL2, protože hardwarové klíče lze fyzicky ukrást.',
+                    'c' => 'AAL3, protože využívá hardwarově vázané kryptografické klíče a jako jediný standard poskytuje nativní odolnost proti phishingu (Phishing-Resistant).',
+                ],
+                'correct_option' => 'c',
+            ],
+        ];
+
+        // Smažeme staré otázky pro FIDO modul
+        Question::where('module_id', $fidoModule->id)->delete();
+
+        foreach ($questions as $q) {
+            Question::create([
+                'module_id' => $fidoModule->id,
                 'text' => $q['text'],
                 'options' => $q['options'],
                 'correct_option' => $q['correct_option'],

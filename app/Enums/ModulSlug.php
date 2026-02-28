@@ -33,8 +33,7 @@ enum ModulSlug: string
             self::TOTP => 'module.totp.setup',
             self::SMS => 'module.sms.setup',
             self::BIOMETRY => 'module.biometrics.setup',
-            // self::FIDO2 => 'module.fido2.setup',
-            default => 'dashboard',
+            self::FIDO2 => 'module.fido2.setup',
         };
     }
 
@@ -47,8 +46,7 @@ enum ModulSlug: string
             self::TOTP => 'module.totp.attack',
             self::SMS => 'module.sms.attack',
             self::BIOMETRY => 'module.biometrics.attack',
-            // self::FIDO2 => 'module.fido2.attack',
-            default => 'dashboard',
+            self::FIDO2 => 'module.fido2.attack',
         };
     }
 

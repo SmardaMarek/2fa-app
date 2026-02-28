@@ -69,8 +69,7 @@ class Module extends Model
                 ModulSlug::TOTP => 'module.totp.lessons',
                 ModulSlug::SMS => 'module.sms.lessons',
                 ModulSlug::BIOMETRY => 'module.biometrics.lessons',
-                // ModulSlug::FIDO2 => 'module.fido2.lessons',
-                default => 'dashboard',
+                ModulSlug::FIDO2 => 'module.fido2.lessons',
             };
         }
 

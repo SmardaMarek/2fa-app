@@ -1,0 +1,10 @@
+{
+    "type": "webauthn.get",
+    "challenge": "a7c8f93...b21",
+    "origin": "https://securebank.cz",
+    "crossOrigin": false
+}
+// Tento celý objekt je prohlížečem zahašován.
+// Autentizátor tento hash podepíše privátním klíčem.
+// I kdyby proxy server (AitM) změnil origin v plain-textu,
+// rozbije se matematická platnost podpisu (Signature Verification Failed).

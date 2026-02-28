@@ -8,7 +8,7 @@ use App\Services\Simulation\CodeSamplesService;
 use App\Services\UserProgressService;
 use Illuminate\Http\Request;
 
-class BiometricsSimulationController extends Controller
+class Fido2KeySimulationController extends Controller
 {
     public function __construct(protected CodeSamplesService $codeSamplesService, protected UserProgressService $progressService
     ) {}
@@ -17,21 +17,21 @@ class BiometricsSimulationController extends Controller
     {
         $this->progressService->completeSimulationSetupStep($module);
 
-        return view('modules.simulation.biometrics.attack', compact('module'));
+        return view('modules.simulation.fido2-key.attack', compact('module'));
     }
 
     public function setup(Module $module)
     {
-        return view('modules.simulation.biometrics.setup', compact('module'));
+        return view('modules.simulation.fido2-key.setup', compact('module'));
     }
 
     public function lessons(Module $module)
     {
         $this->progressService->completeSimulationAttackStep($module);
 
-        return view('modules.simulation.biometrics.lesson', [
+        return view('modules.simulation.fido2-key.lesson', [
             'module' => $module,
-            'codeSamples' => $this->codeSamplesService->getBiometricsLessonCodeSamples(),
+            'codeSamples' => $this->codeSamplesService->getFidoLessonCodeSamples(),
         ]);
     }
 
