@@ -29,14 +29,55 @@
     <div class="max-w-7xl mx-auto mt-8 px-4 sm:px-6 lg:px-8">
         <div class="relative overflow-hidden bg-indigo-500/5 dark:bg-indigo-500/10 border-l-4 border-indigo-500 rounded-r-2xl p-6 backdrop-blur-md shadow-sm">
             <div class="flex items-start gap-4">
-                <div class="p-2 bg-indigo-500 rounded-lg text-white">
+                <div class="p-2 bg-indigo-500 rounded-lg text-white shrink-0 mt-1">
                     <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                 </div>
-                <div class="text-gray-700 dark:text-slate-200 text-sm leading-relaxed space-y-2 font-medium">
-                    <p>SMS OTP není bezpečné ověření "něco, co vlastním". V této simulaci si vyzkoušíte <strong>SIM Swapping</strong> útok.</p>
-                    <p><strong>Úkol:</strong> Vlevo přesvědčte operátora k swapu, uprostřed se zkuste přihlásit a vpravo sledujte "vlastní" telefon.</p>
+                <div class="text-gray-700 dark:text-slate-300 text-sm leading-relaxed space-y-5 font-medium flex-1">
+
+                    {{-- Hlavní cíl --}}
+                    <div>
+                        <h3 class="text-base font-bold text-indigo-900 dark:text-indigo-300 uppercase tracking-wider mb-1">
+                            Cíl experimentu: Social Engineering a SIM Swapping
+                        </h3>
+                        <p>
+                            Zabezpečení pomocí SMS OTP často selhává na lidském faktoru. V této simulaci si vyzkoušíte, jak snadné je obejít technická bezpečnostní pravidla pomocí manipulace s operátorem zákaznické linky.
+                        </p>
+                    </div>
+
+                    {{-- Kroky úkolu --}}
+                    <div class="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-100 dark:border-indigo-500/30 rounded-xl p-4">
+                        <p class="font-bold text-indigo-800 dark:text-indigo-200 mb-2 uppercase tracking-widest text-xs">Vaše mise:</p>
+                        <ol class="list-decimal list-inside space-y-1.5 text-indigo-900/80 dark:text-indigo-200/80">
+                            <li>V levém panelu zmanipulujte agenta na chatu, aby ignoroval chybějící autorizační PIN.</li>
+                            <li>Donoťte ho převést číslo oběti na vaši novou SIM kartu (využijte ukradené osobní údaje v Dossieru).</li>
+                            <li>Jakmile získáte kontrolu nad číslem, vyžádejte si v prostředním panelu přihlašovací SMS do banky.</li>
+                        </ol>
+                    </div>
+
+                    {{-- Taktické nápovědy pro překonání bota --}}
+                    <div>
+                        <p class="font-bold text-slate-800 dark:text-slate-200 mb-3 flex items-center gap-2">
+                            <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                            Taktické nápovědy pro komunikaci:
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                            <div class="bg-white dark:bg-slate-800/50 p-3 rounded-lg border border-gray-200 dark:border-slate-700 shadow-sm">
+                                <strong class="text-indigo-600 dark:text-indigo-400 block text-xs uppercase mb-1">1. Vytvořte časový tlak</strong>
+                                <span class="text-[11px] text-slate-500 dark:text-slate-400 leading-tight block">Používejte slova jako "okamžitě", "rychle", "letadlo" nebo "nouze". Pravidla se pod tlakem snáze porušují.</span>
+                            </div>
+                            <div class="bg-white dark:bg-slate-800/50 p-3 rounded-lg border border-gray-200 dark:border-slate-700 shadow-sm">
+                                <strong class="text-indigo-600 dark:text-indigo-400 block text-xs uppercase mb-1">2. Zahrajte na empatii</strong>
+                                <span class="text-[11px] text-slate-500 dark:text-slate-400 leading-tight block">Zmiňte "krádež", "ztrátu" dokladů nebo problémy v "zahraničí". Vyvolejte u agenta touhu pomoci oběti.</span>
+                            </div>
+                            <div class="bg-white dark:bg-slate-800/50 p-3 rounded-lg border border-gray-200 dark:border-slate-700 shadow-sm">
+                                <strong class="text-indigo-600 dark:text-indigo-400 block text-xs uppercase mb-1">3. Vynuťte bypass</strong>
+                                <span class="text-[11px] text-slate-500 dark:text-slate-400 leading-tight block">Pokud agent trvá na PINu, vnuťte mu alternativu. Nabídněte nadiktování "rodného čísla" nebo "adresy".</span>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -46,42 +87,87 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
 
-                {{-- PANEL 1: ÚTOČNÍK (FIXED HEIGHT RESOLVED) --}}
+                {{-- PANEL 1: ÚTOČNÍK (INTERAKTIVNÍ CHAT) --}}
                 <div class="lg:col-span-1 flex flex-col h-[650px] space-y-4">
                     <div class="flex-1 bg-slate-950/90 backdrop-blur-md rounded-2xl px-6 py-6 border-b-4 border-rose-600 shadow-2xl flex flex-col min-h-0 relative">
                         <div class="absolute top-0 left-0 w-full h-1 bg-rose-600 shadow-[0_0_10px_rgba(225,29,72,0.5)]"></div>
+                        {{-- Ukradená data oběti (OSINT / Stolen Wallet) --}}
+                        <div class="bg-slate-900/80 border border-rose-500/30 rounded-xl p-4 mb-4 shadow-inner relative overflow-hidden group flex-shrink-0">
+                            {{-- Vodoznak v pozadí --}}
+                            <div class="absolute top-0 right-0 p-2 opacity-5 pointer-events-none">
+                                <svg class="w-16 h-16 text-rose-500" fill="currentColor" viewBox="0 0 24 24"><path d="M3 4v16a2 2 0 002 2h14a2 2 0 002-2V4a2 2 0 00-2-2H5a2 2 0 00-2 2zm7 4a3 3 0 11-6 0 3 3 0 016 0zm-1.84 4.34A5.002 5.002 0 003 16v1h10v-1a5.002 5.002 0 00-4.84-3.66H8.16zM15 12h6v2h-6v-2zm0-4h6v2h-6V8zm0 8h6v2h-6v-2z"></path></svg>
+                            </div>
 
-                        <h3 class="text-rose-500 font-mono font-bold text-[10px] mb-4 tracking-[0.2em] uppercase flex-shrink-0 flex justify-between">
-                            <span>// PHASE_1: SOCIAL_ENG</span>
-                            <span class="animate-pulse">● LIVE</span>
-                        </h3>
+                            <h4 class="text-rose-500 font-mono text-[10px] font-black uppercase tracking-[0.2em] mb-3 flex items-center border-b border-slate-800 pb-2">
+                                <svg class="w-3 h-3 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                                Dossier: Ukradená data oběti
+                            </h4>
+
+                            <div class="grid grid-cols-[100px_1fr] gap-y-2 text-[10px] font-mono relative z-10">
+                                <div class="text-slate-500 uppercase tracking-widest">Jméno:</div>
+                                <div class="text-slate-200 font-bold selection:bg-rose-500 selection:text-white">Jan Novák</div>
+
+                                <div class="text-slate-500 uppercase tracking-widest">Rodné číslo:</div>
+                                <div class="text-emerald-400 font-bold selection:bg-rose-500 selection:text-white">850515/1234</div>
+
+                                <div class="text-slate-500 uppercase tracking-widest">Trvalý pobyt:</div>
+                                <div class="text-slate-200 selection:bg-rose-500 selection:text-white">Smetanova 123, 602 00 Brno</div>
+
+                                {{-- ICCID útočníka (To co diktuje operátorovi) --}}
+                                <div class="text-slate-500 uppercase tracking-widest mt-2 pt-2 border-t border-slate-800/50">Vaše ICCID:</div>
+                                <div class="text-rose-400 font-bold mt-2 pt-2 border-t border-slate-800/50 selection:bg-rose-500 selection:text-white">8942031122334455667</div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center mb-4 flex-shrink-0">
+                            <h3 class="text-rose-500 font-mono font-bold text-[10px] tracking-[0.2em] uppercase flex items-center gap-2">
+                                <span>// SOCIAL_ENGINEERING</span>
+                                <span class="animate-pulse text-rose-400">● LIVE</span>
+                            </h3>
+
+                            {{-- Trust Meter --}}
+                            <div class="flex items-center gap-2 bg-slate-900 border border-slate-700 px-2 py-1 rounded" x-show="step === 'chat' && chatStarted">
+                                <span class="text-[8px] font-bold text-slate-400 uppercase tracking-widest">Důvěra</span>
+                                <div class="w-16 h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                                    <div class="h-full transition-all duration-500" :class="trustLevel > 75 ? 'bg-emerald-500' : (trustLevel > 40 ? 'bg-amber-500' : 'bg-rose-500')" :style="`width: ${trustLevel}%`"></div>
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="flex-1 flex flex-col min-h-0" x-show="step === 'chat'">
-                            {{-- Chat box s min-h-0 a flex-1 pro správné scrollování uvnitř flexu --}}
-                            <div id="chat-box" class="bg-slate-900/50 p-4 rounded-xl text-[11px] font-mono overflow-y-auto flex-1 border border-slate-800 shadow-inner space-y-4 scrollbar-hide">
+                            {{-- Chat zóna --}}
+                            <div id="chat-box" class="bg-slate-900/50 p-4 rounded-t-xl text-[11px] font-mono overflow-y-auto flex-1 border-x border-t border-slate-800 shadow-inner space-y-4 scrollbar-hide">
                                 <p class="mb-4 text-slate-500 italic text-center border-b border-slate-700 pb-2 flex-shrink-0 font-bold text-[9px]">-- ZABEZPEČENÝ CHAT OPERÁTORA --</p>
 
-                                <div x-show="!chatStarted" class="h-full flex items-center justify-center">
-                                    <button @click="startChat" class="bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-3 rounded-xl font-black uppercase transition-all shadow-xl shadow-indigo-600/20 text-[10px]">
-                                        Začít konverzaci
+                                <div x-show="!chatStarted" class="h-full flex flex-col items-center justify-center space-y-4">
+                                    <p class="text-[10px] text-slate-400 text-center px-4">Použijte manipulaci, empatii a pocit urgence k oklamání agenta.</p>
+                                    <button @click="startChat" class="bg-rose-600 hover:bg-rose-500 text-white px-6 py-3 rounded-xl font-black uppercase transition-all shadow-xl shadow-rose-600/20 text-[10px]">
+                                        Zahájit útok
                                     </button>
                                 </div>
 
-                                <div x-show="chatStarted" class="space-y-4">
-                                    <template x-for="(msg, index) in visibleMessages" :key="index">
+                                <div x-show="chatStarted" class="space-y-4 pb-2">
+                                    <template x-for="(msg, index) in messages" :key="index">
                                         <div class="animate-fade-in space-y-1">
-                                            <span :class="msg.role === 'agent' ? 'text-blue-500' : 'text-rose-500'" class="font-black text-[9px] uppercase tracking-widest" x-text="msg.sender"></span>
-                                            <p :class="msg.role === 'agent' ? 'text-slate-300' : 'text-slate-100'" class="leading-relaxed bg-slate-800/40 p-2 rounded-lg border border-slate-800" x-text="msg.text"></p>
+                                            <span :class="msg.role === 'agent' ? 'text-blue-500' : 'text-rose-500'" class="font-black text-[9px] uppercase tracking-widest" x-text="msg.role === 'agent' ? 'Agent' : 'Vy'"></span>
+                                            <p :class="msg.role === 'agent' ? 'text-slate-300' : 'text-slate-100'" class="leading-relaxed bg-slate-800/40 p-2.5 rounded-lg border border-slate-800" x-text="msg.text"></p>
                                         </div>
                                     </template>
                                     <div x-show="isTyping" class="text-slate-500 italic text-[10px] animate-pulse flex items-center gap-2 mt-2">
-                                        <span x-text="typingWho + ' píše...'"></span>
+                                        Agent píše...
                                     </div>
                                 </div>
                             </div>
 
+                            {{-- Input zóna --}}
+                            <div x-show="chatStarted && !chatFinished" class="bg-slate-900 border-x border-b border-slate-800 rounded-b-xl p-2 flex gap-2">
+                                <input type="text" x-model="userInput" @keydown.enter="sendMessage" placeholder="Napište agentovi výmluvu..." class="flex-1 bg-slate-950 border border-slate-700 text-white text-[11px] rounded-lg focus:border-rose-500 focus:ring-0 placeholder-slate-600 px-3">
+                                <button @click="sendMessage" :disabled="userInput.trim() === '' || isTyping" class="bg-rose-600 hover:bg-rose-500 disabled:bg-slate-800 disabled:text-slate-600 text-white px-4 py-2 rounded-lg font-bold text-[10px] uppercase transition-colors">
+                                    Odeslat
+                                </button>
+                            </div>
+
                             <div x-show="chatFinished" x-transition.opacity class="mt-4 flex-shrink-0">
-                                <button @click="executeSwap" class="w-full bg-rose-600 hover:bg-rose-700 text-white py-4 rounded-xl font-black uppercase text-[10px] tracking-[0.2em] transition-all shadow-xl border border-rose-500">
+                                <button @click="executeSwap" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-4 rounded-xl font-black uppercase text-[10px] tracking-[0.2em] transition-all shadow-xl shadow-emerald-500/20">
                                     [ Provést SIM Swap ]
                                 </button>
                             </div>
@@ -110,7 +196,7 @@
                     </div>
                 </div>
 
-                {{-- PANEL 2: BANKA (LAYOUT FIX) --}}
+                {{-- PANEL 2: BANKA (Beze změny) --}}
                 <div class="lg:col-span-1 h-[650px]">
                     <div class="bg-white dark:bg-slate-800/60 dark:backdrop-blur-md rounded-3xl shadow-2xl border border-gray-200 dark:border-slate-700/50 overflow-hidden h-full flex flex-col relative">
                         <div class="absolute top-0 left-0 w-full h-1 bg-blue-600"></div>
@@ -153,9 +239,6 @@
                                         <div class="text-center">
                                             <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Zadejte 6místný kód</label>
                                             <input type="text" name="code" maxlength="6" class="w-full text-center text-3xl font-black tracking-[0.4em] bg-transparent border-b-2 border-slate-200 dark:border-slate-700 text-blue-600 dark:text-blue-400 focus:border-blue-500 focus:ring-0 placeholder-slate-200 dark:placeholder-slate-800" placeholder="000000" required>
-                                            @error('code')
-                                            <p class="text-rose-500 text-[10px] mt-2 font-bold">{{ $message }}</p>
-                                            @enderror
                                         </div>
                                         <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-2xl font-black uppercase text-xs tracking-widest transition-all shadow-lg">
                                             Potvrdit a přihlásit
@@ -167,7 +250,7 @@
                     </div>
                 </div>
 
-                {{-- PANEL 3: TELEFON (STICKY) --}}
+                {{-- PANEL 3: TELEFON (Beze změny) --}}
                 <div class="lg:col-span-1 flex flex-col h-[650px]">
                     <div class="sticky top-0 flex flex-col items-center">
                         <div class="mb-6 flex flex-col items-center gap-2">
@@ -197,32 +280,80 @@
         </div>
     </div>
 
-    {{-- SCRIPTY (LOGIKA NEDOTČENA) --}}
     <script>
         function simSwapGame() {
             return {
-                step: 'chat', simSwapped: false, smsSent: false, attackerCode: null, victimCode: null, isLoading: false,
-                chatStarted: false, isTyping: false, typingWho: '', chatFinished: false, visibleMessages: [],
-                chatMessages: [
-                    { role: 'agent', sender: 'Agent (David)', text: 'Dobrý den, vítejte na lince podpory. Jak vám mohu pomoci?', delay: 1500 },
-                    { role: 'attacker', sender: 'Vy (Útočník)', text: 'Davide, prosím vás, jsem zoufalý. V zahraničí mi ukradli batoh i s telefonem. Potřebuji okamžitě přenést své číslo na náhradní prázdnou SIM kartu.', delay: 2500 },
-                    { role: 'agent', sender: 'Agent (David)', text: 'To mě velmi mrzí. Z bezpečnostních důvodů mi prosím nejprve sdělte váš 4místný administrátorský PIN pro ověření identity.', delay: 3000 },
-                    { role: 'attacker', sender: 'Vy (Útočník)', text: 'Ten PIN si nepamatuju, všechny doklady mi vzali! Za 40 minut mi letí letadlo a já se bez SMS kódu nedostanu do banky, abych zaplatil letenku! Nadiktuji vám rodné číslo, adresu, cokoliv! Jde o krizovou situaci!', delay: 3500 },
-                    { role: 'agent', sender: 'Agent (David)', text: 'Chápu vaši složitou situaci... Standardně musíme vyžadovat PIN, ale zkusím požádat o manuální ověření přes vaše rodné číslo a adresu. Chviličku strpení...', delay: 4000 },
-                    { role: 'agent', sender: 'Agent (David)', text: 'Dobře, údaje souhlasí s naší databází. Nadiktujte mi prosím ICCID kód té nové SIM karty, provedu přesměrování sítě.', delay: 2000 }
-                ],
-                startChat() { this.chatStarted = true; this.playChat(); },
-                async playChat() {
-                    for (let i = 0; i < this.chatMessages.length; i++) {
-                        let msg = this.chatMessages[i]; this.typingWho = msg.sender; this.isTyping = true;
-                        await new Promise(resolve => setTimeout(resolve, msg.delay));
-                        this.isTyping = false; this.visibleMessages.push(msg);
-                        this.$nextTick(() => { const chatBox = document.getElementById('chat-box'); if(chatBox) chatBox.scrollTop = chatBox.scrollHeight; });
-                        if (i < this.chatMessages.length - 1) { await new Promise(resolve => setTimeout(resolve, 600)); }
-                    }
-                    this.chatFinished = true;
+                step: 'chat', simSwapped: false, smsSent: false, attackerCode: null, victimCode: null,
+                chatStarted: false, isTyping: false, chatFinished: false, trustLevel: 0,
+                userInput: '',
+                messages: [],
+
+                // Klíčová slova, na která bot reaguje
+                urgencyKeywords: ['rychle', 'krádež', 'ukrad', 'ztrát', 'ztrat', 'nouze', 'letad', 'zahranič', 'prosím', 'okamžitě', 'peněženk', 'doklad'],
+                infoKeywords: ['rodné číslo', 'rč', 'adresa', 'iccid', 'novou sim', 'číslo sim'],
+
+                startChat() {
+                    this.chatStarted = true;
+                    this.addAgentMessage('Dobrý den, zde podpora operátora. Jak vám mohu pomoci? Prosím, pro jakoukoliv změnu si připravte svůj 4místný PIN.', 800);
                 },
-                executeSwap() { this.simSwapped = true; this.step = 'intercept'; this.victimCode = null; },
+
+                sendMessage() {
+                    if(this.userInput.trim() === '') return;
+
+                    const text = this.userInput;
+                    this.messages.push({ role: 'user', text: text });
+                    this.userInput = '';
+                    this.scrollChat();
+
+                    this.processBotLogic(text.toLowerCase());
+                },
+
+                addAgentMessage(text, delay) {
+                    this.isTyping = true;
+                    setTimeout(() => {
+                        this.isTyping = false;
+                        this.messages.push({ role: 'agent', text: text });
+                        this.scrollChat();
+                    }, delay);
+                },
+
+                processBotLogic(input) {
+                    let trustGained = 0;
+
+                    // Jednoduchá analýza textu
+                    this.urgencyKeywords.forEach(kw => { if(input.includes(kw)) trustGained += 15; });
+                    this.infoKeywords.forEach(kw => { if(input.includes(kw)) trustGained += 20; });
+
+                    if (trustGained > 0) {
+                        this.trustLevel = Math.min(100, this.trustLevel + trustGained);
+                    }
+
+                    // Reakce bota podle úrovně důvěry
+                    if (this.trustLevel >= 100) {
+                        this.addAgentMessage('Ověřil jsem si vaše údaje. Výjimečně jsem schválil přenos čísla bez PINu vzhledem k vaší krizové situaci. Proces převodu byl zahájen.', 2000);
+                        setTimeout(() => { this.chatFinished = true; }, 3500);
+                    } else if (this.trustLevel >= 70) {
+                        this.addAgentMessage('Rozumím vážnosti situace. Pokud nemáte PIN, nadiktujte mi alespoň své rodné číslo a adresu pro manuální identifikaci.', 1500);
+                    } else if (this.trustLevel >= 40) {
+                        this.addAgentMessage('Chápu, ale bezpečnostní pravidla jsou striktní. Jste si jistý, že si na PIN nevzpomenete? Případně potřebuji znát detailní důvod, proč to musíme řešit hned.', 1500);
+                    } else {
+                        this.addAgentMessage('Omlouvám se, ale bez vašeho PIN kódu nemohu provádět změny na účtu. Taková jsou pravidla.', 1500);
+                    }
+                },
+
+                scrollChat() {
+                    this.$nextTick(() => {
+                        const chatBox = document.getElementById('chat-box');
+                        if(chatBox) chatBox.scrollTop = chatBox.scrollHeight;
+                    });
+                },
+
+                executeSwap() {
+                    this.simSwapped = true;
+                    this.step = 'intercept';
+                    this.victimCode = null;
+                },
+
                 async requestSms() {
                     this.smsSent = true;
                     try {
@@ -230,7 +361,13 @@
                             method: 'POST', headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}', 'Accept': 'application/json'}
                         });
                         let data = await response.json();
-                        setTimeout(() => { if (this.simSwapped) { this.attackerCode = data.simulated_code; } else { this.victimCode = data.simulated_code; } }, 1500);
+                        setTimeout(() => {
+                            if (this.simSwapped) {
+                                this.attackerCode = data.simulated_code;
+                            } else {
+                                this.victimCode = data.simulated_code;
+                            }
+                        }, 1500);
                     } catch (e) { console.error(e); }
                 }
             }

@@ -26,7 +26,7 @@
     </x-slot>
 
     <div class="py-12 bg-gray-50 dark:bg-slate-900 min-h-screen transition-colors duration-300">
-        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
             {{-- Karta s obsahem - Glassmorphism efekt v dark mode --}}
             <div class="relative bg-white dark:bg-slate-800/40 dark:backdrop-blur-md overflow-hidden shadow-xl dark:shadow-2xl sm:rounded-2xl border border-gray-200 dark:border-slate-700/50 flex flex-col transition-all duration-300">
