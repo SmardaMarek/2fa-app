@@ -14,7 +14,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth', 'verified', 'mfa'])->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -75,6 +75,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/mfa/setup', [\App\Http\Controllers\Auth\MfaController::class, 'setup'])->name('mfa.setup');
+    Route::post('/mfa/setup', [\App\Http\Controllers\Auth\MfaController::class, 'verifySetup'])->name('mfa.verify_setup');
+    Route::get('/mfa/challenge', [\App\Http\Controllers\Auth\MfaController::class, 'challenge'])->name('mfa.challenge');
+    Route::post('/mfa/challenge', [\App\Http\Controllers\Auth\MfaController::class, 'verify'])->name('mfa.verify');
 });
 
 require __DIR__.'/auth.php';

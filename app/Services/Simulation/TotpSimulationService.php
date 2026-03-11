@@ -54,7 +54,7 @@ class TotpSimulationService
         }
 
         $qrCodeSvg = $google2fa->getQRCodeInline(
-            'MFA study application',
+            'Simulation Qr',
             $user->email,
             $secret
         );

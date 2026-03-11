@@ -13,6 +13,7 @@ class User extends Authenticatable
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
+
     /**
      * The attributes that are mass assignable.
      *
@@ -23,6 +24,7 @@ class User extends Authenticatable
         'email',
         'password',
         'google2fa_secret',
+        'google2fa_confirmed_at',
     ];
 
     /**
@@ -33,6 +35,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'google2fa_secret',
+        'google2fa_recovery_codes',
     ];
 
     /**
@@ -45,11 +49,19 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'google2fa_secret' => 'encrypted',
+            'google2fa_recovery_codes' => 'encrypted:array',
+            'google2fa_confirmed_at' => 'datetime',
         ];
     }
 
     public function progress(): HasMany
     {
         return $this->hasMany(UserProgress::class);
+    }
+
+    public function hasMfaEnabled(): bool
+    {
+        return !is_null($this->google2fa_secret) && !is_null($this->google2fa_confirmed_at);
     }
 }

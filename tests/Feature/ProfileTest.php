@@ -3,20 +3,28 @@
 use App\Models\User;
 
 test('profile page is displayed', function () {
-    $user = User::factory()->create();
+    $user = User::factory()->create([
+        'google2fa_secret' => 'DUMMYSECRET',
+        'google2fa_confirmed_at' => now(),
+    ]);
 
     $response = $this
         ->actingAs($user)
+        ->withSession(['mfa_verified' => true])
         ->get('/profile');
 
     $response->assertOk();
 });
 
 test('profile information can be updated', function () {
-    $user = User::factory()->create();
+    $user = User::factory()->create([
+        'google2fa_secret' => 'DUMMYSECRET',
+        'google2fa_confirmed_at' => now(),
+    ]);
 
     $response = $this
         ->actingAs($user)
+        ->withSession(['mfa_verified' => true])
         ->patch('/profile', [
             'name' => 'Test User',
             'email' => 'test@example.com',
@@ -34,10 +42,14 @@ test('profile information can be updated', function () {
 });
 
 test('email verification status is unchanged when the email address is unchanged', function () {
-    $user = User::factory()->create();
+    $user = User::factory()->create([
+        'google2fa_secret' => 'DUMMYSECRET',
+        'google2fa_confirmed_at' => now(),
+    ]);
 
     $response = $this
         ->actingAs($user)
+        ->withSession(['mfa_verified' => true])
         ->patch('/profile', [
             'name' => 'Test User',
             'email' => $user->email,
@@ -51,10 +63,14 @@ test('email verification status is unchanged when the email address is unchanged
 });
 
 test('user can delete their account', function () {
-    $user = User::factory()->create();
+    $user = User::factory()->create([
+        'google2fa_secret' => 'DUMMYSECRET',
+        'google2fa_confirmed_at' => now(),
+    ]);
 
     $response = $this
         ->actingAs($user)
+        ->withSession(['mfa_verified' => true])
         ->delete('/profile', [
             'password' => 'password',
         ]);
@@ -68,10 +84,14 @@ test('user can delete their account', function () {
 });
 
 test('correct password must be provided to delete account', function () {
-    $user = User::factory()->create();
+    $user = User::factory()->create([
+        'google2fa_secret' => 'DUMMYSECRET',
+        'google2fa_confirmed_at' => now(),
+    ]);
 
     $response = $this
         ->actingAs($user)
+        ->withSession(['mfa_verified' => true])
         ->from('/profile')
         ->delete('/profile', [
             'password' => 'wrong-password',
