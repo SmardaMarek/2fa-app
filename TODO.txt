@@ -4,4 +4,6 @@ Vytvořit testy
 Přidat ověřovací email
 Přidat kontrolu emailu, jestli je ve školní doméně
 Udělat pentetrační test
-Projet STAN level 5 výsledky a podívat se co je relevantní
+přidat ještě otisk atd
+klidně zkusit s flashkou - zašifrovat - rozpracovat simulaci
+přidat tutorial jak to nastavit na svém zařízení - nad rámec,napadlo mě to, je to přínos
