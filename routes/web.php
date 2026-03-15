@@ -58,6 +58,7 @@ Route::middleware(['auth', 'verified', 'mfa'])->group(function () {
         Route::prefix('biometrics')->name('biometrics.')->group(function () {
             Route::get('/setup', [BiometricsSimulationController::class, 'setup'])->name('setup');
             Route::get('/attack', [BiometricsSimulationController::class, 'attack'])->name('attack');
+            Route::get('/attack-2', [BiometricsSimulationController::class, 'attack2'])->name('attack2');
             Route::get('/lessons', [BiometricsSimulationController::class, 'lessons'])->name('lessons');
             Route::post('/complete', [BiometricsSimulationController::class, 'complete'])->name('complete');
         });

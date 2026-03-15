@@ -20,6 +20,11 @@ class BiometricsSimulationController extends Controller
         return view('modules.simulation.biometrics.attack', compact('module'));
     }
 
+    public function attack2(Module $module)
+    {
+        return view('modules.simulation.biometrics.attack2', compact('module'));
+    }
+
     public function setup(Module $module)
     {
         return view('modules.simulation.biometrics.setup', compact('module'));

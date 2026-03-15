@@ -4,7 +4,7 @@
             <h2 class="font-semibold text-xl text-slate-100 leading-tight">
                 {{ $module->title }} - Simulace: Presentation Attack (2D vs 3D)
             </h2>
-            <div class="bg-white dark:bg-slate-800/80 rounded-xl px-5 py-2 border border-gray-200 dark:border-slate-700/50 backdrop-blur-sm shadow-sm dark:shadow-inner flex items-center gap-3">
+             <div class="bg-white dark:bg-slate-800/80 rounded-xl px-5 py-2 border border-gray-200 dark:border-slate-700/50 backdrop-blur-sm shadow-sm dark:shadow-inner flex items-center gap-3">
                 <div class="flex gap-1">
                     <span class="h-1.5 w-3 rounded-full bg-indigo-500 shadow-[0_0_5px_rgba(99,102,241,0.5)]"></span>
                     <span class="h-1.5 w-3 rounded-full bg-indigo-500 shadow-[0_0_5px_rgba(99,102,241,0.5)]"></span>
@@ -247,10 +247,10 @@
             </div>
 
             <div class="mt-8 flex justify-end" x-show="hasTriedBoth" x-transition>
-                <form action="{{  route($module->getSimulationLessonsRoute(), ['module' => $module->slug]) }}" method="GET">
+                <form action="{{  route('module.biometrics.attack2', ['module' => $module->slug]) }}" method="GET">
                     @csrf
                     <button type="submit" class="group bg-indigo-600 hover:bg-indigo-500 text-white px-8 py-4 rounded-2xl font-black uppercase tracking-widest transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(99,102,241,0.4)] flex items-center">
-                        Přejít na analýzu obrany
+                        Pokračovat dál
                         <svg class="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                     </button>
                 </form>

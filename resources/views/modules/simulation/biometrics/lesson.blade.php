@@ -48,7 +48,7 @@
                 <div class="bg-slate-900 px-8 py-5 border-l-4 border-rose-500 flex items-center justify-between">
                     <h3 class="text-lg font-bold text-white flex items-center font-mono uppercase tracking-wider">
                         <svg class="w-5 h-5 mr-3 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
-                        Analýza selhání senzoru
+                        Analýza selhání senzoru (Optika)
                     </h3>
                     <span class="text-[10px] bg-rose-500/10 text-rose-400 border border-rose-500/20 px-2 py-1 rounded uppercase font-bold">Spoofing Vulnerability</span>
                 </div>
@@ -86,7 +86,50 @@
                 </div>
             </div>
 
-            {{-- SEKCE 2: PREVENCE A IMPLEMENTACE (FIDO2 & LocalAuth) --}}
+            {{-- SEKCE 2: ANALÝZA ZRANITELNOSTÍ (MasterPrint Attack) --}}
+            <div class="bg-white dark:bg-slate-800/40 dark:backdrop-blur-md overflow-hidden shadow-xl dark:shadow-2xl sm:rounded-3xl border border-gray-200 dark:border-slate-700/50 flex flex-col transition-all duration-300">
+                <div class="bg-slate-900 px-8 py-5 border-l-4 border-rose-500 flex items-center justify-between">
+                    <h3 class="text-lg font-bold text-white flex items-center font-mono uppercase tracking-wider">
+                        <svg class="w-5 h-5 mr-3 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4"></path></svg>
+                        Analýza selhání senzoru (Geometrie)
+                    </h3>
+                    <span class="text-[10px] bg-rose-500/10 text-rose-400 border border-rose-500/20 px-2 py-1 rounded uppercase font-bold">MasterPrint Exploit</span>
+                </div>
+
+                <div class="p-8 md:p-10">
+                    <div class="prose dark:prose-invert prose-indigo max-w-none text-gray-700 dark:text-slate-200 leading-relaxed font-medium mb-10">
+                        <p>
+                            Druhý sandbox demonstroval, že u kapacitních a ultrazvukových senzorů otisků prstů na mobilních zařízeních nevychází hlavní hrozba z podvržení materiálu, ale z <strong>fyzikálních omezení samotného senzoru</strong> a z nich plynoucí kompromitace matematické pravděpodobnosti.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {{-- Bod 1 --}}
+                        <div class="bg-slate-50 dark:bg-slate-900/50 p-6 rounded-2xl border border-slate-200 dark:border-slate-700/50 shadow-inner group hover:border-rose-500/30 transition-colors">
+                            <div class="flex items-center gap-3 mb-4">
+                                <span class="bg-rose-500/10 text-rose-500 text-[10px] px-2 py-1 rounded font-black tracking-tighter uppercase">Technická zranitelnost</span>
+                            </div>
+                            <h4 class="text-slate-900 dark:text-white font-bold mb-3 text-sm">Částečné šablony (Partial Templates)</h4>
+                            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                                Vzhledem k malé ploše mobilního senzoru nedochází k uložení celého otisku, ale k extrakci desítek <strong>dílčích šablon</strong> během registrační fáze. Při odemykání pak systému stačí kryptografická shoda pouze s jedinou z těchto mnoha šablon.
+                            </p>
+                        </div>
+
+                        {{-- Bod 2 --}}
+                        <div class="bg-slate-50 dark:bg-slate-900/50 p-6 rounded-2xl border border-slate-200 dark:border-slate-700/50 shadow-inner group hover:border-rose-500/30 transition-colors">
+                            <div class="flex items-center gap-3 mb-4">
+                                <span class="bg-rose-500/10 text-rose-500 text-[10px] px-2 py-1 rounded font-black tracking-tighter uppercase">Statistický útok</span>
+                            </div>
+                            <h4 class="text-slate-900 dark:text-white font-bold mb-3 text-sm">MasterPrint Injekce</h4>
+                            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                                Algoritmicky vygenerovaný <strong>MasterPrint</strong> obsahuje shluk nejběžnějších papilárních linií a markantů lidské populace. Matematicky tak dramaticky zvyšuje hodnotu FAR (False Accept Rate), protože se snadno "trefí" do některé z mnoha uložených částečných šablon.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- SEKCE 3: PREVENCE A IMPLEMENTACE (FIDO2 & LocalAuth) --}}
             <div class="bg-white dark:bg-slate-800/40 dark:backdrop-blur-md overflow-hidden shadow-xl dark:shadow-2xl sm:rounded-3xl border border-gray-200 dark:border-slate-700/50 flex flex-col transition-all duration-300">
                 <div class="bg-slate-900 px-8 py-5 border-l-4 border-indigo-500 flex items-center justify-between">
                     <h3 class="text-lg font-bold text-white flex items-center font-mono uppercase tracking-wider">

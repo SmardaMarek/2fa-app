@@ -357,7 +357,7 @@
                 async requestSms() {
                     this.smsSent = true;
                     try {
-                        let response = await fetch('{{ route('module.sms.send', ['module' => $module->slug]) }}', {
+                        let response = await fetch("{{ route('module.sms.send', ['module' => $module->slug]) }}", {
                             method: 'POST', headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}', 'Accept': 'application/json'}
                         });
                         let data = await response.json();
