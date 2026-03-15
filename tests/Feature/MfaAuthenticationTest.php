@@ -80,3 +80,42 @@ test('user can verify initial mfa setup', function () {
     expect($user->google2fa_secret)->toBe($secret);
     expect($user->google2fa_confirmed_at)->not->toBeNull();
 });
+
+test('user cannot verify mfa challenge with invalid code', function () {
+    $google2fa = new Google2FA();
+    $secret = $google2fa->generateSecretKey();
+
+    $user = User::factory()->create([
+        'google2fa_secret' => $secret,
+        'google2fa_confirmed_at' => now(),
+    ]);
+
+    $response = $this->actingAs($user)->post('/mfa/challenge', [
+        'code' => '999999' // Neplatný kód
+    ]);
+
+    $response->assertSessionHasErrors('code');
+    $response->assertSessionMissing('mfa_verified');
+});
+
+test('user cannot verify initial mfa setup with invalid code', function () {
+    $user = User::factory()->create([
+        'google2fa_secret' => null,
+        'google2fa_confirmed_at' => null,
+    ]);
+
+    $google2fa = new Google2FA();
+    $secret = $google2fa->generateSecretKey();
+
+    $response = $this->actingAs($user)
+                     ->withSession(['google2fa_secret' => $secret])
+                     ->post('/mfa/setup', [
+                         'code' => '999999' // Neplatný kód
+                     ]);
+
+    $response->assertSessionHasErrors('code');
+    $response->assertSessionMissing('mfa_verified');
+
+    $user->refresh();
+    expect($user->google2fa_confirmed_at)->toBeNull();
+});
