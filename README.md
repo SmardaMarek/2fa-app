@@ -1,3 +1,17 @@
+Tato aplikace je výsledkem diplomové práce na MendelU (program Otevřená informatika).
+
+Jedná se o interaktivní vzdělávací aplikaci navrženou pro studenty Mendelovy univerzity. Cílem projektu je seznámit studenty s vnitřním fungováním vícefaktorové autentizace (MFA) a poskytnout vhled do protokolů, které dnes považujeme za standardy bezpečnosti.
+
+- Hlavní cíle projektu
+    - Vzdělávání hrou: Simulace reálných útoků (AitM, Replay, MasterPrint) v izolovaných sandboxech.
+    - Moderní standardy: Praktické ukázky FIDO2 / WebAuthn, TOTP a pokročilé biometrie.
+    - Mitigace: Nejen ukázat zranitelnost, ale přímo v kódu demonstrovat správné inženýrské řešení a mitigaci.
+
+- Technický Stack
+    - Framework: Laravel (Blade)
+    - Reaktivita: Alpine.js
+    - Styling: Tailwind CSS (Dark-mode priority)
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
