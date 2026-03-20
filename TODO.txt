@@ -1,3 +1,3 @@
-Přidat kontrolu emailu, jestli je ve školní doméně
+
 klidně zkusit s flashkou - zašifrovat - rozpracovat simulaci
 přidat tutorial jak to nastavit na svém zařízení - nad rámec,napadlo mě to, je to přínos
