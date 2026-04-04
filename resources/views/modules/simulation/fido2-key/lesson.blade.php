@@ -83,7 +83,7 @@
                             </p>
                         </div>
 
-                        {{-- Bod bod 3 --}}
+                        {{-- Bod 3 --}}
                         <div class="bg-slate-50 dark:bg-slate-900/50 p-6 rounded-2xl border border-slate-200 dark:border-slate-700/50 shadow-inner group hover:border-emerald-500/30 transition-colors">
                             <div class="flex items-center gap-3 mb-4">
                                 <span class="bg-emerald-500/10 text-emerald-500 text-[10px] px-2 py-1 rounded font-black tracking-tighter uppercase">Mechanismus 0x03</span>
@@ -155,10 +155,155 @@
                     @endif
                 </div>
 
+                {{-- SEKCE 3: ZBYTKOVÁ RIZIKA --}}
+                <div class="p-8 md:p-10 border-t border-gray-100 dark:border-slate-700/50">
+                    <h4 class="text-amber-500 font-black text-sm uppercase tracking-wider mb-6 flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                        Zbytková rizika (a jak je eliminovat)
+                    </h4>
+                    <div class="prose dark:prose-invert prose-indigo max-w-none text-gray-600 dark:text-slate-300 mb-6 leading-relaxed">
+                        <p>
+                            FIDO2 poskytuje nejvyšší úroveň ochrany (AAL3), ale <strong>žádný systém není absolutně neprůstřelný</strong>. Je nutné znát zbytková rizika a mít plán pro jejich mitigaci:
+                        </p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-amber-500/5 dark:bg-amber-500/10 border border-amber-500/20 rounded-2xl p-5">
+                            <h5 class="text-amber-500 font-bold text-xs uppercase tracking-wider mb-2">Fyzická krádež klíče</h5>
+                            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                                Pokud klíč nemá nastavený PIN (User Verification), <strong>každý, kdo ho fyzicky drží, se může autentizovat</strong>. Řešení: Vždy aktivovat UV (PIN/biometrie na zařízení).
+                            </p>
+                        </div>
+                        <div class="bg-amber-500/5 dark:bg-amber-500/10 border border-amber-500/20 rounded-2xl p-5">
+                            <h5 class="text-amber-500 font-bold text-xs uppercase tracking-wider mb-2">Ztráta klíče</h5>
+                            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                                Na rozdíl od hesla nelze kryptografický klíč "obnovit". Pokud ztratíte jediný klíč, <strong>ztratíte přístup</strong>. Řešení: Vždy registrovat ≥ 2 klíče a uložit recovery kódy na bezpečné místo.
+                            </p>
+                        </div>
+                        <div class="bg-amber-500/5 dark:bg-amber-500/10 border border-amber-500/20 rounded-2xl p-5">
+                            <h5 class="text-amber-500 font-bold text-xs uppercase tracking-wider mb-2">Platform vs. Hardware</h5>
+                            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                                Platformové autentizátory (Touch ID, Windows Hello) jsou vázány na zařízení — nejsou přenositelné. Hardware klíče (YubiKey, Titan) fungují všude, ale vyžadují fyzický nosič.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- SEKCE 4: SROVNÁVACÍ TABULKA --}}
+                <div class="p-8 md:p-10 border-t border-gray-100 dark:border-slate-700/50">
+                    <h4 class="text-indigo-400 font-black text-sm uppercase tracking-wider mb-6 flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"></path></svg>
+                        Srovnání všech metod
+                    </h4>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-xs font-mono">
+                            <thead>
+                                <tr class="border-b border-slate-700">
+                                    <th class="text-left py-3 px-4 text-slate-400 font-bold uppercase tracking-wider">Vlastnost</th>
+                                    <th class="text-center py-3 px-4 text-slate-400 font-bold uppercase tracking-wider">SMS OTP</th>
+                                    <th class="text-center py-3 px-4 text-slate-400 font-bold uppercase tracking-wider">TOTP</th>
+                                    <th class="text-center py-3 px-4 text-slate-400 font-bold uppercase tracking-wider">Biometrie</th>
+                                    <th class="text-center py-3 px-4 text-indigo-400 font-bold uppercase tracking-wider">FIDO2</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-slate-300">
+                                <tr class="border-b border-slate-800">
+                                    <td class="py-3 px-4 text-slate-400">Phishing-resistant</td>
+                                    <td class="py-3 px-4 text-center text-rose-400 font-bold">✗</td>
+                                    <td class="py-3 px-4 text-center text-rose-400 font-bold">✗</td>
+                                    <td class="py-3 px-4 text-center text-amber-400 font-bold">≈</td>
+                                    <td class="py-3 px-4 text-center text-emerald-400 font-bold">✓</td>
+                                </tr>
+                                <tr class="border-b border-slate-800">
+                                    <td class="py-3 px-4 text-slate-400">Replay-resistant</td>
+                                    <td class="py-3 px-4 text-center text-rose-400 font-bold">✗</td>
+                                    <td class="py-3 px-4 text-center text-amber-400 font-bold">≈*</td>
+                                    <td class="py-3 px-4 text-center text-emerald-400 font-bold">✓</td>
+                                    <td class="py-3 px-4 text-center text-emerald-400 font-bold">✓</td>
+                                </tr>
+                                <tr class="border-b border-slate-800">
+                                    <td class="py-3 px-4 text-slate-400">Vyžaduje HW</td>
+                                    <td class="py-3 px-4 text-center text-slate-500">Telefon</td>
+                                    <td class="py-3 px-4 text-center text-slate-500">Ne</td>
+                                    <td class="py-3 px-4 text-center text-slate-500">Senzor</td>
+                                    <td class="py-3 px-4 text-center text-slate-500">Klíč/Zařízení</td>
+                                </tr>
+                                <tr class="border-b border-slate-800">
+                                    <td class="py-3 px-4 text-slate-400">NIST AAL</td>
+                                    <td class="py-3 px-4 text-center text-amber-400">AAL2 (Restricted)</td>
+                                    <td class="py-3 px-4 text-center text-amber-400">AAL2</td>
+                                    <td class="py-3 px-4 text-center text-amber-400">AAL2</td>
+                                    <td class="py-3 px-4 text-center text-emerald-400 font-bold">AAL3</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 text-slate-400">Hlavní riziko</td>
+                                    <td class="py-3 px-4 text-center text-rose-400">SIM Swap</td>
+                                    <td class="py-3 px-4 text-center text-rose-400">AitM Phishing</td>
+                                    <td class="py-3 px-4 text-center text-rose-400">Spoofing / Non-revocability</td>
+                                    <td class="py-3 px-4 text-center text-amber-400">Ztráta klíče</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="text-[10px] text-slate-500 mt-3 italic">* Replay u TOTP je možné mitigovat stavovou pamětí (cache), ale není to součástí standardu.</p>
+                </div>
+
+                {{-- Praktická doporučení --}}
+                <div class="p-8 md:p-10 border-t border-gray-100 dark:border-slate-700/50">
+                    <div class="bg-emerald-500/5 dark:bg-emerald-500/10 border border-emerald-500/20 rounded-2xl p-6 shadow-inner">
+                        <h5 class="font-black text-emerald-900 dark:text-emerald-300 uppercase tracking-tight text-xs mb-4">Best Practices pro nasazení FIDO2</h5>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <ul class="space-y-3">
+                                <li class="flex items-start gap-2">
+                                    <span class="text-emerald-500 mt-0.5">•</span>
+                                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed"><strong class="text-slate-800 dark:text-slate-200">Vždy registrovat ≥ 2 klíče</strong> — záložní klíč (nebo Passkey v telefonu) pro případ ztráty primárního</p>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="text-emerald-500 mt-0.5">•</span>
+                                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed"><strong class="text-slate-800 dark:text-slate-200">Uložit recovery kódy offline</strong> — vytisknout nebo zapsat na papír a uložit do trezoru</p>
+                                </li>
+                            </ul>
+                            <ul class="space-y-3">
+                                <li class="flex items-start gap-2">
+                                    <span class="text-emerald-500 mt-0.5">•</span>
+                                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed"><strong class="text-slate-800 dark:text-slate-200">Aktivovat UV (PIN/biometrie)</strong> na HW klíči — chrání před zneužitím při fyzické krádeži</p>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="text-emerald-500 mt-0.5">•</span>
+                                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed"><strong class="text-slate-800 dark:text-slate-200">Začít s Passkeys</strong> — pro většinu uživatelů je to nejsnazší cesta k FIDO2 (vestavěné v iOS, Android, macOS, Windows)</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Co udělat teď --}}
+                <div class="mx-8 md:mx-10 mb-8">
+                    <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-2xl p-6 shadow-inner">
+                        <h4 class="text-emerald-500 font-black text-xs uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Co udělat teď
+                        </h4>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="flex items-start gap-3">
+                                <span class="bg-emerald-500/20 text-emerald-400 font-mono text-xs font-bold w-7 h-7 flex items-center justify-center rounded-lg shrink-0 border border-emerald-500/30">1</span>
+                                <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed"><strong class="text-emerald-600 dark:text-emerald-400">Aktivujte Passkeys</strong> na Google, Apple nebo Microsoft účtu — je to zdarma a vestavěné ve vašem zařízení.</p>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span class="bg-emerald-500/20 text-emerald-400 font-mono text-xs font-bold w-7 h-7 flex items-center justify-center rounded-lg shrink-0 border border-emerald-500/30">2</span>
+                                <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed"><strong class="text-emerald-600 dark:text-emerald-400">Registrujte záložní klíč/zařízení</strong> — nikdy nezáviste na jediném klíči. Uložte recovery kódy.</p>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span class="bg-emerald-500/20 text-emerald-400 font-mono text-xs font-bold w-7 h-7 flex items-center justify-center rounded-lg shrink-0 border border-emerald-500/30">3</span>
+                                <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed"><strong class="text-emerald-600 dark:text-emerald-400">Nastavte PIN na HW klíč</strong> — chrání vás, pokud klíč ztratíte nebo vám ho někdo ukradne.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 {{-- Patička s odesláním do kvízu --}}
                 <div class="bg-gray-50/80 dark:bg-slate-800/60 px-8 py-8 border-t border-gray-100 dark:border-slate-700/50 flex flex-col md:flex-row justify-between items-center gap-6 mt-auto">
                     <p class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest">
-                        Absolutní bezpečnost dosažena. Jste připraveni na závěrečný test?
+                        Nejvyšší úroveň ochrany (AAL3) demonstrována. Jste připraveni na závěrečný test?
                     </p>
 
                     <form action="{{ route('module.fido2.complete', ['module' => $module->slug]) }}" method="POST" class="w-full md:w-auto">

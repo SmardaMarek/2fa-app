@@ -43,7 +43,7 @@
                 <div class="p-8 md:p-10">
                     <div class="prose dark:prose-invert prose-indigo max-w-none text-gray-700 dark:text-slate-200 leading-relaxed font-medium mb-8">
                         <p>
-                            Úspěch útoku <strong>Adversary-in-the-Middle (AitM)</strong>, který jste si vyzkoušeli, není chybou vaší implementace. Jedná se o fundamentální vlastnost návrhu protokolu **TOTP** dle standardu **RFC 6238**.
+                            Úspěch útoku <strong>Adversary-in-the-Middle (AitM)</strong>, který jste si vyzkoušeli, není chybou vaší implementace. Jedná se o fundamentální vlastnost návrhu protokolu <strong>TOTP</strong> dle standardu <strong>RFC 6238</strong>.
                         </p>
                     </div>
 
@@ -65,7 +65,7 @@
 
                     <div class="prose dark:prose-invert prose-indigo max-w-none text-gray-700 dark:text-slate-200 leading-relaxed font-medium">
                         <p>
-                            Jak vidíte, funkce přijímá pouze symetrický klíč a čas. **Zcela chybí kryptografická vazba na doménu**. Kód vygenerovaný pro falešnou doménu je matematicky identický s kódem pro legitimní službu.
+                            Jak vidíte, funkce přijímá pouze symetrický klíč a čas. <strong>Zcela chybí kryptografická vazba na doménu</strong>. Kód vygenerovaný pro falešnou doménu je matematicky identický s kódem pro legitimní službu.
                         </p>
                     </div>
 
@@ -77,7 +77,7 @@
                         <div>
                             <h4 class="text-rose-500 font-bold uppercase tracking-wider text-xs mb-1">Standardy a mitigace</h4>
                             <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-medium">
-                                Dokument **NIST SP 800-63B** řadí TOTP do úrovně AAL2 právě kvůli rizikům phishingu. Plnou ochranu poskytuje až **FIDO2 / WebAuthn**, kde podpis zahrnuje hash `rpId` (Origin Binding).
+                                Dokument <strong>NIST SP 800-63B</strong> řadí TOTP do úrovně AAL2 právě kvůli rizikům phishingu. Plnou ochranu poskytuje až <strong>FIDO2 / WebAuthn</strong>, kde podpis zahrnuje hash <code>rpId</code> (Origin Binding).
                             </p>
                         </div>
                     </div>
@@ -121,6 +121,80 @@
                                     <pre class="m-0"><code class="language-{{ strtolower($language) }} p-8 text-sm leading-relaxed block overflow-x-auto bg-transparent">{{ $code }}</code></pre>
                                 </div>
                             @endforeach
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Sekce 3: Praktická doporučení --}}
+                <div class="p-8 md:p-10 border-t border-gray-100 dark:border-slate-700/50">
+                    <h4 class="text-emerald-500 font-black text-sm uppercase tracking-wider mb-6 flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                        Důležité upozornění k mitigaci
+                    </h4>
+                    <div class="bg-amber-500/5 dark:bg-amber-500/10 border border-amber-500/20 rounded-2xl p-6 mb-8">
+                        <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-medium">
+                            Stavová paměť (cache), kterou jste si v simulaci zapnuli, řeší <strong>pouze Replay Attack</strong>. Útok AitM (phishing) zůstává <strong>zranitelností by design</strong> — kód vygenerovaný na falešné doméně je matematicky platný i na legitimní službě. Jedinou plnou ochranou je přechod na protokol s Origin Binding (FIDO2 / Passkeys).
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-emerald-500/5 dark:bg-emerald-500/10 border border-emerald-500/20 rounded-2xl p-6 shadow-inner">
+                            <h5 class="font-black text-emerald-900 dark:text-emerald-300 uppercase tracking-tight text-xs mb-4">Co může udělat uživatel</h5>
+                            <ul class="space-y-3">
+                                <li class="flex items-start gap-2">
+                                    <span class="text-emerald-500 mt-0.5">•</span>
+                                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed"><strong class="text-slate-800 dark:text-slate-200">Vždy kontrolovat doménu</strong> v adresním řádku před zadáním TOTP kódu</p>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="text-emerald-500 mt-0.5">•</span>
+                                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed"><strong class="text-slate-800 dark:text-slate-200">Používat password manažer</strong> — ten odmítne vyplnit přihlašovací údaje na neznámé doméně (de facto "lidský Origin Binding")</p>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="text-emerald-500 mt-0.5">•</span>
+                                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed"><strong class="text-slate-800 dark:text-slate-200">Přejít na FIDO2 / Passkeys</strong> všude, kde je to podporováno (Google, Apple, Microsoft, GitHub aj.)</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="bg-indigo-500/5 dark:bg-indigo-500/10 border border-indigo-500/20 rounded-2xl p-6 shadow-inner">
+                            <h5 class="font-black text-indigo-900 dark:text-indigo-300 uppercase tracking-tight text-xs mb-4">Co může udělat vývojář</h5>
+                            <ul class="space-y-3">
+                                <li class="flex items-start gap-2">
+                                    <span class="text-indigo-500 mt-0.5">•</span>
+                                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed"><strong class="text-slate-800 dark:text-slate-200">Minimální validní okno</strong> — nastavit tolerance na 1 krok (30s), ne více</p>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="text-indigo-500 mt-0.5">•</span>
+                                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed"><strong class="text-slate-800 dark:text-slate-200">Stavová paměť (Redis cache)</strong> — ukládat použité kódy a zamítat opakované pokusy</p>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="text-indigo-500 mt-0.5">•</span>
+                                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed"><strong class="text-slate-800 dark:text-slate-200">Rate limiting a lockout</strong> — po N neúspěšných pokusech dočasně zablokovat verifikaci</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Co udělat teď --}}
+                <div class="mx-8 md:mx-10 mb-8">
+                    <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-2xl p-6 shadow-inner">
+                        <h4 class="text-emerald-500 font-black text-xs uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Co udělat teď
+                        </h4>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="flex items-start gap-3">
+                                <span class="bg-emerald-500/20 text-emerald-400 font-mono text-xs font-bold w-7 h-7 flex items-center justify-center rounded-lg shrink-0 border border-emerald-500/30">1</span>
+                                <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed"><strong class="text-emerald-600 dark:text-emerald-400">Zkontrolujte bookmarky</strong> — přistupujte k bance a emailu výhradně přes uložené záložky, nikdy přes odkazy v emailech.</p>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span class="bg-emerald-500/20 text-emerald-400 font-mono text-xs font-bold w-7 h-7 flex items-center justify-center rounded-lg shrink-0 border border-emerald-500/30">2</span>
+                                <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed"><strong class="text-emerald-600 dark:text-emerald-400">Nainstalujte password manažer</strong> (Bitwarden, 1Password). Ten za vás zkontroluje doménu a na phishingové stránce nevyplní nic.</p>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span class="bg-emerald-500/20 text-emerald-400 font-mono text-xs font-bold w-7 h-7 flex items-center justify-center rounded-lg shrink-0 border border-emerald-500/30">3</span>
+                                <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed"><strong class="text-emerald-600 dark:text-emerald-400">Aktivujte Passkeys</strong> kde je to možné — je to automatický Origin Binding, který eliminuje phishing i replay.</p>
+                            </div>
                         </div>
                     </div>
                 </div>

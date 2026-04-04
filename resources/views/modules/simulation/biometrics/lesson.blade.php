@@ -176,6 +176,124 @@
                     @endif
                 </div>
 
+                {{-- SEKCE 4: FAR/FRR TRADEOFF --}}
+                <div class="p-8 md:p-10 border-t border-gray-100 dark:border-slate-700/50">
+                    <h4 class="text-indigo-400 font-black text-sm uppercase tracking-wider mb-6 flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                        Kompromis bezpečnosti: FAR vs. FRR
+                    </h4>
+                    <div class="prose dark:prose-invert prose-indigo max-w-none text-gray-600 dark:text-slate-300 mb-6 leading-relaxed">
+                        <p>
+                            V simulaci jste viděli práh shody nastavený na 80%. Toto číslo je výsledkem kompromisu mezi dvěma protichůdnými metrikami:
+                        </p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div class="bg-rose-500/5 dark:bg-rose-500/10 border border-rose-500/20 rounded-2xl p-5">
+                            <h5 class="text-rose-500 font-bold text-xs uppercase tracking-wider mb-2">FAR (False Accept Rate)</h5>
+                            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                                Pravděpodobnost, že systém akceptuje <strong>nesprávný</strong> biometrický vzor. Snížení prahu (např. na 70%) zvyšuje FAR — více útočníků projde. Právě toto exploitoval MasterPrint.
+                            </p>
+                        </div>
+                        <div class="bg-emerald-500/5 dark:bg-emerald-500/10 border border-emerald-500/20 rounded-2xl p-5">
+                            <h5 class="text-emerald-500 font-bold text-xs uppercase tracking-wider mb-2">FRR (False Reject Rate)</h5>
+                            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                                Pravděpodobnost, že systém odmítne <strong>správný</strong> biometrický vzor. Zvýšení prahu (např. na 95%) sníží FAR, ale oprávnění uživatelé budou častěji zamítnuti — zhorší se uživatelský komfort.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="bg-indigo-500/5 dark:bg-indigo-500/10 border border-indigo-500/20 rounded-2xl p-5">
+                        <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed font-medium">
+                            <strong class="text-indigo-600 dark:text-indigo-400">Equal Error Rate (EER)</strong> — bod, kde se FAR a FRR protínají. Čím nižší EER, tím je senzor kvalitnější. Mobilní senzory otisků mívají EER kolem 1-3%, zatímco 3D systémy rozpoznávání obličeje (Face ID) dosahují EER pod 0.001%.
+                        </p>
+                    </div>
+                </div>
+
+                {{-- SEKCE 5: NON-REVOCABILITY --}}
+                <div class="p-8 md:p-10 border-t border-gray-100 dark:border-slate-700/50">
+                    <h4 class="text-amber-500 font-black text-sm uppercase tracking-wider mb-6 flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                        Neodvolatelnost biometrických dat
+                    </h4>
+                    <div class="bg-amber-500/5 dark:bg-amber-500/10 border border-amber-500/20 rounded-2xl p-6">
+                        <div class="prose dark:prose-invert prose-indigo max-w-none text-gray-600 dark:text-slate-300 leading-relaxed">
+                            <p>
+                                Na rozdíl od hesla, které můžete změnit za 10 sekund, <strong>biometrický vzor (otisk prstu, geometrie obličeje) změnit nelze</strong>. Pokud útočník získá vaši biometrickou šablonu, nelze ji „resetovat" jako heslo. Kompromitovaný biometrický faktor je kompromitován trvale.
+                            </p>
+                            <p>
+                                Proto biometrie <strong>nikdy nesmí být jediným autentizačním faktorem</strong>. V moderní architektuře FIDO2 slouží výhradně jako lokální odemknutí úložiště (User Verification) — samotný biometrický hash nikdy neopouští zařízení.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- SEKCE 6: PRAKTICKÁ DOPORUČENÍ --}}
+                <div class="p-8 md:p-10 border-t border-gray-100 dark:border-slate-700/50">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-emerald-500/5 dark:bg-emerald-500/10 border border-emerald-500/20 rounded-2xl p-6 shadow-inner">
+                            <h5 class="font-black text-emerald-900 dark:text-emerald-300 uppercase tracking-tight text-xs mb-4">Co může udělat uživatel</h5>
+                            <ul class="space-y-3">
+                                <li class="flex items-start gap-2">
+                                    <span class="text-emerald-500 mt-0.5">•</span>
+                                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed"><strong class="text-slate-800 dark:text-slate-200">Preferovat 3D senzory</strong> — zařízení s Face ID (IR projektor), ultrasonic fingerprint nebo ToF senzorem</p>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="text-emerald-500 mt-0.5">•</span>
+                                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed"><strong class="text-slate-800 dark:text-slate-200">Registrovat méně prstů</strong> — každý prst = desítky dalších šablon → vyšší FAR. Registrujte jen 1-2 prsty</p>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="text-emerald-500 mt-0.5">•</span>
+                                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed"><strong class="text-slate-800 dark:text-slate-200">Vždy kombinovat s dalším faktorem</strong> — biometrie + PIN/pattern. Samotná biometrie ≠ bezpečnost</p>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="text-emerald-500 mt-0.5">•</span>
+                                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed"><strong class="text-slate-800 dark:text-slate-200">Nepovolovat face unlock na levných zařízeních</strong> — RGB kamery bez IR projektoru jsou zranitelné fotografií</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="bg-indigo-500/5 dark:bg-indigo-500/10 border border-indigo-500/20 rounded-2xl p-6 shadow-inner">
+                            <h5 class="font-black text-indigo-900 dark:text-indigo-300 uppercase tracking-tight text-xs mb-4">Co může udělat vývojář</h5>
+                            <ul class="space-y-3">
+                                <li class="flex items-start gap-2">
+                                    <span class="text-indigo-500 mt-0.5">•</span>
+                                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed"><strong class="text-slate-800 dark:text-slate-200">Implementovat FIDO2 User Verification</strong> — biometrie slouží jen k odemknutí klíče, nikdy nepřenášet biometrická data po síti</p>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="text-indigo-500 mt-0.5">•</span>
+                                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed"><strong class="text-slate-800 dark:text-slate-200">Vyžadovat PAD Level 2+</strong> — certifikace senzoru dle ISO 30107 zaručuje odolnost vůči Presentation Attacku</p>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="text-indigo-500 mt-0.5">•</span>
+                                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed"><strong class="text-slate-800 dark:text-slate-200">Mít záložní autentizaci</strong> — v případě kompromitace biometrie musí uživatel mít alternativní cestu (PIN, recovery kódy)</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Co udělat teď --}}
+                <div class="mx-8 md:mx-10 mb-8">
+                    <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-2xl p-6 shadow-inner">
+                        <h4 class="text-emerald-500 font-black text-xs uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Co udělat teď
+                        </h4>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="flex items-start gap-3">
+                                <span class="bg-emerald-500/20 text-emerald-400 font-mono text-xs font-bold w-7 h-7 flex items-center justify-center rounded-lg shrink-0 border border-emerald-500/30">1</span>
+                                <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed"><strong class="text-emerald-600 dark:text-emerald-400">Zkontrolujte nastavení telefonu</strong> — ověřte, že váš telefon používá 3D rozpoznávání (Face ID / IR), ne pouze 2D kameru.</p>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span class="bg-emerald-500/20 text-emerald-400 font-mono text-xs font-bold w-7 h-7 flex items-center justify-center rounded-lg shrink-0 border border-emerald-500/30">2</span>
+                                <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed"><strong class="text-emerald-600 dark:text-emerald-400">Omezte počet registrovaných prstů</strong> — každý navíc zvyšuje FAR. Pro maximální bezpečnost registrujte jen 1-2.</p>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span class="bg-emerald-500/20 text-emerald-400 font-mono text-xs font-bold w-7 h-7 flex items-center justify-center rounded-lg shrink-0 border border-emerald-500/30">3</span>
+                                <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed"><strong class="text-emerald-600 dark:text-emerald-400">Aktivujte Passkeys</strong> — vaše biometrie slouží jen jako lokální odemknutí, biometrická data nikdy neopouštějí zařízení.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 {{-- Patička s odesláním --}}
                 <div class="bg-gray-50/80 dark:bg-slate-800/60 px-8 py-8 border-t border-gray-100 dark:border-slate-700/50 flex flex-col md:flex-row justify-between items-center gap-6 mt-auto">
                     <p class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest">
