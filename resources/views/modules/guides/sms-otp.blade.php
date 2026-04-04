@@ -1,5 +1,5 @@
-{{-- SMS OTP Guide: Průvodce bezpečnějšími alternativami --}}
-<div x-data="{ currentStep: 1, totalSteps: 3, platform: 'android' }">
+{{-- SMS OTP Guide: Konkrétní návod na přechod z SMS na bezpečnější metodu --}}
+<div x-data="{ currentStep: 1, totalSteps: 4, platform: 'android' }">
 
     {{-- Výběr platformy --}}
     <div class="flex items-center justify-center gap-4 mb-8">
@@ -27,105 +27,153 @@
         </template>
     </div>
 
-    {{-- KROK 1: Kde máte SMS OTP aktivní --}}
+    {{-- KROK 1: Zabezpečte svou SIM u operátora --}}
     <div x-show="currentStep === 1" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-x-4" x-transition:enter-end="opacity-100 translate-x-0">
         <div class="text-center mb-8">
             <div class="inline-flex items-center justify-center w-16 h-16 bg-amber-500/10 rounded-2xl mb-4">
-                <svg class="w-8 h-8 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                <svg class="w-8 h-8 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
             </div>
-            <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-2">Kde máte SMS ověření aktivní?</h3>
-            <p class="text-slate-500 dark:text-slate-400 text-sm max-w-md mx-auto">Zkontrolujte, které vaše služby stále používají SMS jako druhý faktor. Typicky to jsou:</p>
+            <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-2">Zabezpečte svou SIM kartu u operátora</h3>
+            <p class="text-slate-500 dark:text-slate-400 text-sm max-w-md mx-auto">Prvním krokem je ochrana proti SIM Swappingu — útoku, který jste provedli v simulaci.</p>
         </div>
 
-        <div class="space-y-3 max-w-lg mx-auto">
-            <div class="bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-xl p-4 flex items-center gap-4">
-                <div class="w-10 h-10 bg-blue-500/10 rounded-lg flex items-center justify-center shrink-0">🏦</div>
-                <div class="flex-1">
-                    <h4 class="font-bold text-sm text-slate-800 dark:text-slate-100">Internetové bankovnictví</h4>
-                    <p class="text-[10px] text-slate-400">Většina českých bank stále posílá potvrzovací SMS</p>
-                </div>
-                <span class="text-[9px] bg-rose-500/10 text-rose-400 border border-rose-500/20 px-2 py-0.5 rounded uppercase font-bold">Riziko</span>
+        <div class="max-w-lg mx-auto space-y-4">
+            <div class="bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-xl p-6">
+                <h4 class="font-bold text-sm text-slate-800 dark:text-slate-100 mb-4">Co udělat — zabere to 5 minut</h4>
+                <ol class="space-y-4 text-sm text-slate-700 dark:text-slate-300">
+                    <li class="flex gap-3">
+                        <span class="flex items-center justify-center w-6 h-6 bg-amber-500 text-white rounded-full text-xs font-bold shrink-0">1</span>
+                        <span>Zavolejte na zákaznickou linku svého operátora (T-Mobile: 4603, O2: 800 02 02 02, Vodafone: 800 77 00 77)</span>
+                    </li>
+                    <li class="flex gap-3">
+                        <span class="flex items-center justify-center w-6 h-6 bg-amber-500 text-white rounded-full text-xs font-bold shrink-0">2</span>
+                        <span>Požádejte o <strong>nastavení autorizačního PINu</strong> pro veškeré změny na účtu (výměna SIM, portace čísla)</span>
+                    </li>
+                    <li class="flex gap-3">
+                        <span class="flex items-center justify-center w-6 h-6 bg-amber-500 text-white rounded-full text-xs font-bold shrink-0">3</span>
+                        <span>Zeptejte se, zda nabízejí <strong>eSIM</strong> — tu nelze fyzicky vyměnit na pobočce</span>
+                    </li>
+                </ol>
             </div>
-            <div class="bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-xl p-4 flex items-center gap-4">
-                <div class="w-10 h-10 bg-green-500/10 rounded-lg flex items-center justify-center shrink-0">📱</div>
-                <div class="flex-1">
-                    <h4 class="font-bold text-sm text-slate-800 dark:text-slate-100">Sociální sítě</h4>
-                    <p class="text-[10px] text-slate-400">Facebook, Instagram — často výchozí metoda</p>
-                </div>
-                <span class="text-[9px] bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2 py-0.5 rounded uppercase font-bold">Změňte</span>
-            </div>
-            <div class="bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-xl p-4 flex items-center gap-4">
-                <div class="w-10 h-10 bg-purple-500/10 rounded-lg flex items-center justify-center shrink-0">📧</div>
-                <div class="flex-1">
-                    <h4 class="font-bold text-sm text-slate-800 dark:text-slate-100">E-mailové služby</h4>
-                    <p class="text-[10px] text-slate-400">Gmail, Seznam — nabízejí lepší alternativy</p>
-                </div>
-                <span class="text-[9px] bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2 py-0.5 rounded uppercase font-bold">Změňte</span>
+
+            <div class="p-4 bg-rose-500/5 dark:bg-rose-500/10 border border-rose-500/20 rounded-xl">
+                <p class="text-xs text-rose-700 dark:text-rose-300 text-center font-medium">
+                    ⚠️ <strong>Proč to udělat hned?</strong> Bez PINu stačí útočníkovi vaše jméno a rodné číslo — přesně jako v simulaci.
+                </p>
             </div>
         </div>
     </div>
 
-    {{-- KROK 2: Proč SMS nestačí --}}
+    {{-- KROK 2: Přepněte Google účet z SMS na Authenticator --}}
     <div x-show="currentStep === 2" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-x-4" x-transition:enter-end="opacity-100 translate-x-0" style="display: none;">
         <div class="text-center mb-8">
-            <div class="inline-flex items-center justify-center w-16 h-16 bg-rose-500/10 rounded-2xl mb-4">
-                <svg class="w-8 h-8 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+            <div class="inline-flex items-center justify-center w-16 h-16 bg-amber-500/10 rounded-2xl mb-4">
+                <svg class="w-8 h-8 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
             </div>
-            <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-2">Proč přejít z SMS na silnější metodu?</h3>
-            <p class="text-slate-500 dark:text-slate-400 text-sm max-w-md mx-auto">Jak jste viděli v simulaci, SMS OTP má zásadní zranitelnosti.</p>
+            <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-2">Přepněte Google účet z SMS na Authenticator</h3>
+            <p class="text-slate-500 dark:text-slate-400 text-sm max-w-md mx-auto">Pokud máte na Google účtu aktivní SMS ověření, nahraďte ho za TOTP aplikaci.</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-lg mx-auto">
-            <div class="bg-rose-500/5 dark:bg-rose-500/10 border border-rose-500/20 rounded-xl p-4">
-                <h4 class="font-bold text-xs text-rose-500 uppercase tracking-wider mb-2">❌ SMS OTP</h4>
-                <ul class="text-xs text-slate-600 dark:text-slate-400 space-y-1.5">
-                    <li>• SIM Swapping útok</li>
-                    <li>• SS7 odposlech</li>
-                    <li>• Závisí na mobilní síti</li>
-                    <li>• Kód lze přečíst z notifikace</li>
-                </ul>
-            </div>
-            <div class="bg-emerald-500/5 dark:bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-4">
-                <h4 class="font-bold text-xs text-emerald-500 uppercase tracking-wider mb-2">✅ TOTP / Passkeys</h4>
-                <ul class="text-xs text-slate-600 dark:text-slate-400 space-y-1.5">
-                    <li>• Kód se generuje offline</li>
-                    <li>• Nelze odposlechnout</li>
-                    <li>• Funguje bez signálu</li>
-                    <li>• Passkeys: phishing-resistant</li>
-                </ul>
+        <div class="max-w-lg mx-auto">
+            <div class="bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-xl p-6">
+                <ol class="space-y-4 text-sm text-slate-700 dark:text-slate-300">
+                    <li class="flex gap-3">
+                        <span class="flex items-center justify-center w-6 h-6 bg-amber-500 text-white rounded-full text-xs font-bold shrink-0">1</span>
+                        <span>Otevřete <strong class="text-amber-600 dark:text-amber-400">myaccount.google.com/security</strong></span>
+                    </li>
+                    <li class="flex gap-3">
+                        <span class="flex items-center justify-center w-6 h-6 bg-amber-500 text-white rounded-full text-xs font-bold shrink-0">2</span>
+                        <span>Klikněte na <strong>Dvoufázové ověření</strong></span>
+                    </li>
+                    <li class="flex gap-3">
+                        <span class="flex items-center justify-center w-6 h-6 bg-amber-500 text-white rounded-full text-xs font-bold shrink-0">3</span>
+                        <span>V sekci „Aplikace Authenticator" klikněte <strong>Nastavit</strong></span>
+                    </li>
+                    <li class="flex gap-3">
+                        <span class="flex items-center justify-center w-6 h-6 bg-amber-500 text-white rounded-full text-xs font-bold shrink-0">4</span>
+                        <span>Naskenujte QR kód v Google Authenticator (viz modul TOTP)</span>
+                    </li>
+                    <li class="flex gap-3">
+                        <span class="flex items-center justify-center w-6 h-6 bg-amber-500 text-white rounded-full text-xs font-bold shrink-0">5</span>
+                        <span>Po ověření <strong>odstraňte telefonní číslo</strong> jako záložní metodu (pokud to Google umožní)</span>
+                    </li>
+                </ol>
             </div>
         </div>
     </div>
 
-    {{-- KROK 3: Jak přepnout --}}
+    {{-- KROK 3: Zkontrolujte další služby --}}
     <div x-show="currentStep === 3" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-x-4" x-transition:enter-end="opacity-100 translate-x-0" style="display: none;">
         <div class="text-center mb-8">
+            <div class="inline-flex items-center justify-center w-16 h-16 bg-amber-500/10 rounded-2xl mb-4">
+                <svg class="w-8 h-8 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+            </div>
+            <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-2">Zkontrolujte další služby, kde máte SMS</h3>
+            <p class="text-slate-500 dark:text-slate-400 text-sm max-w-md mx-auto">Projděte si tento seznam a u každé služby aktivujte silnější metodu.</p>
+        </div>
+
+        <div class="max-w-lg mx-auto space-y-3">
+            <div class="bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-xl p-4 flex items-center gap-4">
+                <span class="w-10 h-10 bg-blue-600/10 rounded-lg flex items-center justify-center text-lg shrink-0">f</span>
+                <div class="flex-1">
+                    <h4 class="font-bold text-sm text-slate-800 dark:text-slate-100">Facebook</h4>
+                    <p class="text-[10px] text-slate-400 font-mono">Nastavení → Zabezpečení → Dvoufázové ověření → Ověřovací aplikace</p>
+                </div>
+                <span class="text-[9px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded uppercase font-bold">Přepněte</span>
+            </div>
+            <div class="bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-xl p-4 flex items-center gap-4">
+                <span class="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center text-white text-xs font-bold shrink-0">IG</span>
+                <div class="flex-1">
+                    <h4 class="font-bold text-sm text-slate-800 dark:text-slate-100">Instagram</h4>
+                    <p class="text-[10px] text-slate-400 font-mono">Nastavení → Zabezpečení → Dvoufázové ověření → Ověřovací aplikace</p>
+                </div>
+                <span class="text-[9px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded uppercase font-bold">Přepněte</span>
+            </div>
+            <div class="bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-xl p-4 flex items-center gap-4">
+                <span class="w-10 h-10 bg-blue-500/10 rounded-lg flex items-center justify-center shrink-0">🏦</span>
+                <div class="flex-1">
+                    <h4 class="font-bold text-sm text-slate-800 dark:text-slate-100">Banka</h4>
+                    <p class="text-[10px] text-slate-400">Aktivujte potvrzování přes <strong>mobilní aplikaci</strong> (push notifikace) místo SMS</p>
+                </div>
+                <span class="text-[9px] bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2 py-0.5 rounded uppercase font-bold">Ověřte</span>
+            </div>
+        </div>
+    </div>
+
+    {{-- KROK 4: Skryjte své číslo --}}
+    <div x-show="currentStep === 4" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-x-4" x-transition:enter-end="opacity-100 translate-x-0" style="display: none;">
+        <div class="text-center mb-8">
             <div class="inline-flex items-center justify-center w-16 h-16 bg-emerald-500/10 rounded-2xl mb-4">
-                <svg class="w-8 h-8 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                <svg class="w-8 h-8 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
             </div>
-            <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-2">Přepněte na bezpečnější metodu</h3>
-            <p class="text-slate-500 dark:text-slate-400 text-sm max-w-md mx-auto">U většiny služeb lze SMS nahradit za TOTP aplikaci nebo Passkey.</p>
+            <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-2">Chraňte své telefonní číslo</h3>
+            <p class="text-slate-500 dark:text-slate-400 text-sm max-w-md mx-auto">SIM Swap začíná tím, že útočník zná vaše číslo. Omezte jeho dostupnost.</p>
         </div>
 
-        <div class="space-y-3 max-w-lg mx-auto">
-            <div class="bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-xl p-4">
-                <h4 class="font-bold text-sm text-slate-800 dark:text-slate-100 mb-2">Google účet</h4>
-                <p class="text-xs text-slate-500 dark:text-slate-400">myaccount.google.com → Zabezpečení → Dvoufázové ověření → <strong>Přidat aplikaci Authenticator</strong></p>
+        <div class="max-w-lg mx-auto space-y-4">
+            <div class="bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-xl p-5">
+                <h4 class="font-bold text-sm text-slate-800 dark:text-slate-100 mb-3">Praktické kroky</h4>
+                <ul class="space-y-3 text-sm text-slate-700 dark:text-slate-300">
+                    <li class="flex gap-3">
+                        <span class="text-emerald-500 font-bold shrink-0">✓</span>
+                        <span>Na sociálních sítích <strong>skryjte své telefonní číslo</strong> z profilu</span>
+                    </li>
+                    <li class="flex gap-3">
+                        <span class="text-emerald-500 font-bold shrink-0">✓</span>
+                        <span>Nepřihlašujte se číslem — používejte <strong>e-mail jako login</strong></span>
+                    </li>
+                    <li class="flex gap-3">
+                        <span class="text-emerald-500 font-bold shrink-0">✓</span>
+                        <span>Zvažte <strong>sekundární číslo</strong> pro služby, kde musíte číslo uvést (e-shopy, registrace)</span>
+                    </li>
+                </ul>
             </div>
-            <div class="bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-xl p-4">
-                <h4 class="font-bold text-sm text-slate-800 dark:text-slate-100 mb-2">Facebook</h4>
-                <p class="text-xs text-slate-500 dark:text-slate-400">Nastavení → Zabezpečení → Dvoufázové ověření → <strong>Změnit na Authenticator</strong></p>
-            </div>
-            <div class="bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-xl p-4">
-                <h4 class="font-bold text-sm text-slate-800 dark:text-slate-100 mb-2">Bankovnictví</h4>
-                <p class="text-xs text-slate-500 dark:text-slate-400">Většina bank přechází na potvrzení v <strong>mobilní aplikaci</strong> (push notifikace). Pokud to vaše banka nabízí, aktivujte to.</p>
-            </div>
-        </div>
 
-        <div class="mt-6 p-5 bg-emerald-500/5 dark:bg-emerald-500/10 border border-emerald-500/20 rounded-2xl text-center max-w-lg mx-auto">
-            <div class="text-3xl mb-2">🔒</div>
-            <h4 class="font-bold text-emerald-700 dark:text-emerald-400 mb-1">Každý krok se počítá</h4>
-            <p class="text-xs text-slate-600 dark:text-slate-400">I přepnutí jednoho účtu z SMS na TOTP výrazně zvyšuje vaše zabezpečení.</p>
+            <div class="p-5 bg-emerald-500/5 dark:bg-emerald-500/10 border border-emerald-500/20 rounded-2xl text-center">
+                <div class="text-3xl mb-2">🔒</div>
+                <h4 class="font-bold text-emerald-700 dark:text-emerald-400 mb-1">Gratulujeme!</h4>
+                <p class="text-xs text-slate-600 dark:text-slate-400">Zabezpečili jste SIM u operátora, přepnuli služby z SMS na Authenticator a omezili dostupnost svého čísla.</p>
+            </div>
         </div>
     </div>
 

@@ -65,10 +65,6 @@
 
                 {{-- Patička --}}
                 <div class="bg-gray-50 dark:bg-slate-800/60 px-8 py-6 border-t border-gray-100 dark:border-slate-700/50 flex flex-col md:flex-row justify-between items-center mt-auto gap-4">
-                    <p class="text-gray-500 dark:text-slate-400 text-sm text-center md:text-left">
-                        Zabezpečte svůj digitální život ještě dnes.
-                    </p>
-
                     <a href="{{ route('dashboard') }}" class="w-full md:w-auto relative inline-flex items-center justify-center px-6 py-3 bg-slate-600 hover:bg-slate-700 dark:bg-slate-700 dark:hover:bg-slate-600 border border-transparent rounded-xl font-bold text-sm text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 dark:focus:ring-offset-slate-900 shadow-lg">
                         <span class="flex items-center gap-2">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
