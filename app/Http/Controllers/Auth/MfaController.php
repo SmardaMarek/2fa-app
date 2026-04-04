@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
@@ -78,6 +80,7 @@ class MfaController extends Controller
             session(['mfa_verified' => true]);
             session(['mfa_verified_at' => now()]);
             session(['mfa_last_timestamp' => $timestamp]);
+            $request->session()->regenerate();
 
             return redirect()->intended(route('dashboard', absolute: false));
         }

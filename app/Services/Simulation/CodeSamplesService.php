@@ -8,9 +8,12 @@ use Illuminate\Support\Facades\File;
 
 class CodeSamplesService
 {
-    public function getBiometricsLessonCodeSamples(): array
+    /**
+     * Generická metoda pro načtení code samples z daného adresáře.
+     */
+    public function getCodeSamples(string $directory): array
     {
-        $directoryPath = resource_path('views/modules/code-samples/biometrics-lesson');
+        $directoryPath = resource_path("views/modules/code-samples/{$directory}");
         $samples = [];
 
         if (File::isDirectory($directoryPath)) {
@@ -24,19 +27,18 @@ class CodeSamplesService
         return $samples;
     }
 
+    public function getBiometricsLessonCodeSamples(): array
+    {
+        return $this->getCodeSamples('biometrics-lesson');
+    }
+
     public function getFidoLessonCodeSamples(): array
     {
-        $directoryPath = resource_path('views/modules/code-samples/fido2-key-lesson');
-        $samples = [];
+        return $this->getCodeSamples('fido2-key-lesson');
+    }
 
-        if (File::isDirectory($directoryPath)) {
-            $files = File::files($directoryPath);
-            foreach ($files as $file) {
-                $language = pathinfo($file->getFilename(), PATHINFO_FILENAME);
-                $samples[$language] = file_get_contents($file->getRealPath());
-            }
-        }
-
-        return $samples;
+    public function getTotpLessonCodeSamples(): array
+    {
+        return $this->getCodeSamples('totp-app-lesson');
     }
 }

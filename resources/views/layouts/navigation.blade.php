@@ -17,7 +17,7 @@
                     </x-nav-link>
 
                     {{-- Dynamické načtení modulů z Enumu --}}
-                    @foreach(\App\Enums\ModulSlug::cases() as $module)
+                    @foreach(\App\Enums\ModuleSlug::cases() as $module)
                         <div class="hidden sm:flex sm:items-center">
                             <x-dropdown align="left" width="48">
                                 <x-slot name="trigger">

@@ -47,11 +47,10 @@ class ModuleSeeder extends Seeder
         ];
 
         foreach ($modules as $data) {
-            $exists = Module::where('slug', $data['slug'])->exists();
-
-            if (! $exists) {
-                Module::create($data);
-            }
+            Module::updateOrCreate(
+                ['slug' => $data['slug']],
+                $data
+            );
         }
     }
 }

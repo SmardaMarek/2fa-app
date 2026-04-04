@@ -9,8 +9,10 @@ use App\Models\Module;
 use App\Services\Simulation\OtpSimulationService;
 use App\Services\UserProgressService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class SmsSimulationController extends Controller
 {
@@ -19,7 +21,7 @@ class SmsSimulationController extends Controller
         private UserProgressService $progressService
     ) {}
 
-    public function setup(Module $module)
+    public function setup(Module $module): View
     {
         return view('modules.simulation.otp.setup', compact('module'));
     }
@@ -40,7 +42,7 @@ class SmsSimulationController extends Controller
         return response()->json($response);
     }
 
-    public function verify(Request $request, Module $module)
+    public function verify(Request $request, Module $module): RedirectResponse
     {
         $request->validate(['code' => 'required|digits:6']);
 
@@ -56,12 +58,12 @@ class SmsSimulationController extends Controller
         return back()->withErrors(['code' => 'Neplatný nebo expirovaný kód. Zkuste to znovu.']);
     }
 
-    public function attack(Module $module)
+    public function attack(Module $module): View
     {
         return view('modules.simulation.otp.attack', compact('module'));
     }
 
-    public function verifyAttack(Request $request, Module $module)
+    public function verifyAttack(Request $request, Module $module): RedirectResponse
     {
         $request->validate(['code' => 'required|digits:6']);
 
@@ -77,13 +79,14 @@ class SmsSimulationController extends Controller
         return back()->withErrors(['code' => 'Kód už vypršel. Útočník musí být rychlejší!']);
     }
 
-    public function lessons(Module $module)
+    public function lessons(Module $module): View
     {
         return view('modules.simulation.otp.lesson', compact('module'));
     }
 
-    public function complete(Request $request, Module $module)
+    public function complete(Request $request, Module $module): RedirectResponse
     {
+        $this->progressService->completeSimulationSetupStep($module);
         $this->progressService->completeSimulationAttackStep($module);
 
         return redirect()->route('module.quiz', ['module' => $module->slug])

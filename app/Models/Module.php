@@ -6,8 +6,10 @@ namespace App\Models;
 
 use App\Enums\FactorType;
 use App\Enums\ModuleDifficulty;
-use App\Enums\ModulSlug;
+use App\Enums\ModuleSlug;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Module extends Model
 {
@@ -26,12 +28,12 @@ class Module extends Model
         'is_active' => 'boolean',
     ];
 
-    public function progress()
+    public function progress(): HasMany
     {
         return $this->hasMany(UserProgress::class);
     }
 
-    public function questions()
+    public function questions(): HasMany
     {
         return $this->hasMany(Question::class);
     }
@@ -39,9 +41,9 @@ class Module extends Model
     /**
      * Vrátí Enum instanci pro tento modul na základě slugu v databázi.
      */
-    public function getSlugEnum(): ?ModulSlug
+    public function getSlugEnum(): ?ModuleSlug
     {
-        return ModulSlug::tryFrom($this->slug);
+        return ModuleSlug::tryFrom($this->slug);
     }
 
     /**
@@ -71,16 +73,7 @@ class Module extends Model
     {
         $enum = $this->getSlugEnum();
 
-        if ($enum) {
-            return match ($enum) {
-                ModulSlug::TOTP => 'module.totp.lessons',
-                ModulSlug::SMS => 'module.sms.lessons',
-                ModulSlug::BIOMETRY => 'module.biometrics.lessons',
-                ModulSlug::FIDO2 => 'module.fido2.lessons',
-            };
-        }
-
-        return 'dashboard';
+        return $enum ? $enum->getSimulationLessonsRoute() : 'dashboard';
     }
 
     public function getSimulationVerifySetupRoute(): string
@@ -89,8 +82,8 @@ class Module extends Model
 
         if ($enum) {
             return match ($enum) {
-                ModulSlug::TOTP => 'module.totp.verify_setup',
-                ModulSlug::SMS => 'module.sms.verify',
+                ModuleSlug::TOTP => 'module.totp.verify_setup',
+                ModuleSlug::SMS => 'module.sms.verify',
                 default => 'dashboard',
             };
         }

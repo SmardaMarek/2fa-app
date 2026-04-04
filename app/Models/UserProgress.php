@@ -41,4 +41,9 @@ class UserProgress extends Model
     {
         return $this->belongsTo(Module::class);
     }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }

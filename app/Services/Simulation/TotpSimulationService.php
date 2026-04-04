@@ -5,14 +5,12 @@ declare(strict_types=1);
 namespace App\Services\Simulation;
 
 use App\Managers\MfaSimulationManager;
-use App\Managers\UserProgressManager;
 use App\Models\MfaSimulation;
 use App\Models\Module;
 use App\Models\User;
 use App\Services\UserProgressService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\File;
 use PragmaRX\Google2FA\Exceptions\IncompatibleWithGoogleAuthenticatorException;
 use PragmaRX\Google2FA\Exceptions\InvalidCharactersException;
 use PragmaRX\Google2FA\Exceptions\SecretKeyTooShortException;
@@ -23,9 +21,9 @@ class TotpSimulationService
 {
     public function __construct(
         protected MfaSimulationManager $mfaSimulationManager,
-        protected UserProgressManager $progressManger,
         protected Google2FA $google2fa,
-        protected UserProgressService $userProgressService
+        protected UserProgressService $userProgressService,
+        protected CodeSamplesService $codeSamplesService
     ) {}
 
     /**
@@ -44,16 +42,14 @@ class TotpSimulationService
             MfaSimulation::SCENARIO_TYPE_SETUP
         );
 
-        $google2fa = new Google2FA;
-
         if (empty($simulation->state_data['secret'])) {
-            $secret = $google2fa->generateSecretKey();
+            $secret = $this->google2fa->generateSecretKey();
             $simulation->update(['state_data' => ['secret' => $secret]]);
         } else {
             $secret = $simulation->state_data['secret'];
         }
 
-        $qrCodeSvg = $google2fa->getQRCodeInline(
+        $qrCodeSvg = $this->google2fa->getQRCodeInline(
             'Simulation Qr',
             $user->email,
             $secret
@@ -78,9 +74,7 @@ class TotpSimulationService
             ->where('module_id', $module->id)
             ->firstOrFail();
 
-        $google2fa = new Google2FA;
-
-        return $google2fa->verifyKey($simulation->state_data['secret'], $request->code);
+        return $this->google2fa->verifyKey($simulation->state_data['secret'], $request->code);
     }
 
     public function verifyPhishingHypothesis(User $user, Module $module, string $code): bool
@@ -96,11 +90,7 @@ class TotpSimulationService
             $code
         );
 
-        if ($isValid) {
-            return true;
-        }
-
-        return false;
+        return $isValid;
     }
 
     /**
@@ -120,17 +110,6 @@ class TotpSimulationService
 
     public function getLessonCodeSamples(): array
     {
-        $directoryPath = resource_path('views/modules/code-samples/totp-app-lesson');
-        $samples = [];
-
-        if (File::isDirectory($directoryPath)) {
-            $files = File::files($directoryPath);
-            foreach ($files as $file) {
-                $language = pathinfo($file->getFilename(), PATHINFO_FILENAME);
-                $samples[$language] = file_get_contents($file->getRealPath());
-            }
-        }
-
-        return $samples;
+        return $this->codeSamplesService->getTotpLessonCodeSamples();
     }
 }

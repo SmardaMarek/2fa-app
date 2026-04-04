@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Enums;
 
-enum ModulSlug: string
+enum ModuleSlug: string
 {
     case TOTP = 'totp-app';
     case SMS = 'sms-otp';
@@ -59,8 +59,7 @@ enum ModulSlug: string
             self::TOTP => 'module.totp.lessons',
             self::SMS => 'module.sms.lessons',
             self::BIOMETRY => 'module.biometrics.lessons',
-            // self::FIDO2 => 'module.fido2.lessons',
-            default => 'dashboard',
+            self::FIDO2 => 'module.fido2.lessons',
         };
     }
 }

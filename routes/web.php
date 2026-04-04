@@ -46,11 +46,11 @@ Route::middleware(['auth', 'verified', 'mfa'])->group(function () {
         // B) SMS OTP Simulace
         Route::prefix('sms')->name('sms.')->group(function () {
             Route::get('/setup', [SmsSimulationController::class, 'setup'])->name('setup');
-            Route::post('/send', [SmsSimulationController::class, 'send'])->name('send');
-            Route::post('/verify', [SmsSimulationController::class, 'verify'])->name('verify');
+            Route::post('/send', [SmsSimulationController::class, 'send'])->middleware('throttle:5,1')->name('send');
+            Route::post('/verify', [SmsSimulationController::class, 'verify'])->middleware('throttle:5,1')->name('verify');
 
             Route::get('/attack', [SmsSimulationController::class, 'attack'])->name('attack');
-            Route::post('/attack', [SmsSimulationController::class, 'verifyAttack'])->name('verify_attack');
+            Route::post('/attack', [SmsSimulationController::class, 'verifyAttack'])->middleware('throttle:5,1')->name('verify_attack');
 
             Route::get('/lessons', [SmsSimulationController::class, 'lessons'])->name('lessons');
             Route::post('/complete', [SmsSimulationController::class, 'complete'])->name('complete');

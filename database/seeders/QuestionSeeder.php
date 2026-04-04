@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Enums\ModulSlug;
+use App\Enums\ModuleSlug;
 use App\Models\Module;
 use App\Models\Question;
 use Illuminate\Database\Seeder;
@@ -19,7 +19,7 @@ class QuestionSeeder extends Seeder
 
     private function seedTotpQuestions(): void
     {
-        $totpModule = Module::where('slug', ModulSlug::TOTP)->first();
+        $totpModule = Module::where('slug', ModuleSlug::TOTP)->first();
 
         if (! $totpModule) {
             return;
@@ -124,7 +124,7 @@ class QuestionSeeder extends Seeder
 
     private function seedSmsQuestions(): void
     {
-        $smsModule = Module::where('slug', ModulSlug::SMS)->first();
+        $smsModule = Module::where('slug', ModuleSlug::SMS)->first();
 
         if (! $smsModule) {
             return;
@@ -219,7 +219,7 @@ class QuestionSeeder extends Seeder
 
     private function seedBiometricsQuestions(): void
     {
-        $biometricsModule = Module::where('slug', ModulSlug::BIOMETRY)->first();
+        $biometricsModule = Module::where('slug', ModuleSlug::BIOMETRY)->first();
 
         if (! $biometricsModule) {
             return;
@@ -314,8 +314,7 @@ class QuestionSeeder extends Seeder
 
     private function seedFidoQuestions(): void
     {
-        // Uprav si slug podle toho, jak ho máš v Enumu (např. ModulSlug::FIDO)
-        $fidoModule = Module::where('slug', ModulSlug::FIDO2)->first();
+        $fidoModule = Module::where('slug', ModuleSlug::FIDO2)->first();
 
         if (! $fidoModule) {
             return;

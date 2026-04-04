@@ -23,6 +23,7 @@ class MfaSimulation extends Model
         'scenario_type',
         'status',
         'state_data',
+        'attempts',
     ];
 
     protected $casts = [
@@ -32,5 +33,10 @@ class MfaSimulation extends Model
     public function module(): BelongsTo
     {
         return $this->belongsTo(Module::class);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }

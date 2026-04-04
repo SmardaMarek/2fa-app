@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Mfa;
 
+use App\Http\Controllers\Controller;
 use App\Services\Mfa\DashboardService;
 
-class DashboardController
+class DashboardController extends Controller
 {
     public function __construct(protected DashboardService $dashboardService) {}
 

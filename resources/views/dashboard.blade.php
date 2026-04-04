@@ -42,7 +42,7 @@
                             default => 'bg-slate-500/10 text-slate-400 border-slate-500/20'
                         };
 
-                        $modulEnum = \App\Enums\ModulSlug::tryFrom($module->slug);
+                        $modulEnum = \App\Enums\ModuleSlug::tryFrom($module->slug);
 
                         $nextRoute = match($completedSteps) {
                             1 => route($modulEnum ? $modulEnum->getSimulationSetupRoute() : 'dashboard', ['module' => $module->slug]),

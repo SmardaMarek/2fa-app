@@ -13,13 +13,13 @@ class MfaSimulationManager
     {
         abort_if($userId !== Auth::id(), 403);
 
-        return MfaSimulation::firstOrCreate(
+        return MfaSimulation::updateOrCreate(
             ['user_id' => $userId, 'module_id' => $moduleId],
             ['status' => $status, 'scenario_type' => $scenarioType]
         );
     }
 
-    public function findByUserAndModule(int $userId, int $moduleId)
+    public function findByUserAndModule(int $userId, int $moduleId): ?MfaSimulation
     {
         abort_if($userId !== Auth::id(), 403);
 
