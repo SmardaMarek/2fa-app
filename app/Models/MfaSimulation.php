@@ -17,7 +17,13 @@ class MfaSimulation extends Model
 
     public const SCENARIO_ATTACK = 'attack';
 
-    protected $guarded = [];
+    protected $fillable = [
+        'user_id',
+        'module_id',
+        'scenario_type',
+        'status',
+        'state_data',
+    ];
 
     protected $casts = [
         'state_data' => 'array',

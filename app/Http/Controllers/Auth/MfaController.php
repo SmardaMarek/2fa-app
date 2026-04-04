@@ -66,9 +66,9 @@ class MfaController extends Controller
         }
 
         $google2fa = new Google2FA();
-        $valid = $google2fa->verifyKey($secret, $request->code);
+        $timestamp = $google2fa->verifyKeyNewer($secret, $request->code, null);
 
-        if ($valid) {
+        if ($timestamp !== false) {
             $user->forceFill([
                 'google2fa_secret' => $secret,
                 'google2fa_confirmed_at' => now(),
@@ -76,6 +76,8 @@ class MfaController extends Controller
 
             session()->forget('google2fa_secret');
             session(['mfa_verified' => true]);
+            session(['mfa_verified_at' => now()]);
+            session(['mfa_last_timestamp' => $timestamp]);
 
             return redirect()->intended(route('dashboard', absolute: false));
         }
@@ -106,16 +108,21 @@ class MfaController extends Controller
 
         $user = $request->user();
         $google2fa = new Google2FA();
+        $oldTimestamp = session('mfa_last_timestamp', null);
 
         try {
-            if ($google2fa->verifyKey($user->google2fa_secret, $request->code)) {
+            $timestamp = $google2fa->verifyKeyNewer($user->google2fa_secret, $request->code, $oldTimestamp);
+
+            if ($timestamp !== false) {
                 session(['mfa_verified' => true]);
+                session(['mfa_verified_at' => now()]);
+                session(['mfa_last_timestamp' => $timestamp]);
                 $request->session()->regenerate();
 
                 return redirect()->intended(route('dashboard', absolute: false));
             }
         } catch (IncompatibleWithGoogleAuthenticatorException|InvalidCharactersException|SecretKeyTooShortException $e) {
-
+            report($e);
         }
 
         return back()->withErrors(['code' => 'Invalid authentication code. Please try again.']);

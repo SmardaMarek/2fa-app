@@ -27,6 +27,8 @@ Route::middleware(['auth', 'verified', 'mfa'])->group(function () {
         Route::get('/quiz', [QuizController::class, 'show'])->name('quiz');
         Route::post('/quiz', [QuizController::class, 'submit'])->name('quiz.submit');
 
+        Route::get('/guide', [TheoryController::class, 'guide'])->name('guide');
+
         // --- 2. SPECIFICKÉ ROUTY SIMULACÍ ---
 
         // A) TOTP Simulace
@@ -80,9 +82,9 @@ Route::middleware(['auth', 'verified', 'mfa'])->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/mfa/setup', [\App\Http\Controllers\Auth\MfaController::class, 'setup'])->name('mfa.setup');
-    Route::post('/mfa/setup', [\App\Http\Controllers\Auth\MfaController::class, 'verifySetup'])->name('mfa.verify_setup');
+    Route::post('/mfa/setup', [\App\Http\Controllers\Auth\MfaController::class, 'verifySetup'])->middleware('throttle:5,1')->name('mfa.verify_setup');
     Route::get('/mfa/challenge', [\App\Http\Controllers\Auth\MfaController::class, 'challenge'])->name('mfa.challenge');
-    Route::post('/mfa/challenge', [\App\Http\Controllers\Auth\MfaController::class, 'verify'])->name('mfa.verify');
+    Route::post('/mfa/challenge', [\App\Http\Controllers\Auth\MfaController::class, 'verify'])->middleware('throttle:5,1')->name('mfa.verify');
 });
 
 require __DIR__.'/auth.php';

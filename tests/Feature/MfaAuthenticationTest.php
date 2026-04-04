@@ -119,3 +119,61 @@ test('user cannot verify initial mfa setup with invalid code', function () {
     $user->refresh();
     expect($user->google2fa_confirmed_at)->toBeNull();
 });
+
+test('mfa challenge is rate limited after 5 failed attempts', function () {
+    $google2fa = new Google2FA();
+    $secret = $google2fa->generateSecretKey();
+
+    $user = User::factory()->create([
+        'google2fa_secret' => $secret,
+        'google2fa_confirmed_at' => now(),
+    ]);
+
+    // 5 neúspěšných pokusů
+    for ($i = 0; $i < 5; $i++) {
+        $this->actingAs($user)->post('/mfa/challenge', [
+            'code' => '000000',
+        ]);
+    }
+
+    // 6. pokus musí vrátit 429 (Too Many Requests)
+    $response = $this->actingAs($user)->post('/mfa/challenge', [
+        'code' => '000000',
+    ]);
+
+    $response->assertStatus(429);
+});
+
+test('same totp code cannot be used twice (replay attack)', function () {
+    $google2fa = new Google2FA();
+    $secret = $google2fa->generateSecretKey();
+
+    $user = User::factory()->create([
+        'google2fa_secret' => $secret,
+        'google2fa_confirmed_at' => now(),
+    ]);
+
+    $validCode = $google2fa->getCurrentOtp($secret);
+
+    // První použití – úspěch
+    $response = $this->actingAs($user)->post('/mfa/challenge', [
+        'code' => $validCode,
+    ]);
+    $response->assertRedirect('/dashboard');
+    $response->assertSessionHas('mfa_verified', true);
+
+    $lastTimestamp = session('mfa_last_timestamp');
+    expect($lastTimestamp)->not->toBeNull();
+
+    // Druhé použití stejného kódu – musí selhat
+    $response2 = $this->actingAs($user)
+        ->withSession([
+            'mfa_verified' => false,
+            'mfa_last_timestamp' => $lastTimestamp,
+        ])
+        ->post('/mfa/challenge', [
+            'code' => $validCode,
+        ]);
+
+    $response2->assertSessionHasErrors('code');
+});

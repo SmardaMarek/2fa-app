@@ -11,7 +11,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Module extends Model
 {
-    protected $guarded = [];
+    protected $fillable = [
+        'slug',
+        'title',
+        'description',
+        'factor_type',
+        'difficulty',
+        'is_active',
+    ];
 
     protected $casts = [
         'factor_type' => FactorType::class,

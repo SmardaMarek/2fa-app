@@ -32,6 +32,14 @@ class EnsureMfaIsVerified
             return redirect()->route('mfa.challenge');
         }
 
+        // Re-challenge if MFA verification is older than 60 minutes
+        $mfaVerifiedAt = session('mfa_verified_at');
+        if ($mfaVerifiedAt && now()->diffInMinutes($mfaVerifiedAt) > 60) {
+            session()->forget(['mfa_verified', 'mfa_verified_at', 'mfa_last_timestamp']);
+
+            return redirect()->route('mfa.challenge');
+        }
+
         return $next($request);
     }
 }

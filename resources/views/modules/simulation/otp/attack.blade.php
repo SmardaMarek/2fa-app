@@ -324,6 +324,9 @@
                     this.urgencyKeywords.forEach(kw => { if(input.includes(kw)) trustGained += 15; });
                     this.infoKeywords.forEach(kw => { if(input.includes(kw)) trustGained += 20; });
 
+                    // Rozpoznání rodného čísla zadaného přímo (formát: 850515/1234 nebo 8505151234)
+                    if (/\d{6}\/?\d{3,4}/.test(input)) trustGained += 20;
+
                     if (trustGained > 0) {
                         this.trustLevel = Math.min(100, this.trustLevel + trustGained);
                     }

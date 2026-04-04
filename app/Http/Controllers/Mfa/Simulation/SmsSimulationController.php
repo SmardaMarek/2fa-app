@@ -26,13 +26,18 @@ class SmsSimulationController extends Controller
 
     public function send(Module $module): JsonResponse
     {
-        // Generujeme a ukládáme hash kódu přes naši dříve vytvořenou servisu
         $code = $this->smsService->generateAndDispatch(Auth::user());
 
-        return response()->json([
+        $response = [
             'message' => 'SMS byla odeslána na vaše zařízení.',
-            'simulated_code' => $code, // V produkci kód NIKDY nevracíme, zde slouží pro UI simulátoru telefonu
-        ]);
+        ];
+
+        // V produkci kód NIKDY nevracíme, zde slouží pro UI simulátoru telefonu
+        if (!app()->environment('production')) {
+            $response['simulated_code'] = $code;
+        }
+
+        return response()->json($response);
     }
 
     public function verify(Request $request, Module $module)

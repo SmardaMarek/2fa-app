@@ -19,7 +19,15 @@ class UserProgress extends Model
 
     protected $table = 'user_progress';
 
-    protected $guarded = [];
+    protected $fillable = [
+        'user_id',
+        'module_id',
+        'theory_completed',
+        'simulation_setup_completed',
+        'simulation_attack_completed',
+        'quiz_completed',
+        'completed_at',
+    ];
 
     protected $casts = [
         'theory_completed' => 'boolean',

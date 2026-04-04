@@ -16,6 +16,7 @@ class TheoryController extends Controller
     public function show(Module $module)
     {
         $contentView = "modules.content.{$module->slug}";
+        abort_unless(view()->exists($contentView), 404);
 
         return view('modules.theory', [
             'module' => $module,
@@ -30,10 +31,22 @@ class TheoryController extends Controller
         return redirect()->route('module.implementation', $module);
     }
 
+    public function guide(Module $module)
+    {
+        $contentView = "modules.guides.{$module->slug}";
+        abort_unless(view()->exists($contentView), 404);
+
+        return view('modules.guide', [
+            'module' => $module,
+            'contentView' => $contentView,
+        ]);
+    }
+
     public function implementation(Module $module)
     {
         $codeSamples = $this->theoryService->getCodeSamples($module);
         $contentView = "modules.code-samples.introduction.{$module->slug}";
+        abort_unless(view()->exists($contentView), 404);
 
         return view('modules.implementation', [
             'module' => $module,

@@ -15,8 +15,6 @@ class Fido2KeySimulationController extends Controller
 
     public function attack(Module $module)
     {
-        $this->progressService->completeSimulationSetupStep($module);
-
         return view('modules.simulation.fido2-key.attack', compact('module'));
     }
 
@@ -27,8 +25,6 @@ class Fido2KeySimulationController extends Controller
 
     public function lessons(Module $module)
     {
-        $this->progressService->completeSimulationAttackStep($module);
-
         return view('modules.simulation.fido2-key.lesson', [
             'module' => $module,
             'codeSamples' => $this->codeSamplesService->getFidoLessonCodeSamples(),
@@ -37,6 +33,9 @@ class Fido2KeySimulationController extends Controller
 
     public function complete(Request $request, Module $module)
     {
+        $this->progressService->completeSimulationSetupStep($module);
+        $this->progressService->completeSimulationAttackStep($module);
+
         return redirect()->route('module.quiz', ['module' => $module->slug]);
     }
 }
