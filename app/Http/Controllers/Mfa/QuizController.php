@@ -46,6 +46,8 @@ class QuizController extends Controller
 
         return back()
             ->withInput()
-            ->with('error', "Máte {$result['score']} z {$result['total']} správně. K dokončení modulu potřebujete 100 %.");
+            ->with('error', "Máte {$result['score']} z {$result['total']} správně. K dokončení modulu potřebujete 100 %. Nesprávné odpovědi jsou zvýrazněny níže.")
+            ->with('incorrectQuestions', $result['incorrectQuestions'])
+            ->with('submitted', true);
     }
 }
