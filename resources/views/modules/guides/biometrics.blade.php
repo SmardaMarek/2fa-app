@@ -6,13 +6,13 @@
         <span class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest">Vaše zařízení:</span>
         <div class="flex flex-wrap bg-slate-100 dark:bg-slate-900/50 rounded-xl p-1 border border-slate-200 dark:border-slate-700 gap-0.5">
             <button @click="platform = 'windows'" :class="platform === 'windows' ? 'bg-white dark:bg-slate-700 shadow-sm text-blue-600 dark:text-blue-400' : 'text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'" class="px-3 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all">
-                🪟 Windows
+                Windows
             </button>
             <button @click="platform = 'android'" :class="platform === 'android' ? 'bg-white dark:bg-slate-700 shadow-sm text-emerald-600 dark:text-emerald-400' : 'text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'" class="px-3 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all">
                  Android
             </button>
             <button @click="platform = 'iphone'" :class="platform === 'iphone' ? 'bg-white dark:bg-slate-700 shadow-sm text-slate-600 dark:text-slate-300' : 'text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'" class="px-3 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all">
-                🍎 iPhone
+                iPhone
             </button>
         </div>
     </div>
@@ -43,7 +43,7 @@
         <div class="max-w-lg mx-auto">
             {{-- Windows Hello --}}
             <div x-show="platform === 'windows'" class="bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-xl p-6">
-                <h4 class="font-bold text-sm text-blue-600 dark:text-blue-400 uppercase tracking-wider mb-4">🪟 Windows Hello — otisk prstu nebo obličej</h4>
+                <h4 class="font-bold text-sm text-blue-600 dark:text-blue-400 uppercase tracking-wider mb-4"> Windows Hello — otisk prstu nebo obličej</h4>
                 <ol class="space-y-4 text-sm text-slate-700 dark:text-slate-300">
                     <li class="flex gap-3">
                         <span class="flex items-center justify-center w-6 h-6 bg-amber-500 text-white rounded-full text-xs font-bold shrink-0">1</span>
