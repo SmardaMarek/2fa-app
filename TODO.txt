@@ -1,2 +1,0 @@
-- klidně zkusit s flashkou - zašifrovat - rozpracovat simulaci
-- přepracovat s webem fyzického klíče

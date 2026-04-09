@@ -163,26 +163,26 @@
                     </h4>
                     <div class="prose dark:prose-invert prose-indigo max-w-none text-gray-600 dark:text-slate-300 mb-6 leading-relaxed">
                         <p>
-                            FIDO2 poskytuje nejvyšší úroveň ochrany (AAL3), ale <strong>žádný systém není absolutně neprůstřelný</strong>. Je nutné znát zbytková rizika a mít plán pro jejich mitigaci:
+                            FIDO2 poskytuje nejvyšší úroveň ochrany (AAL3), ale <strong>žádný systém není absolutně neprůstřelný</strong>. Jak jste viděli v sandboxu, je nutné znát zbytková rizika a mít plán pro jejich mitigaci:
                         </p>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div class="bg-amber-500/5 dark:bg-amber-500/10 border border-amber-500/20 rounded-2xl p-5">
                             <h5 class="text-amber-500 font-bold text-xs uppercase tracking-wider mb-2">Fyzická krádež klíče</h5>
                             <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                                Pokud klíč nemá nastavený PIN (User Verification), <strong>každý, kdo ho fyzicky drží, se může autentizovat</strong>. Řešení: Vždy aktivovat UV (PIN/biometrie na zařízení).
+                                Pokud klíč nemá nastavený PIN (User Verification), <strong>každý, kdo ho fyzicky drží, se může autentizovat pouhým dotykem</strong>. Řešení: Vždy vynutit UV (PIN/biometrie na zařízení).
+                            </p>
+                        </div>
+                        <div class="bg-amber-500/5 dark:bg-amber-500/10 border border-amber-500/20 rounded-2xl p-5">
+                            <h5 class="text-amber-500 font-bold text-xs uppercase tracking-wider mb-2">Session Hijacking</h5>
+                            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                                FIDO2 řeší prvotní přihlášení (Autentizaci). Jakmile server vydá <strong>Session Cookie</strong>, FIDO2 vás už nechrání. Pokud útočník cookie ukradne malwarem, získá i vaši relaci.
                             </p>
                         </div>
                         <div class="bg-amber-500/5 dark:bg-amber-500/10 border border-amber-500/20 rounded-2xl p-5">
                             <h5 class="text-amber-500 font-bold text-xs uppercase tracking-wider mb-2">Ztráta klíče</h5>
                             <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                                Na rozdíl od hesla nelze kryptografický klíč "obnovit". Pokud ztratíte jediný klíč, <strong>ztratíte přístup</strong>. Řešení: Vždy registrovat ≥ 2 klíče a uložit recovery kódy na bezpečné místo.
-                            </p>
-                        </div>
-                        <div class="bg-amber-500/5 dark:bg-amber-500/10 border border-amber-500/20 rounded-2xl p-5">
-                            <h5 class="text-amber-500 font-bold text-xs uppercase tracking-wider mb-2">Platform vs. Hardware</h5>
-                            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                                Platformové autentizátory (Touch ID, Windows Hello) jsou vázány na zařízení — nejsou přenositelné. Hardware klíče (YubiKey, Titan) fungují všude, ale vyžadují fyzický nosič.
+                                Na rozdíl od hesla nelze asymetrický klíč "obnovit". Pokud ztratíte jediný klíč (třeba i ten vázaný na platformu), <strong>ztratíte přístup k účtu</strong>. Řešení: Vždy registrovat více klíčů a uložit recovery kódy.
                             </p>
                         </div>
                     </div>
