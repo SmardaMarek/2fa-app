@@ -61,7 +61,7 @@
                                     <li class="flex items-start">
                                         <span class="bg-indigo-500/20 text-indigo-400 font-mono text-[10px] font-bold w-6 h-6 flex items-center justify-center rounded mr-3 mt-0.5 shrink-0 border border-indigo-500/30">3</span>
                                         <span>
-                                <strong class="text-slate-200">Nasazení obrany (Mitigace):</strong> Staňte se obráncem. V pravém panelu zapněte <strong>Stavovou paměť (Cache)</strong>. Vygenerujte si vlevo nový kód a zopakujte celý útok. Server si nyní kód "zapamatuje" a pokus o Replay zablokuje.
+                                <strong class="text-slate-200">Nasazení obrany (Ochranná opatření):</strong> Staňte se obráncem. V pravém panelu zapněte <strong>Stavovou paměť (Cache)</strong>. Vygenerujte si vlevo nový kód a zopakujte celý útok. Server si nyní kód "zapamatuje" a pokus o Replay zablokuje.
                             </span>
                                     </li>
                                 </ul>
@@ -215,7 +215,7 @@
                 <form action="{{ route($module->getSimulationLessonsRoute(), ['module' => $module->slug]) }}" method="GET">
                     @csrf
                     <button type="submit" class="group bg-indigo-600 hover:bg-indigo-500 text-white px-10 py-5 rounded-2xl font-black uppercase tracking-widest transition-all transform hover:scale-[1.02] shadow-[0_0_20px_rgba(99,102,241,0.4)] flex items-center text-sm">
-                        Pokračovat na analýzu mitigace
+                        Pokračovat na analýzu ochranných opatření
                         <svg class="ml-3 w-6 h-6 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                     </button>
                 </form>

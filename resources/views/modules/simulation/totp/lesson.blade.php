@@ -3,7 +3,7 @@
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
                 <h2 class="font-bold text-2xl text-gray-800 dark:text-slate-100 leading-tight tracking-tight">
-                    {{ $module->title }} <span class="text-gray-500 dark:text-slate-400 font-normal">| Analýza a mitigace</span>
+                    {{ $module->title }} <span class="text-gray-500 dark:text-slate-400 font-normal">| Analýza a ochranná opatření</span>
                 </h2>
             </div>
 
@@ -69,13 +69,13 @@
                         </p>
                     </div>
 
-                    {{-- Alert pro mitigaci --}}
+                    {{-- Alert pro ochranná opatření --}}
                     <div class="mt-8 p-6 bg-rose-500/5 border border-rose-500/20 rounded-2xl flex gap-5 items-start">
                         <div class="p-2 bg-rose-500/10 rounded-lg text-rose-500">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
                         </div>
                         <div>
-                            <h4 class="text-rose-500 font-bold uppercase tracking-wider text-xs mb-1">Standardy a mitigace</h4>
+                            <h4 class="text-rose-500 font-bold uppercase tracking-wider text-xs mb-1">Standardy a ochranná opatření</h4>
                             <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-medium">
                                 Dokument <strong>NIST SP 800-63B</strong> řadí TOTP do úrovně AAL2 právě kvůli rizikům phishingu. Plnou ochranu poskytuje až <strong>FIDO2 / WebAuthn</strong>, kde podpis zahrnuje hash <code>rpId</code> (Origin Binding).
                             </p>
@@ -89,7 +89,7 @@
                 <div class="bg-slate-900 px-6 py-4 border-l-4 border-amber-500 flex items-center justify-between">
                     <h3 class="text-lg font-bold text-white flex items-center font-mono uppercase tracking-wider">
                         <svg class="w-5 h-5 mr-3 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
-                        Replay Attack a mitigace okna
+                        Replay Attack a ochrana časového okna
                     </h3>
                 </div>
 
@@ -110,7 +110,7 @@
                                 <button @click="selectedLang = '{{ $language }}'"
                                         :class="selectedLang === '{{ $language }}' ? 'bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-400 border-gray-200 dark:border-slate-700/50 border-t border-x rounded-t-xl' : 'text-gray-500 dark:text-slate-500 hover:text-indigo-400'"
                                         class="py-3 px-6 text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-200 outline-none -mb-[1px]">
-                                    {{ $language }} Mitigace
+                                    {{ $language }} Ochrana
                                 </button>
                             @endforeach
                         </div>
@@ -129,7 +129,7 @@
                 <div class="p-8 md:p-10 border-t border-gray-100 dark:border-slate-700/50">
                     <h4 class="text-emerald-500 font-black text-sm uppercase tracking-wider mb-6 flex items-center gap-2">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-                        Důležité upozornění k mitigaci
+                        Důležité upozornění k ochraně
                     </h4>
                     <div class="bg-amber-500/5 dark:bg-amber-500/10 border border-amber-500/20 rounded-2xl p-6 mb-8">
                         <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-medium">

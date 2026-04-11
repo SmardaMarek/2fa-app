@@ -25,7 +25,7 @@
         </div>
     </div>
 
-    <h3 class="dark:text-slate-100 italic font-black tracking-tighter uppercase">Absolutní mitigace hrozeb (NIST AAL3)</h3>
+    <h3 class="dark:text-slate-100 italic font-black tracking-tighter uppercase">Absolutní eliminace hrozeb (NIST AAL3)</h3>
     <p class="dark:text-slate-300 leading-relaxed">
         Bezpečnostní autority klasifikují FIDO2 jako <em>Phishing-Resistant MFA</em>. Splňuje nejvyšší úroveň zabezpečení <strong>AAL3 (Authenticator Assurance Level 3)</strong> díky těmto pilířům:
     </p>

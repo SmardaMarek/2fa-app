@@ -3,7 +3,7 @@
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
                 <h2 class="font-bold text-2xl text-gray-800 dark:text-slate-100 leading-tight tracking-tight">
-                    {{ $module->title }} <span class="text-gray-500 dark:text-slate-400 font-normal">| Analýza a mitigace</span>
+                    {{ $module->title }} <span class="text-gray-500 dark:text-slate-400 font-normal">| Analýza a ochranná opatření</span>
                 </h2>
             </div>
 
@@ -101,7 +101,7 @@
                 </div>
             </div>
 
-            {{-- SEKCE 2: PREVENCE A MITIGACE --}}
+            {{-- SEKCE 2: PREVENCE A OCHRANNÁ OPATŘENÍ --}}
             <div class="bg-white dark:bg-slate-800/40 dark:backdrop-blur-md overflow-hidden shadow-xl dark:shadow-2xl sm:rounded-3xl border border-gray-200 dark:border-slate-700/50 flex flex-col transition-all duration-300">
                 <div class="bg-slate-900 px-8 py-5 border-l-4 border-emerald-500 flex items-center justify-between">
                     <h3 class="text-lg font-bold text-white flex items-center font-mono uppercase tracking-wider">
@@ -167,7 +167,7 @@
                                 <div class="p-2 bg-indigo-500/20 rounded-lg text-indigo-500">
                                     <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
                                 </div>
-                                <h4 class="font-black text-indigo-900 dark:text-indigo-300 uppercase tracking-tight text-sm">Mitigace pro vývojáře</h4>
+                                <h4 class="font-black text-indigo-900 dark:text-indigo-300 uppercase tracking-tight text-sm">Ochranná opatření pro vývojáře</h4>
                             </div>
 
                             <ul class="space-y-4">

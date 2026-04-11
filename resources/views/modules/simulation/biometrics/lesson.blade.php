@@ -3,7 +3,7 @@
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
                 <h2 class="font-bold text-2xl text-gray-800 dark:text-slate-100 leading-tight tracking-tight">
-                    {{ $module->title }} <span class="text-gray-500 dark:text-slate-400 font-normal">| Analýza a mitigace</span>
+                    {{ $module->title }} <span class="text-gray-500 dark:text-slate-400 font-normal">| Analýza a ochranná opatření</span>
                 </h2>
             </div>
 
