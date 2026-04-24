@@ -119,7 +119,7 @@
 </main>
 
 <footer class="border-t border-gray-800 py-8 text-center text-sm text-gray-500">
-    © {{ date('Y') }} Marek Šmarda — vytvořeno v rámci dimplové práce
+    © {{ date('Y') }} Marek Šmarda — vytvořeno v rámci diplomové práce
 </footer>
 
 </body>

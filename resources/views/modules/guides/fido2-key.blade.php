@@ -43,7 +43,7 @@
             <div class="bg-amber-500/5 dark:bg-amber-500/10 border border-amber-500/20 rounded-xl p-5 text-left">
                 <div class="text-2xl mb-3">⚙️</div>
                 <h4 class="font-bold text-sm text-amber-700 dark:text-amber-400 mb-1">Princip programu USB Raptor</h4>
-                <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">Vygenerujeme unikátní šifrovaný hashový soubor (<code class="bg-slate-200 dark:bg-slate-800 px-1 rounded text-[10px]">.k3y</code>). Windows se odemknou pouze potě, co zachytí fyzické připojení tohoto souboru na portu.</p>
+                <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">Vygenerujeme unikátní šifrovaný hashový soubor (<code class="bg-slate-200 dark:bg-slate-800 px-1 rounded text-[10px]">.k3y</code>). Windows se odemknou pouze poté, co zachytí fyzické připojení tohoto souboru na portu.</p>
             </div>
         </div>
     </div>
@@ -55,7 +55,7 @@
                 <svg class="w-8 h-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
             </div>
             <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-2">Instalace je blesková</h3>
-            <p class="text-slate-500 dark:text-slate-400 text-sm max-w-md mx-auto">Otevřený program `USB Raptor` nemusíte vůbec instalovat (je Portable). Stáhnete a rovnou běží.</p>
+            <p class="text-slate-500 dark:text-slate-400 text-sm max-w-md mx-auto">Otevřený program USB Raptor nemusíte vůbec instalovat (je Portable). Stáhnete a rovnou běží.</p>
         </div>
 
         <div class="max-w-lg mx-auto">
@@ -93,7 +93,7 @@
                 <svg class="w-8 h-8 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"></path></svg>
             </div>
             <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-2">Vykování fyzického klíče do Flashky</h3>
-            <p class="text-slate-500 dark:text-slate-400 text-sm max-w-md mx-auto">Toto je ten reálny moment zapsání tokenu srovnatelný s kryptografickým "MakeCredential" z naší simulace webAuthnu.</p>
+            <p class="text-slate-500 dark:text-slate-400 text-sm max-w-md mx-auto">Toto je ten reálný moment zapsání tokenu srovnatelný s kryptografickým "MakeCredential" z naší simulace WebAuthn.</p>
         </div>
 
         <div class="max-w-lg mx-auto">
@@ -144,7 +144,7 @@
             <div class="p-5 bg-indigo-500/5 dark:bg-indigo-500/10 border border-indigo-500/20 rounded-2xl text-center max-w-lg mx-auto shadow-inner">
                 <h4 class="font-bold text-indigo-700 dark:text-indigo-400 mb-2 uppercase tracking-wider text-xs">Vzpomeňte na "User Verification" útok</h4>
                 <p class="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed">
-                    Jak jste si sami zkusili FIDO2 simulátoru u <strong>vzájemné konfigurace proti Fyzické krádeži</strong>: Pokud nemáte na Flash klíč heslo nebo se nesníží senzor (tzn. jakýkoliv zloděj ji vloží do počítače), zamykací SW vás nezachrání. Raptor nepoužívá PIN pro vložení! A proto se mu neříká FIDO2 klíč, ale pouze Token Přítomnosti Uživatele (User Presence Token).
+                    Jak jste si sami zkusili v FIDO2 simulátoru u <strong>konfigurace proti fyzické krádeži</strong>: Pokud nemáte na Flash klíč heslo nebo nemá biometrický senzor (tzn. jakýkoliv zloděj ji vloží do počítače), zamykací SW vás nezachrání. Raptor nepoužívá PIN pro vložení! A proto se mu neříká FIDO2 klíč, ale pouze Token Přítomnosti Uživatele (User Presence Token).
                 </p>
             </div>
         </div>

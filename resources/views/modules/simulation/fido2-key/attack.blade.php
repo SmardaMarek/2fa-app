@@ -15,7 +15,7 @@
                     <span class="h-1.5 w-3 rounded-full bg-slate-300 dark:bg-slate-600"></span>
                 </div>
                 <span class="text-sm font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest">
-                    Krok 2 / 4
+                    Krok 3 / 4
                 </span>
             </div>
         </div>

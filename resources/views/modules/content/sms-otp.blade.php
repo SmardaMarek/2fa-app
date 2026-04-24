@@ -66,8 +66,8 @@
                 </div>
             </div>
             <div class="rounded-xl overflow-hidden bg-slate-900 p-4 border border-slate-700/50">
-
-                <p class="text-[9px] text-slate-500 mt-2 italic text-right">Vektor útoku na signalizační vrstvu mobilní sítě</p>
+                <img src="{{ asset('img/ss7.png') }}" alt="SS7 Signaling System Architecture" class="w-full h-auto opacity-90">
+                <p class="text-[9px] text-slate-500 mt-2 italic text-right">Zdroj: TechTarget - Signaling System 7</p>
             </div>
         </div>
 

@@ -101,9 +101,14 @@
                     </form>
                 </div>
 
-                {{-- Varovná poznámka --}}
-                <div class="bg-gray-50 dark:bg-slate-800/60 px-8 py-4 border-t border-gray-100 dark:border-slate-700/50">
-                    <p class="text-[10px] text-slate-500 dark:text-slate-400 text-center uppercase tracking-tighter">
+                {{-- Navigační patička --}}
+                <div class="bg-gray-50 dark:bg-slate-800/60 px-8 py-4 border-t border-gray-100 dark:border-slate-700/50 flex items-center justify-between">
+                    <a href="{{ route('module.implementation', ['module' => $module->slug]) }}"
+                       class="flex items-center gap-2 text-sm font-bold text-gray-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors group">
+                        <svg class="w-4 h-4 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                        Zpět na implementaci
+                    </a>
+                    <p class="text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-tighter">
                         Bezpečnostní poznámka: Tento klíč nikdy nesdílejte s neověřenými stranami.
                     </p>
                 </div>

@@ -6,8 +6,8 @@ namespace App\Enums;
 
 enum ModuleSlug: string
 {
-    case TOTP = 'totp-app';
     case SMS = 'sms-otp';
+    case TOTP = 'totp-app';
     case BIOMETRY = 'biometrics';
     case FIDO2 = 'fido2-key';
 

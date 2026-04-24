@@ -13,12 +13,20 @@ class DashboardService
 {
     public function getActiveModulesForUser(): Collection
     {
-        return Module::query()
+        $modules = Module::query()
             ->where('is_active', true)
             ->with(['progress' => function ($query) {
                 $query->where('user_id', Auth::id());
             }])
             ->get();
+
+        // Seřadí moduly podle pořadí v ModuleSlug enumu
+        $order = array_map(fn($case) => $case->value, \App\Enums\ModuleSlug::cases());
+
+        return $modules->sortBy(function ($module) use ($order) {
+            $index = array_search($module->slug, $order);
+            return $index !== false ? $index : PHP_INT_MAX;
+        })->values();
     }
 
     public function getProgressForUser(): array

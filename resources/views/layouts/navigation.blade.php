@@ -101,6 +101,25 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+
+            {{-- Mobilní menu modulů --}}
+            @foreach(\App\Enums\ModuleSlug::cases() as $module)
+                <div class="border-t border-gray-200 dark:border-gray-600 pt-2 mt-2">
+                    <span class="px-4 text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider">{{ $module->label() }}</span>
+                    <x-responsive-nav-link :href="route('module.theory', ['module' => $module->value])">
+                        1. Teorie a princip
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('module.implementation', ['module' => $module->value])">
+                        2. Ukázky implementace
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route($module->getSimulationSetupRoute(), ['module' => $module->value])">
+                        3. Interaktivní simulace
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('module.quiz', ['module' => $module->value])">
+                        4. Quiz
+                    </x-responsive-nav-link>
+                </div>
+            @endforeach
         </div>
 
         <!-- Responsive Settings Options -->
