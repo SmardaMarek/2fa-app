@@ -1,7 +1,7 @@
 <div class="prose dark:prose-invert prose-indigo max-w-none">
     <h3 class="dark:text-slate-100 italic font-black tracking-tighter uppercase">0x01: Co je SMS-OTP (Out-of-Band)?</h3>
     <p class="dark:text-slate-300 leading-relaxed text-justify">
-        <strong>SMS-OTP (One-Time Password)</strong> představuje metodu ověřování „mimo hlavní kanál“ (Out-of-Band). Na rozdíl od moderních metod není kód generován lokálně ve vašem zařízení, ale na straně serveru[cite: 5, 81, 615]. Bezpečnost zde nespočívá v kryptografii, ale v <strong>časově omezené platnosti</strong> (typicky 30–300 sekund) a jednorázovosti kódu, který je doručován na základě vazby mezi vaším veřejným telefonním číslem (MSISDN) a fyzickou SIM kartou (IMSI)[cite: 4, 78, 95].
+        <strong>SMS-OTP (One-Time Password)</strong> představuje metodu ověřování „mimo hlavní kanál“ (Out-of-Band). Na rozdíl od moderních metod není kód generován lokálně ve vašem zařízení, ale na straně serveru. Bezpečnost zde nespočívá v kryptografii, ale v <strong>časově omezené platnosti</strong> (typicky 30–300 sekund) a jednorázovosti kódu, který je doručován na základě vazby mezi vaším veřejným telefonním číslem (MSISDN) a fyzickou SIM kartou (IMSI).
     </p>
 
     <div class="my-8 bg-indigo-900/20 border border-indigo-500/30 rounded-2xl overflow-hidden shadow-2xl transition-all hover:shadow-indigo-500/10">
@@ -19,25 +19,25 @@
                 <div class="space-y-2 border-l-2 border-indigo-500/30 pl-4">
                     <h4 class="text-xs font-bold text-indigo-400 uppercase tracking-tighter">Generování (Server-Side)</h4>
                     <p class="text-[11px] text-slate-400">
-                        Server vygeneruje náhodné n-místné číslo a uloží jej do dočasné paměti (Redis/Memcached)[cite: 5, 81]. Pro doručení se využívá SMPP protokol komunikující s <strong>SMSC (Short Message Service Center)</strong>[cite: 6, 91].
+                        Server vygeneruje náhodné n-místné číslo a uloží jej do dočasné paměti s omezenou dobou platnosti. Kód je následně odeslán jako prostý text prostřednictvím mobilní sítě na zařízení uživatele.
                     </p>
                 </div>
                 <div class="space-y-2 border-l-2 border-emerald-500/30 pl-4">
                     <h4 class="text-xs font-bold text-emerald-400 uppercase tracking-tighter">Transportní vrstva</h4>
                     <p class="text-[11px] text-slate-400">
-                        Kód cestuje skrze signalizační síť <strong>SS7 (Signalling System No. 7)</strong>[cite: 6, 98]. Tento protokol vznikl v dobách absolutní důvěry mezi operátory a postrádá moderní šifrování, což umožňuje odposlech na úrovni roamingových uzlů[cite: 7, 99, 101].
+                        Kód cestuje skrze signalizační síť <strong>SS7 (Signalling System No. 7)</strong>. Tento protokol vznikl v dobách absolutní důvěry mezi operátory a postrádá moderní šifrování, což umožňuje odposlech na úrovni roamingových uzlů.
                     </p>
                 </div>
             </div>
             <div class="bg-slate-950/50 p-4 rounded-xl border border-indigo-500/20 font-mono text-[10px] text-indigo-300 shadow-inner">
-                <span class="text-indigo-500 font-bold">Stack:</span> Auth Server -> SMPP Gateway -> SS7 MAP_ForwardSM -> HLR Check -> Mobile Device
+                <span class="text-indigo-500 font-bold">Stack:</span> Auth Server -> SMS brána -> SS7 síť -> HLR -> Mobilní zařízení
             </div>
         </div>
     </div>
 
     <h3 class="dark:text-slate-100 italic font-black tracking-tighter uppercase">Kritické strukturální slabiny</h3>
     <p class="dark:text-slate-300 leading-relaxed text-justify">
-        I když je SMS MFA lepší než žádné MFA, bezpečnostní autority jako <strong>NIST (SP 800-63B)</strong> od ní explicitně odrazují[cite: 15, 110, 685]. Důvodem je, že útočník nemusí hacknout vaši aplikaci, ale „hackne“ telekomunikační cestu k vám[cite: 94, 97].
+        I když je SMS MFA lepší než žádné MFA, bezpečnostní autority jako <strong>NIST (SP 800-63B)</strong> od ní explicitně odrazují. Důvodem je, že útočník nemusí hacknout vaši aplikaci, ale „hackne“ telekomunikační cestu k vám.
     </p>
 
     <div class="grid grid-cols-1 gap-4 my-8">
@@ -48,7 +48,7 @@
             <div>
                 <strong class="text-slate-100 block mb-1 uppercase tracking-tighter text-xs">SIM Swapping (HLR Manipulation)</strong>
                 <p class="text-xs dark:text-slate-400 leading-relaxed">
-                    Nejnebezpečnější útok. Útočník pomocí sociálního inženýrství přesvědčí operátora k převodu čísla na novou SIM kartu[cite: 8, 95, 678]. V registru <strong>HLR (Home Location Register)</strong> se změní mapování a veškeré OTP kódy začnou chodit útočníkovi, zatímco váš telefon ztratí signál[cite: 96, 678, 778].
+                    Nejnebezpečnější útok. Útočník pomocí sociálního inženýrství přesvědčí operátora k převodu čísla na novou SIM kartu. V registru <strong>HLR (Home Location Register)</strong> se změní mapování a veškeré OTP kódy začnou chodit útočníkovi, zatímco váš telefon ztratí signál.
                 </p>
             </div>
         </div>
@@ -61,7 +61,7 @@
                 <div>
                     <strong class="text-slate-100 block mb-1 uppercase tracking-tighter text-xs">Interception (SS7 Vulnerabilities)</strong>
                     <p class="text-xs dark:text-slate-400 leading-relaxed">
-                        Útočníci s přístupem k globální signalizační síti mohou podvrhnout zprávu o změně lokality vašeho zařízení[cite: 7, 99, 680]. SMS s kódem je pak přesměrována do útočníkovy sítě, aniž by došlo k jakémukoliv fyzickému zásahu do vašeho telefonu[cite: 100, 680].
+                        Útočníci s přístupem k globální signalizační síti mohou podvrhnout zprávu o změně lokality vašeho zařízení. SMS s kódem je pak přesměrována do útočníkovy sítě, aniž by došlo k jakémukoliv fyzickému zásahu do vašeho telefonu.
                     </p>
                 </div>
             </div>
@@ -78,7 +78,7 @@
             <div>
                 <strong class="text-slate-100 block mb-1 uppercase tracking-tighter text-xs">Absence Origin Bindingu</strong>
                 <p class="text-xs dark:text-slate-400 leading-relaxed">
-                    SMS je prostý text bez kryptografické vazby na TLS relaci[cite: 12, 16, 620]. Pokud vás útočník naláká na falešný web, kód z SMS mu tam ochotně přepíšete, protože zpráva neobsahuje mechanismus, který by ověřil, že kód zadáváte na legitimní doméně[cite: 11, 103, 104, 619, 682].
+                    SMS je prostý text bez kryptografické vazby na TLS relaci. Pokud vás útočník naláká na falešný web, kód z SMS mu tam ochotně přepíšete, protože zpráva neobsahuje mechanismus, který by ověřil, že kód zadáváte na legitimní doméně.
                 </p>
             </div>
         </div>
@@ -93,7 +93,7 @@
             Technický cíl simulace
         </h4>
         <p class="text-sm dark:text-slate-400 leading-relaxed text-justify">
-            V následujícím cvičení si vyzkoušíte roli útočníka provádějícího <strong>AitM (Adversary-in-the-Middle)</strong> útok. Uvidíte, jak snadné je zachytit a zneužít SMS kód v reálném čase pomocí proxy serveru. Pochopíte, proč bankovní sektor v EU pod tlakem regulací (PSD2/3) masivně přechází na bezpečnější biometrické a FIDO2 standardy[cite: 113, 114, 177, 222, 223, 225].
+            V následujícím cvičení si vyzkoušíte roli útočníka provádějícího <strong>SIM Swapping</strong> útok. Uvidíte, jak snadné je pomocí sociálního inženýrství přesvědčit operátora k převodu telefonního čísla a následně zachytit SMS kód oběti. Pochopíte, proč je SMS OTP považováno za nejméně bezpečnou formu MFA a proč se doporučuje přechod na silnější autentizační metody.
         </p>
     </div>
 </div>

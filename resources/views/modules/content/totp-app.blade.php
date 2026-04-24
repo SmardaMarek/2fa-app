@@ -1,12 +1,12 @@
 <div class="prose dark:prose-invert prose-indigo max-w-none">
     <h3 class="dark:text-slate-100 italic font-black tracking-tighter uppercase">0x01: Co je TOTP (Authenticator)?</h3>
     <p class="dark:text-slate-300 leading-relaxed text-justify">
-        <strong>TOTP (Time-based One-Time Password)</strong>, definovaný v <strong>RFC 6238</strong>, představuje algoritmus generující jednorázová hesla synchronizovaná časem. Na rozdíl od SMS mechanismů je TOTP plně autonomní a nevyžaduje interakci s infrastrukturou operátora. Jde o symetrický systém, kde obě strany znají stejné tajemství (Seed).
+        <strong>TOTP (Time-based One-Time Password)</strong> představuje algoritmus generující jednorázová hesla synchronizovaná časem. Na rozdíl od SMS mechanismů je TOTP plně autonomní a nevyžaduje interakci s infrastrukturou operátora. Jde o symetrický systém, kde obě strany znají stejné tajemství (sdílený tajný klíč).
     </p>
 
     <div class="my-8 bg-indigo-900/20 border border-indigo-500/30 rounded-2xl overflow-hidden shadow-2xl transition-all hover:shadow-indigo-500/10">
         <div class="bg-indigo-600 px-4 py-2 flex items-center justify-between">
-            <span class="text-[10px] font-bold text-indigo-100 uppercase tracking-widest font-mono">Kryptografické jádro (RFC 6238)</span>
+            <span class="text-[10px] font-bold text-indigo-100 uppercase tracking-widest font-mono">Princip generování TOTP</span>
             <svg class="w-4 h-4 text-indigo-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 2m9-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
         </div>
         <div class="p-6">
@@ -16,17 +16,9 @@
             </div>
 
             <p class="text-sm dark:text-slate-300 mb-4 leading-relaxed">
-                Výpočet probíhá lokálně jako hash <strong>HMAC-SHA1</strong> aktuálního Unixového času vyděleného periodou (standardně 30s). Výsledek je následně podroben <strong>dynamickému ořezu (Dynamic Truncation)</strong>, který z binárního hashe vyextrahuje 6–8místný číselný kód.
+                Výpočet probíhá lokálně na základě kombinace sdíleného tajného klíče a aktuálního času. Kódy jsou vytvářeny v krátkých, pevně daných intervalech, nejčastěji každých 30 sekund, což zajišťuje jejich jedinečnost i omezenou platnost.
             </p>
 
-            <div class="font-mono text-lg text-indigo-300 text-center my-4 bg-slate-950/50 py-4 rounded-xl border border-indigo-500/20 shadow-inner">
-                $$TOTP = Truncate(HMAC-SHA1(K, T))$$
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-[11px] font-mono text-indigo-400 border-t border-indigo-500/20 pt-4">
-                <div class="flex items-center"><span class="text-indigo-500 font-bold mr-2">></span> K: Symetrický tajný klíč (Seed)</div>
-                <div class="flex items-center"><span class="text-indigo-500 font-bold mr-2">></span> T: Časový krok (Epoch / 30s)</div>
-            </div>
         </div>
     </div>
 

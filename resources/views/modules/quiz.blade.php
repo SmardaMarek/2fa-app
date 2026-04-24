@@ -45,7 +45,7 @@
                 {{-- Neonová linka progresu - Plná (100%) --}}
                 <div class="absolute top-0 left-0 h-1 w-full bg-indigo-500 shadow-[0_0_15px_rgba(99,102,241,0.6)]"></div>
 
-                <form action="{{ route('module.quiz.submit', $module) }}" method="POST">
+                <form action="{{ route('module.quiz.submit', ['module' => $module->slug]) }}" method="POST">
                     @csrf
 
                     <div class="p-8 md:p-12 space-y-12">

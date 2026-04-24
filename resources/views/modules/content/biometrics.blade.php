@@ -1,5 +1,5 @@
 <div class="prose dark:prose-invert prose-indigo max-w-none text-justify">
-    <h3 class="dark:text-slate-100 italic font-black tracking-tighter uppercase">0x01: Biometrie jako stochastický proces</h3>
+    <h3 class="dark:text-slate-100 italic font-black tracking-tighter uppercase">0x01: Biometrie jako pravděpodobnostní ověření</h3>
     <p class="dark:text-slate-300">
         Biometrie („něco, co jste“) využívá k autentizaci unikátní fyziologické nebo behaviorální rysy osoby. Na rozdíl od hesel se nejedná o diskrétní binární shodu, ale o <strong>vzorové rozpoznávání</strong>. Každý vstup je zatížen šumem, proto systém nehledá identitu, ale <strong>skóre podobnosti</strong> porovnávané s rozhodovacím prahem.
     </p>
@@ -35,14 +35,14 @@
         <div class="rounded-2xl border border-slate-700 bg-slate-800/40 p-6">
             <h4 class="mb-3 text-xs font-bold uppercase tracking-widest text-indigo-400">2. Extrakce příznaků</h4>
             <p class="text-sm text-slate-400">
-                Algoritmus nehledá shodu pixel po pixelu. Hledá tzv. <strong>minucie</strong> (konce a rozdvojení čar) nebo <strong>nodální body</strong> obličeje. Tyto body převede na matematický vektor.
+                Algoritmus nehledá shodu pixel po pixelu. Hledá tzv. <strong>minucie</strong> (konce a rozdvojení čar) nebo <strong>specifické rysy tváře</strong>. Tyto body převede na matematický vektor.
             </p>
         </div>
     </div>
 
-    <h3 class="dark:text-slate-100 italic font-black tracking-tighter uppercase">0x02: Šablona vs. Obraz (TEE)</h3>
+    <h3 class="dark:text-slate-100 italic font-black tracking-tighter uppercase">0x02: Šablona vs. Obraz</h3>
     <p class="dark:text-slate-300 text-justify">
-        Zásadní inženýrský princip: <strong>Systém nikdy neukládá vaši fotku nebo otisk.</strong> Ukládá pouze tzv. <strong>šablonu (template)</strong>, což je výsledek jednosměrné funkce. Celý proces navíc probíhá v <strong>Trusted Execution Environment (TEE)</strong> – izolovaném procesoru, ke kterému nemá přístup ani operační systém, natož webová stránka.
+        Zásadní inženýrský princip: <strong>Systém nikdy neukládá vaši fotku nebo otisk.</strong> Ukládá pouze tzv. <strong>šablonu (template)</strong>, což je výsledek jednosměrné funkce. Biometrická šablona zůstává uložena v zabezpečeném úložišti zařízení a není přístupná externím aplikacím.
     </p>
 
     <div class="my-8 flex flex-col gap-4">

@@ -6,22 +6,18 @@
 
     <div class="my-8 bg-indigo-900/20 border border-indigo-500/30 rounded-2xl overflow-hidden shadow-2xl transition-all hover:shadow-indigo-500/10">
         <div class="bg-indigo-600 px-4 py-2 flex items-center justify-between">
-            <span class="text-[10px] font-bold text-indigo-100 uppercase tracking-widest font-mono">Architektura protokolu (CTAP2 + WebAuthn)</span>
+            <span class="text-[10px] font-bold text-indigo-100 uppercase tracking-widest font-mono">Architektura protokolu FIDO2 / WebAuthn</span>
             <svg class="w-4 h-4 text-indigo-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
         </div>
         <div class="p-6">
             <div class="mb-6 rounded-lg overflow-hidden border border-indigo-500/20 bg-slate-900/50 p-4">
                 <img src="{{ asset('img/fido-schema.png') }}" alt="FIDO2 Architecture" class="w-full h-auto opacity-90">
-                <p class="text-[10px] text-slate-500 mt-2 italic text-right">Schéma komunikace mezi CTAP2 a WebAuthn API</p>
+                <p class="text-[10px] text-slate-500 mt-2 italic text-right">Schéma komunikace mezi autentizátorem a WebAuthn API</p>
             </div>
 
             <p class="text-sm dark:text-slate-300 mb-4 leading-relaxed">
                 Při registraci vytvoří autentizátor (např. TPM čip, YubiKey nebo Secure Enclave) unikátní pár klíčů: <strong>soukromý a veřejný</strong>. Veřejný klíč se odešle na server, zatímco soukromý klíč je bezpečně izolován v hardwaru a nikdy jej neopustí.
             </p>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-[11px] font-mono text-indigo-300 bg-slate-950/50 p-4 rounded-xl border border-indigo-500/20 shadow-inner">
-                <div class="flex items-center"><span class="text-indigo-500 font-bold mr-2">></span> Registrace: Generování $K_{pub}$ a $K_{priv}$</div>
-                <div class="flex items-center"><span class="text-indigo-500 font-bold mr-2">></span> Ověření: $Sign(K_{priv}, Challenge + Origin)$</div>
-            </div>
         </div>
     </div>
 

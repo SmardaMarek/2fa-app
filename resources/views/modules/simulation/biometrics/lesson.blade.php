@@ -111,7 +111,7 @@
                             </div>
                             <h4 class="text-slate-900 dark:text-white font-bold mb-3 text-sm">Částečné šablony (Partial Templates)</h4>
                             <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                                Vzhledem k malé ploše mobilního senzoru nedochází k uložení celého otisku, ale k extrakci desítek <strong>dílčích šablon</strong> během registrační fáze. Při odemykání pak systému stačí kryptografická shoda pouze s jedinou z těchto mnoha šablon.
+                                Vzhledem k malé ploše mobilního senzoru nedochází k uložení celého otisku, ale k extrakci desítek <strong>dílčích šablon</strong> během registrační fáze. Při odemykání pak systému stačí dostatečná shoda pouze s jedinou z těchto mnoha šablon.
                             </p>
                         </div>
 
@@ -203,7 +203,7 @@
                     </div>
                     <div class="bg-indigo-500/5 dark:bg-indigo-500/10 border border-indigo-500/20 rounded-2xl p-5">
                         <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed font-medium">
-                            <strong class="text-indigo-600 dark:text-indigo-400">Equal Error Rate (EER)</strong> — bod, kde se FAR a FRR protínají. Čím nižší EER, tím je senzor kvalitnější. Mobilní senzory otisků mívají EER kolem 1-3%, zatímco 3D systémy rozpoznávání obličeje (Face ID) dosahují EER pod 0.001%.
+                            <strong class="text-indigo-600 dark:text-indigo-400">Equal Error Rate (EER)</strong> — bod, kde se FAR a FRR protínají. Čím nižší EER, tím je senzor kvalitnější. Moderní 3D systémy rozpoznávání obličeje (např. Apple Face ID) dosahují pravděpodobnosti náhodného odemčení cizí osobou přibližně 1:1 000 000, zatímco levnější 2D senzory jsou výrazně méně spolehlivé.
                         </p>
                     </div>
                 </div>
@@ -259,7 +259,7 @@
                                 </li>
                                 <li class="flex items-start gap-2">
                                     <span class="text-indigo-500 mt-0.5">•</span>
-                                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed"><strong class="text-slate-800 dark:text-slate-200">Vyžadovat PAD Level 2+</strong> — certifikace senzoru dle ISO 30107 zaručuje odolnost vůči Presentation Attacku</p>
+                                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed"><strong class="text-slate-800 dark:text-slate-200">Vyžadovat PAD (Presentation Attack Detection)</strong> — senzor musí implementovat detekci živosti, aby odolal spoofingu fotografií a replikám</p>
                                 </li>
                                 <li class="flex items-start gap-2">
                                     <span class="text-indigo-500 mt-0.5">•</span>

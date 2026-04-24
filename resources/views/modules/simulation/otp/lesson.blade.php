@@ -59,27 +59,16 @@
                             <div class="flex items-center gap-3 mb-4">
                                 <span class="bg-rose-500/10 text-rose-500 text-[10px] px-2 py-1 rounded font-black tracking-tighter uppercase">Technika 0x01</span>
                             </div>
-                            <h4 class="text-slate-900 dark:text-white font-bold mb-3 text-sm">Social Engineering (SIM Swap)</h4>
+                            <h4 class="text-slate-900 dark:text-white font-bold mb-3 text-sm">SIM Swapping (Sociální inženýrství)</h4>
                             <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                                Jak jste si vyzkoušeli v simulaci, útočník nemusí prolomit žádné šifrování. Stačí zmanipulovat operátora zákaznické linky pomocí ukradeného jména, adresy a rodného čísla. <strong>Lidský faktor je primární vektor útoku</strong> — technická pravidla operátora selžou pod emočním tlakem.
-                            </p>
-                        </div>
-
-                        {{-- Bod 2 --}}
-                        <div class="bg-slate-50 dark:bg-slate-900/50 p-6 rounded-2xl border border-slate-200 dark:border-slate-700/50 shadow-inner group hover:border-rose-500/30 transition-colors">
-                            <div class="flex items-center gap-3 mb-4">
-                                <span class="bg-rose-500/10 text-rose-500 text-[10px] px-2 py-1 rounded font-black tracking-tighter uppercase">Technika 0x02</span>
-                            </div>
-                            <h4 class="text-slate-900 dark:text-white font-bold mb-3 text-sm">Manipulace HLR a IMSI</h4>
-                            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                                Po úspěšném Social Engineeringu operátor přepíše vazbu v <strong>HLR (Home Location Register)</strong> mezi směrovacím číslem (MSISDN) a hardwarovým identifikátorem <code>IMSI</code> nové SIM karty útočníka. Původní SIM oběti je okamžitě deautorizována.
+                                Jak jste si vyzkoušeli v simulaci, útočník nemusí prolomit žádné šifrování. Stačí zmanipulovat operátora zákaznické linky pomocí ukradeného jména, adresy a rodného čísla. <strong>Lidský faktor je primární vektor útoku</strong> — technická pravidla operátora selžou pod emočním tlakem. Po úspěšném přesvědčení operátor převede telefonní číslo oběti na novou SIM kartu útočníka. Původní SIM oběti je okamžitě deautorizována a veškerá komunikace je směřována na útočníka.
                             </p>
                         </div>
 
                         {{-- Bod 3 --}}
                         <div class="bg-slate-50 dark:bg-slate-900/50 p-6 rounded-2xl border border-slate-200 dark:border-slate-700/50 shadow-inner group hover:border-rose-500/30 transition-colors">
                             <div class="flex items-center gap-3 mb-4">
-                                <span class="bg-rose-500/10 text-rose-500 text-[10px] px-2 py-1 rounded font-black tracking-tighter uppercase">Technika 0x03</span>
+                                <span class="bg-rose-500/10 text-rose-500 text-[10px] px-2 py-1 rounded font-black tracking-tighter uppercase">Technika 0x02</span>
                             </div>
                             <h4 class="text-slate-900 dark:text-white font-bold mb-3 text-sm">Zranitelnosti SS7</h4>
                             <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
@@ -90,7 +79,7 @@
                         {{-- Bod 4 --}}
                         <div class="bg-slate-50 dark:bg-slate-900/50 p-6 rounded-2xl border border-slate-200 dark:border-slate-700/50 shadow-inner group hover:border-rose-500/30 transition-colors">
                             <div class="flex items-center gap-3 mb-4">
-                                <span class="bg-rose-500/10 text-rose-500 text-[10px] px-2 py-1 rounded font-black tracking-tighter uppercase">Technika 0x04</span>
+                                <span class="bg-rose-500/10 text-rose-500 text-[10px] px-2 py-1 rounded font-black tracking-tighter uppercase">Technika 0x03</span>
                             </div>
                             <h4 class="text-slate-900 dark:text-white font-bold mb-3 text-sm">Absence Origin Binding</h4>
                             <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">

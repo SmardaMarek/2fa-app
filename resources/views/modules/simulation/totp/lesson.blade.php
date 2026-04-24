@@ -43,24 +43,8 @@
                 <div class="p-8 md:p-10">
                     <div class="prose dark:prose-invert prose-indigo max-w-none text-gray-700 dark:text-slate-200 leading-relaxed font-medium mb-8">
                         <p>
-                            Úspěch útoku <strong>Adversary-in-the-Middle (AitM)</strong>, který jste si vyzkoušeli, není chybou vaší implementace. Jedná se o fundamentální vlastnost návrhu protokolu <strong>TOTP</strong> dle standardu <strong>RFC 6238</strong>.
+                            Úspěch útoku <strong>Adversary-in-the-Middle (AitM)</strong>, který jste si vyzkoušeli, není chybou vaší implementace. Jedná se o fundamentální vlastnost návrhu protokolu <strong>TOTP</strong>.
                         </p>
-                    </div>
-
-                    {{-- Matematická definice --}}
-                    <div class="my-8 bg-indigo-500/5 dark:bg-indigo-500/10 border border-indigo-500/20 rounded-2xl overflow-hidden shadow-inner">
-                        <div class="bg-indigo-600/10 px-4 py-2 border-b border-indigo-500/20 flex items-center justify-between">
-                            <span class="text-[10px] font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest font-mono">RFC 6238: Algoritmický princip</span>
-                        </div>
-                        <div class="p-8 text-center">
-                            <div class="font-mono text-xl md:text-2xl text-indigo-700 dark:text-indigo-300 leading-relaxed tracking-tight">
-                                $$TOTP = Truncate(HMAC-SHA1(K, T))$$
-                            </div>
-                            <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-mono text-slate-500 dark:text-slate-400 border-t border-indigo-500/10 pt-6 text-left">
-                                <div class="flex items-center gap-2"><span class="font-black text-indigo-500">K:</span> Sdílený tajný klíč (Seed) </div>
-                                <div class="flex items-center gap-2"><span class="font-black text-indigo-500">T:</span> Časový faktor $T = (Unixtime - T_0) / X$ </div>
-                            </div>
-                        </div>
                     </div>
 
                     <div class="prose dark:prose-invert prose-indigo max-w-none text-gray-700 dark:text-slate-200 leading-relaxed font-medium">
@@ -96,7 +80,7 @@
                 <div class="p-8 md:p-10 border-b border-gray-100 dark:border-slate-700/50">
                     <div class="prose dark:prose-invert prose-indigo max-w-none text-gray-600 dark:text-slate-300 mb-8 leading-relaxed">
                         <p>
-                            Aby TOTP kompenzovalo síťovou latenci, RFC 6238 doporučuje validovat i přilehlé časové kroky ($T-1$ až $T+1$). Tím vzniká validní okno o délce až 90 sekund. Bez stavové logiky může útočník i oběť použít **stejný kód opakovaně** (Replay Attack).
+                            Aby TOTP kompenzovalo síťovou latenci, implementace běžně validují i přilehlé časové kroky. Tím vzniká validní okno delší než standardních 30 sekund. Bez stavové logiky může útočník i oběť použít **stejný kód opakovaně** (Replay Attack).
                         </p>
                         <p class="font-bold text-indigo-600 dark:text-indigo-400">
                             Nápravné opatření: Backend musí po úspěšném ověření hodnotu pro daný krok $T$ zneplatnit v mezipaměti (např. Redis) po celou dobu jeho platnosti.

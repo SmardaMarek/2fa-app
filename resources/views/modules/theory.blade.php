@@ -62,7 +62,7 @@
                         Po prostudování teorie si ukážeme reálný kód.
                     </p>
 
-                    <form action="{{ route('module.theory.complete', $module) }}" method="POST" class="w-full md:w-auto">
+                    <form action="{{ route('module.theory.complete', ['module' => $module->slug]) }}" method="POST" class="w-full md:w-auto">
                         @csrf
                         <button type="submit" class="w-full md:w-auto relative inline-flex items-center justify-center px-6 py-3 bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-600/90 dark:hover:bg-indigo-500 border border-transparent rounded-xl font-bold text-sm text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-slate-900 group/btn overflow-hidden shadow-lg shadow-indigo-500/30 dark:shadow-indigo-500/20">
                             <span class="relative z-10 flex items-center gap-2">

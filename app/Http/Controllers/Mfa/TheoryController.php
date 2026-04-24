@@ -28,7 +28,7 @@ class TheoryController extends Controller
     {
         $this->progressService->completeTheory($module);
 
-        return redirect()->route('module.implementation', $module);
+        return redirect()->route('module.implementation', ['module' => $module->slug]);
     }
 
     public function guide(Module $module)
