@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ── Highlight.js: zajistit, že Atom One Dark téma není přepsáno Tailwindem ── */
+pre code.hljs,
+pre code[class*="language-"] {
+    background: #282c34 !important;
+    color: #abb2bf !important;
+}
+
+pre {
+    background: #282c34 !important;
+    border-radius: 0.75rem;
+}
+
+/* Prose reset nesmí přepsat barvy uvnitř code bloků */
+.prose pre code,
+.prose pre code.hljs {
+    color: inherit;
+    background: transparent;
+    font-size: inherit;
+    padding: 0;
+}

@@ -120,7 +120,7 @@
                                         @php
                                             $hljsLang = str_contains(strtolower($language), 'json') ? 'json' : (str_contains(strtolower($language), 'php') ? 'php' : 'javascript');
                                         @endphp
-                                        <pre class="m-0"><code class="language-{{ $hljsLang }} p-8 text-sm leading-relaxed block overflow-x-auto bg-transparent">{{ $code }}</code></pre>
+                                        <pre class="m-0"><code class="language-{{ $hljsLang }} p-8 text-sm leading-relaxed block overflow-x-auto">{{ $code }}</code></pre>
                                     </div>
                                 @endforeach
                             </div>

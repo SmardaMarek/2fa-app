@@ -168,7 +168,7 @@
                                             // Jednoduchá detekce jazyka pro highlight.js na základě klíče
                                             $hljsLang = str_contains(strtolower($language), 'javascript') ? 'javascript' : (str_contains(strtolower($language), 'swift') ? 'swift' : 'plaintext');
                                         @endphp
-                                        <pre class="m-0"><code class="language-{{ $hljsLang }} p-8 text-sm leading-relaxed block overflow-x-auto bg-transparent">{{ $code }}</code></pre>
+                                        <pre class="m-0"><code class="language-{{ $hljsLang }} p-8 text-sm leading-relaxed block overflow-x-auto">{{ $code }}</code></pre>
                                     </div>
                                 @endforeach
                             </div>

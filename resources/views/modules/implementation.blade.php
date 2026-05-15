@@ -107,7 +107,7 @@
                                      x-transition:enter-start="opacity-0"
                                      x-transition:enter-end="opacity-100"
                                      style="display: none;">
-                                    <pre class="m-0"><code class="language-{{ $language }} p-8 text-sm leading-relaxed block overflow-x-auto bg-transparent">{{ $code }}</code></pre>
+                                    <pre class="m-0"><code class="language-{{ $language }} p-8 text-sm leading-relaxed block overflow-x-auto">{{ $code }}</code></pre>
                                 </div>
                             @endforeach
                         </div>

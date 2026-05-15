@@ -102,7 +102,7 @@
                         <div class="relative bg-slate-50 dark:bg-slate-900/40 min-h-[300px]">
                             @foreach($codeSamples as $language => $code)
                                 <div x-show="selectedLang === '{{ $language }}'" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" style="display: none;">
-                                    <pre class="m-0"><code class="language-{{ strtolower($language) }} p-8 text-sm leading-relaxed block overflow-x-auto bg-transparent">{{ $code }}</code></pre>
+                                    <pre class="m-0"><code class="language-{{ strtolower($language) }} p-8 text-sm leading-relaxed block overflow-x-auto">{{ $code }}</code></pre>
                                 </div>
                             @endforeach
                         </div>
